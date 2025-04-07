@@ -30,17 +30,9 @@ function Aboutus () {
                 </div>
             </div>
             
-            <div className="card-body w-2/4">
-                <video className="h-32 rounded-3xl" controls>
+            <div className="card-body w-2/4 flex justify-center items-center">
+                <video className="rounded-3xl" controls>
                     <source src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4" />
-                    Your browser does not support the video tag.
-                </video>
-                <video className="h-32 rounded-3xl" controls>
-                    <source src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4" type="video/mp4" />
-                    Your browser does not support the video tag.
-                </video>
-                <video className="h-32 rounded-3xl" controls>
-                    <source src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4" type="video/mp4" />
                     Your browser does not support the video tag.
                 </video>
             </div>

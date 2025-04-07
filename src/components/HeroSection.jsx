@@ -76,15 +76,15 @@ function Herosection () {
 
           <div className="flex flex-wrap gap-4 md:gap-12 justify-center">
             <div className="space-y-4 -mt-20">
-            <img className="w-24 h-24 sm:w-32 sm:h-32 md:w-48 md:h-48 rounded-2xl" src="/farm-pic.jpg" />
-            <img className="w-24 h-24 sm:w-32 sm:h-32 md:w-48 md:h-24 rounded-2xl" src="/farm-pic3.jpg" />
+              <img className="w-24 h-24 sm:w-32 sm:h-32 md:w-48 md:h-48 rounded-2xl" src="/farm-pic3.jpg" />
+              <img className="w-24 h-24 sm:w-32 sm:h-32 md:w-48 md:h-24 rounded-2xl" src="/farm-pic.jpg" />
             </div>
-            <img className="w-24 h-24 sm:w-32 mt-8 sm:h-32 md:w-48 md:h-48 rounded-2xl" src="/farm-pic4.jpg" />
-            <img className="w-20 h-20 md:w-28 md:h-28 mt-28 rounded-2xl" src="/farm-pic2.jpg" />
-            <img className="w-24 h-24 sm:w-32 sm:h-32 md:w-48 mt-8 md:h-48 rounded-2xl" src="/farm-pic4.jpg" />
+              <img className="w-24 h-24 sm:w-32 mt-8 sm:h-32 md:w-48 md:h-48 rounded-2xl" src="/leaf-pic.jpg" />
+              <img className="w-20 h-20 md:w-28 md:h-28 mt-28 rounded-2xl" src="/farm-pic4.jpg" />
+              <img className="w-24 h-24 sm:w-32 sm:h-32 md:w-48 mt-8 md:h-48 rounded-2xl" src="/water-field.jpg" />
             <div className="space-y-4 -mt-20">
-            <img className="w-24 h-24 sm:w-32 sm:h-32 md:w-48 md:h-24 rounded-2xl" src="/farm-pic3.jpg" />
-            <img className="w-24 h-24 sm:w-32 sm:h-32 md:w-48 md:h-48 rounded-2xl" src="/farm-pic.jpg" />
+              <img className="w-24 h-24 sm:w-32 sm:h-32 md:w-48 md:h-24 rounded-2xl" src="/farming-pic.jpg" />
+              <img className="w-24 h-24 sm:w-32 sm:h-32 md:w-48 md:h-48 rounded-2xl" src="/wheat-pic.jpg" />
             </div>
           </div>
         </div>
