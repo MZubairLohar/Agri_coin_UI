@@ -14,7 +14,7 @@ function Navbar () {
               px-8 py-2 rounded-full 
               flex items-center gap-2 
               text-white
-              bg-[#1BCDB2]
+              bg-[#6F9D7E]
               shadow-[-5px_-5px_10px_rgba(255,_255,_255,_0.8),_5px_5px_10px_rgba(0,_0,_0,_0.25)]
               
               transition-all
@@ -56,7 +56,7 @@ function Navbar () {
     <ul className="menu menu-horizontal px-1 text-black">
       <li><a>About us</a></li>
       <li><a>Donation</a></li>
-      <li><a>Progress</a></li>
+      <li><a>Programs</a></li>
       <li><a>Blog</a></li>
       <li><a>Contact us</a></li>
     </ul>

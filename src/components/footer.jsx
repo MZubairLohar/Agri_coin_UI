@@ -16,24 +16,24 @@ const Footer = () => {
               px-6 py-2 rounded-full 
               border border-amber-50
               flex items-center gap-2 
-              text-black bg-[#1BCDB2]
+              text-[#6F9D7E] bg-[#FFE990]
               transition-all
               hover:shadow-[-1px_-1px_5px_rgba(255,_255,_255,_0.6),_1px_1px_5px_rgba(0,_0,_0,_0.3),inset_-2px_-2px_5px_rgba(255,_255,_255,_1),inset_2px_2px_4px_rgba(0,_0,_0,_0.3)]
             "
           >
             <span>Donate</span>
             <div className="w-6 h-6 flex items-center justify-center rounded-full bg-white">
-              <MdOutlineArrowForwardIos className="text-black text-md" />
+              <MdOutlineArrowForwardIos className="text-[#6F9D7E] text-md" />
             </div>
           </button>
         );
       };
 
   return (
-    <footer className="relative py-12 mt-10 overflow-hidden bg-[#6C9A7D]">
+    <footer className="relative py-12 mt-10 overflow-hidden bg-[#6F9D7E]">
       {/* Background Glow Effect */}
       <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-[#6C9A7D] opacity-90"></div>
+        <div className="absolute inset-0 bg-[#6F9D7E] opacity-90"></div>
         <div className="absolute w-72 h-72 md:w-[400px] md:h-[400px] rounded-full bg-sigma-glow top-[-10%] right-[-10%] opacity-20"></div>
       </div>
 

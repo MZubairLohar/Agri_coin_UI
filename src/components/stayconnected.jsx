@@ -1,4 +1,35 @@
+"use client";
+
+import { useEffect,useRef } from "react";
+
 function Connected () {
+
+  const divright = useRef(null);
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("animate-slideInRight");
+          }
+        });
+      },
+      {
+        threshold: 0.1,
+      }
+    );
+
+    if (divright.current) {
+      observer.observe(divright.current);
+    }
+
+    return () => {
+      if (divright.current) {
+        observer.unobserve(divright.current);
+      }
+    };
+  }, []);
+
     const ButtonWrapper = () => {
         return (
           <div>
@@ -13,14 +44,15 @@ function Connected () {
             className={`
               px-8 py-2 rounded-full 
               flex items-center gap-2 
-              text-white
-              bg-[#676ED2]
-              shadow-[-5px_-5px_10px_rgba(255,_255,_255,_0.8),_5px_5px_10px_rgba(0,_0,_0,_0.25)]
+              text-[#6F9D7E]
+              bg-[#FFE990]
+              font-bold
+            
               
               transition-all
       
               hover:shadow-[-1px_-1px_5px_rgba(255,_255,_255,_0.6),_1px_1px_5px_rgba(0,_0,_0,_0.3),inset_-2px_-2px_5px_rgba(255,_255,_255,_1),inset_2px_2px_4px_rgba(0,_0,_0,_0.3)]
-              hover:text-white
+              hover:text-[#6F9D7E]
           `}
           >
             <span>Donate</span>
@@ -29,30 +61,45 @@ function Connected () {
         };
     return(
         <>
-        <div className="card lg:card-side w-4/5 mt-16 bg-[#B9CDC1] h-[400px] shadow-sm p-4 mx-auto">
-            <div className="card-body w-3/5 text-[#7C71BD]">
-                <h2 className="card-title text-4xl">Stay Connected</h2>
-                <p className="text-md">Our mission is to conserve nature and reduce the most pressing threats to the diversity of life on earth.</p>
-                <div className="space-y-8 mt-4">
-                <input type="text" placeholder="Your Email" className="input input-primary bg-[#B9CDC1]" />
-                <textarea type="text" placeholder="Your Message" className="textarea textarea-primary bg-[#B9CDC1]"></textarea>
-                <ButtonWrapper />
-                </div>
-            </div>
-            
-            <div className="card-body w-2/5 flex">
-            <div className="flex gap-4">
-                <div className="flex items-center justify-center">
-                    <img src="turtles-pic.jpg" className="rounded-lg" />
-                </div>
-                <div className="space-y-4">
-                    <img src="wheat-pic.jpg" className="rounded-lg h-48 -mt-13" />
-                    <img id="pic" src="working-fields.jpg" className="rounded-lg w-full" />
-                </div>
-            </div>
-    
-            </div>
-        </div>
+        <div className="card lg:card-side w-full lg:w-4/5 rounded-2xl mt-16 bg-[#6F9D7E] h-auto lg:h-[400px] shadow-sm p-4 mx-auto">
+  <div className="card-body w-full lg:w-2/5 text-[#FFE990]">
+    <h2 className="card-title text-3xl sm:text-4xl">Stay Connected</h2>
+    <p className="text-md">Our mission is to conserve nature and reduce the most pressing threats to the diversity of life on earth.</p>
+    <div className="space-y-8 mt-4">
+      <input
+        type="text"
+        placeholder="Your Email"
+        className="input text-black input-warning bg-white w-full"
+      />
+      <textarea
+        type="text"
+        placeholder="Your Message"
+        className="textarea text-black textarea-warning bg-white w-full"
+      ></textarea>
+      <ButtonWrapper />
+    </div>
+  </div>
+
+  <div className="card-body w-full lg:w-3/5 flex">
+    <div
+      ref={divright}
+      className="flex gap-4 w-full flex-col lg:flex-row"
+    >
+      <div className="flex items-center w-full lg:w-2/4 justify-center">
+        <img src="pic3.png" className="rounded-lg h-60 w-full lg:w-80" />
+      </div>
+      <div className="space-y-4 w-full lg:w-2/4">
+        <img src="wheat-pic.jpg" className="rounded-lg h-44 -mt-5 w-full" />
+        <img
+          id="pic"
+          src="working-fields.jpg"
+          className="rounded-lg h-44 w-full"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+
         </>
     )
 }

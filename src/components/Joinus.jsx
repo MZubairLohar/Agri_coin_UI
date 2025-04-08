@@ -25,14 +25,14 @@ export default function Joinus() {
         className={`
           px-8 py-2 rounded-full 
           flex items-center gap-2 
-          text-white
-          bg-[#676ED2]
+          text-[#6F9D7E]
+          bg-[#FFE990]
           shadow-[-5px_-5px_10px_rgba(255,_255,_255,_0.8),_5px_5px_10px_rgba(0,_0,_0,_0.25)]
           
           transition-all
   
           hover:shadow-[-1px_-1px_5px_rgba(255,_255,_255,_0.6),_1px_1px_5px_rgba(0,_0,_0,_0.3),inset_-2px_-2px_5px_rgba(255,_255,_255,_1),inset_2px_2px_4px_rgba(0,_0,_0,_0.3)]
-          hover:text-white
+          hover:text-[#6F9D7E]
       `}
       >
         <span>Donate</span>
@@ -91,64 +91,67 @@ export default function Joinus() {
   ];
 
   return (
-    <div className="w-full bg-[#6F9D80] mt-10 h-[650px] flex flex-col items-center justify-center overflow-visible">
-    <div className="z-10 flex flex-col items-center w-full max-w-2xl space-y-4 md:space-y-6 mb-6">
-      <h1 className="text-3xl font-semibold text-black text-center">
-        Join Us: Together for a Better Future
-      </h1>
-    </div>
-  
-    <Swiper
-      onSwiper={setSwiperRef}
-      slidesPerView="auto"
-      spaceBetween={30}
-    //   pagination={{ type: 'fraction' }}
-      navigation
-      modules={[Pagination, Navigation]}
-      className="h-[520px] relative w-full px-4"
-    >
-      {cardData.map((card, index) => (
-        <SwiperSlide
-          key={index}
-          className="min-w-[28rem] pl-6 max-w-md rounded"
-        >
-          <div className="card bg-white text-black h-11/12 shadow-md">
-            <figure className="px-4 pt-4">
-              <img
-                src={card.image}
-                alt={card.title}
-                className="rounded-xl h-60 object-cover w-full"
-              />
-            </figure>
-            <div className="card-body p-4">
-              <h2 className="card-title text-start">{card.title}</h2>
-              <p className="text-start">{card.description}</p>
-              <p className="text-start text-lg mt-2">
-                <span className="text-xl font-bold text-[#676ED2]">
-                  {card.amount}
-                </span>{' '}
-                reload of $100,000 goal
-              </p>
-              <progress
-                className="progress progress-secondary w-full"
-                value={card.progress}
-                max="100"
-              ></progress>
-              <div className="card-actions justify-between mt-2">
-                <div className="flex items-center">
-                  <FaRegHeart className="text-2xl text-pink-600" />
-                  <span className="ml-2 text-base text-gray-700">
-                    {card.supporters} Supporter
-                  </span>
-                </div>
-                <ButtonWrapper />
+    <div className="w-full bg-[#6F9D7E] mt-10 h-[600px] flex flex-col items-center justify-center overflow-visible">
+  <div className="z-10 flex flex-col items-center w-full max-w-2xl space-y-4 md:space-y-6 mb-6 px-4 lg:px-0">
+    <h1 className="text-2xl sm:text-3xl lg:text-4xl mt-10 font-semibold text-white text-center">
+      Join Us: Together for a Better Future
+    </h1>
+  </div>
+
+  <Swiper
+    onSwiper={setSwiperRef}
+    slidesPerView={'auto'}
+    spaceBetween={0}
+    navigation
+    modules={[Pagination, Navigation]}
+    className="lg:h-[520px] h-[auto] mt-6 relative w-full px-2 sm:px-4"
+  >
+    {cardData.map((card, index) => (
+      <SwiperSlide
+        key={index}
+        className="min-w-[18rem] sm:min-w-[20rem] lg:min-w-[22rem] pl-4 max-w-xs rounded"
+      >
+        <div className="card bg-white text-black w-full h-full max-h-[26rem] rounded-lg shadow-lg">
+          <figure className="px-4 pt-4">
+            <img
+              src={card.image}
+              alt={card.title}
+              className="rounded-xl h-40 object-cover w-full"
+            />
+          </figure>
+          <div className="card-body p-4">
+            <h2 className="card-title text-base sm:text-lg font-semibold text-start">{card.title}</h2>
+            <p className="text-sm text-gray-600 text-start">{card.description}</p>
+
+            <p className="text-start text-sm mt-2">
+              <span className="text-base font-bold text-[#676ED2]">
+                {card.amount}
+              </span>{' '}
+              reload of $100,000 goal
+            </p>
+
+            <progress
+              className="progress progress-secondary w-full mt-1"
+              value={card.progress}
+              max="100"
+            ></progress>
+
+            <div className="card-actions justify-between items-center mt-3">
+              <div className="flex items-center">
+                <FaRegHeart className="text-lg text-pink-600" />
+                <span className="ml-2 text-sm text-gray-700">
+                  {card.supporters} Supporter
+                </span>
               </div>
+              <ButtonWrapper />
             </div>
           </div>
-        </SwiperSlide>
-      ))}
-    </Swiper>
-  </div>
+        </div>
+      </SwiperSlide>
+    ))}
+  </Swiper>
+</div>
+
   
   );
 }
