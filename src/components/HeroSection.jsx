@@ -191,7 +191,7 @@ useEffect(() => {
         <>
         <div
   className="relative min-h-screen flex flex-col items-center text-center px-4 md:px-10 lg:px-20 
-    bg-white bg-cover bg-center bg-no-repeat z-10 mt-2"
+    bg-white bg-cover bg-center bg-no-repeat z-10 mt-4"
 >
   <Navbar />
           {/*<img
@@ -199,7 +199,7 @@ useEffect(() => {
           className="absolute top-0 left-0 w-full h-[595px] opacity-30 object-cover z-0"
         />*/}
 
-  <div className="z-10 pt-8 flex flex-col items-center w-full lg:w-full space-y-4 md:space-y-6">
+  <div className="z-10 pt-8 flex flex-col items-center w-full lg:w-full space-y-4 md:space-y-6 mt-4">
     <h1 className="text-xl sm:text-2xl md:text-5xl font-bold text-black w-2/4">
       Save More of Nature's Treasures
     </h1>
