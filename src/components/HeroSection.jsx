@@ -194,10 +194,10 @@ useEffect(() => {
     bg-white bg-cover bg-center bg-no-repeat z-10"
 >
   <Navbar />
-   <img
+          {/*<img
           src="/wheat-bg-pic.jpg"
           className="absolute top-0 left-0 w-full h-[595px] opacity-30 object-cover z-0"
-        />
+        />*/}
 
   <div className="z-10 pt-8 flex flex-col items-center w-full lg:w-full space-y-4 md:space-y-6">
     <h1 className="text-xl sm:text-2xl md:text-5xl font-bold text-black w-2/4">
