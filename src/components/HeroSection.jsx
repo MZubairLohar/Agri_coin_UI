@@ -191,7 +191,7 @@ useEffect(() => {
         <>
         <div
   className="relative min-h-screen flex flex-col items-center text-center px-4 md:px-10 lg:px-20 
-    bg-white bg-cover bg-center bg-no-repeat z-10"
+    bg-white bg-cover bg-center bg-no-repeat z-10 mt-2"
 >
   <Navbar />
           {/*<img
