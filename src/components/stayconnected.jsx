@@ -4,6 +4,84 @@ import { useEffect,useRef } from "react";
 
 function Connected () {
 
+  const divleft = useRef(null);
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("animate-slideInLeft");
+          }
+        });
+      },
+      {
+        threshold: 0.1,
+      }
+    );
+
+    if (divleft.current) {
+      observer.observe(divleft.current);
+    }
+
+    return () => {
+      if (divleft.current) {
+        observer.unobserve(divleft.current);
+      }
+    };
+  }, []);
+
+  const divdown = useRef(null);
+useEffect(() => {
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("animate-slideInUp");
+        }
+      });
+    },
+    {
+      threshold: 0.1,
+    }
+  );
+
+  if (divdown.current) {
+    observer.observe(divdown.current);
+  }
+
+  return () => {
+    if (divdown.current) {
+      observer.unobserve(divdown.current);
+    }
+  };
+}, []);
+
+const divup = useRef(null);
+useEffect(() => {
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("animate-slideInDown");
+        }
+      });
+    },
+    {
+      threshold: 0.1,
+    }
+  );
+
+  if (divup.current) {
+    observer.observe(divup.current);
+  }
+
+  return () => {
+    if (divup.current) {
+      observer.unobserve(divup.current);
+    }
+  };
+}, []);
+
   const divright = useRef(null);
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -76,21 +154,25 @@ function Connected () {
         placeholder="Your Message"
         className="textarea text-black textarea-warning bg-white w-full"
       ></textarea>
-      <ButtonWrapper />
+     <button className="btn btn-accent px-6 py-2 rounded-lg bg-[#FFE990] text-[#6F9D7E]">Donate</button>
     </div>
   </div>
 
   <div className="card-body w-full lg:w-3/5 flex">
     <div
-      ref={divright}
       className="flex gap-4 w-full flex-col lg:flex-row"
     >
       <div className="flex items-center w-full lg:w-2/4 justify-center">
-        <img src="pic3.png" className="rounded-lg h-60 w-full lg:w-80" />
+        <img
+        ref={divleft}
+        src="pic3.png" className="rounded-lg h-60 w-full lg:w-80" />
       </div>
       <div className="space-y-4 w-full lg:w-2/4">
-        <img src="wheat-pic.jpg" className="rounded-lg h-44 -mt-5 w-full" />
         <img
+        ref={divup}
+        src="wheat-pic.jpg" className="rounded-lg h-44 -mt-5 w-full" />
+        <img
+        ref={divdown}
           id="pic"
           src="working-fields.jpg"
           className="rounded-lg h-44 w-full"

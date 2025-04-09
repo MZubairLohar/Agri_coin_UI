@@ -111,8 +111,8 @@ export default function Joinus() {
         key={index}
         className="min-w-[18rem] sm:min-w-[20rem] lg:min-w-[22rem] pl-4 max-w-xs rounded"
       >
-        <div className="card bg-white text-black w-full h-full max-h-[26rem] rounded-lg shadow-lg">
-          <figure className="px-4 pt-4">
+        <div className="card bg-white text-black w-[18rem] h-full max-h-[22rem] rounded-lg shadow-lg">
+          <figure className="">
             <img
               src={card.image}
               alt={card.title}
@@ -123,7 +123,7 @@ export default function Joinus() {
             <h2 className="card-title text-base sm:text-lg font-semibold text-start">{card.title}</h2>
             <p className="text-sm text-gray-600 text-start">{card.description}</p>
 
-            <p className="text-start text-sm mt-2">
+            <p className="text-start text-sm">
               <span className="text-base font-bold text-[#676ED2]">
                 {card.amount}
               </span>{' '}
@@ -131,19 +131,19 @@ export default function Joinus() {
             </p>
 
             <progress
-              className="progress progress-secondary w-full mt-1"
+              className="progress progress-secondary w-full"
               value={card.progress}
               max="100"
             ></progress>
 
-            <div className="card-actions justify-between items-center mt-3">
+            <div className="card-actions justify-between items-center">
               <div className="flex items-center">
                 <FaRegHeart className="text-lg text-pink-600" />
                 <span className="ml-2 text-sm text-gray-700">
                   {card.supporters} Supporter
                 </span>
               </div>
-              <ButtonWrapper />
+              <button className="btn btn-accent px-6 py-2 rounded-lg bg-[#FFE990] text-[#6F9D7E]">Doante</button>
             </div>
           </div>
         </div>

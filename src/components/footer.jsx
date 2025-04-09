@@ -14,7 +14,6 @@ const Footer = () => {
           <button
             className="
               px-6 py-2 rounded-full 
-              border border-amber-50
               flex items-center gap-2 
               text-[#6F9D7E] bg-[#FFE990]
               transition-all
@@ -42,6 +41,7 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row justify-between items-center text-center md:text-left space-y-6 md:space-y-0">
           {/* Logo */}
           <h2 className="text-2xl font-bold gradient-text">AGRI</h2>
+          {/* <img className="" src="/agri-logo.png" /> */}
 
           {/* Navigation Links */}
           <div className="flex flex-wrap justify-center md:justify-start space-x-4 md:space-x-6">
@@ -65,7 +65,7 @@ const Footer = () => {
         </div>
 
         {/* Footer Bottom */}
-        <div className="border-t border-white/10 pt-6 mt-6 text-center">
+        <div className="border-t border-white/10 pt-6 mt-12 text-center">
           <div className="flex justify-center items-center space-y-4 md:space-y-0">
             <a
               href="#"

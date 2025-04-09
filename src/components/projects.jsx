@@ -4,6 +4,34 @@ import { useEffect, useRef } from "react";
 import { IoMdShare } from "react-icons/io";
 
 function Projects() {
+
+  const divdown = useRef(null);
+useEffect(() => {
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("animate-slideInUp");
+        }
+      });
+    },
+    {
+      threshold: 0.1,
+    }
+  );
+
+  if (divdown.current) {
+    observer.observe(divdown.current);
+  }
+
+  return () => {
+    if (divdown.current) {
+      observer.unobserve(divdown.current);
+    }
+  };
+}, []);
+
+
   const divleft = useRef(null);
   const divright = useRef(null);
 
@@ -70,84 +98,91 @@ function Projects() {
   );
 
   return (
-    <div className="relative flex flex-col items-center mt-20 text-center px-4 md:px-10 lg:px-20 w-full">
-      <div className="z-10 flex flex-col items-center w-full max-w-2xl space-y-4 md:space-y-6">
-        <h1 className="text-4xl font-semibold text-black">
-          Take a look at our projects
-        </h1>
-      </div>
+    <div className="relative z-10 flex flex-col items-center mt-20 text-center px-4 md:px-10 lg:px-20 w-full">
 
-      {/* Responsive Cards Wrapper */}
-      <div className="flex flex-wrap gap-6 lg:gap-4 mt-10 justify-center items-center lg:items-stretch">
-        {/* Card 1 */}
-        <div
-          ref={divleft}
-          className="card bg-white text-black card-sm sm:w-80 h-80 w-60 shadow-lg"
-        >
-          <figure>
-            <img src="/tree-pic.jpg" alt="Tree" />
-          </figure>
-          <div className="card-body">
-            <h2 className="card-title text-start">
-              Food Restoration and Rehabilitation material
-            </h2>
-            <p className="text-start">
-              A card component has a figure, a body part, and inside body there
-              are title and actions parts
-            </p>
-            <div className="card-actions justify-between">
-              <ButtonWrapper />
-              <IoMdShare className="text-2xl" />
-            </div>
-          </div>
-        </div>
+  <img
+    src="/corn-anim-pic.png"
+    className="absolute top-80 left-10 w-20 opacity-60 md:w-48 lg:w-40 z-0 animate-spin-slow"
+  />
 
-        {/* Card 2 */}
-        <div className="card card-sm bg-white text-black sm:w-80 h-80 w-60 shadow-lg">
-          <figure>
-            <img src="/corn-pic.jpg" alt="Corn" />
-          </figure>
-          <div className="card-body">
-            <h2 className="card-title text-start">
-              The Clean-Up Team - Plastic waste reduction
-            </h2>
-            <p className="text-start">
-              A card component has a figure, a body part, and inside body there
-              are title and actions parts
-            </p>
-            <div className="card-actions justify-between">
-              <ButtonWrapper />
-              <IoMdShare className="text-2xl" />
-            </div>
-          </div>
-        </div>
+  <div className="flex flex-col items-center w-full max-w-2xl space-y-4 md:space-y-6">
+    <h1 className="text-4xl font-semibold text-black">
+      Take a look at our projects
+    </h1>
+  </div>
 
-        {/* Card 3 */}
-        <div
-          ref={divright}
-          className="card card-sm bg-white text-black sm:w-80 h-80 w-60 shadow-lg"
-        >
-          <figure>
-            <img src="/tractor-pic.jpg" alt="Tractor" />
-          </figure>
-          <div className="card-body">
-            <h2 className="card-title text-start">
-              Panda Conservation: Promoting Protection
-            </h2>
-            <p className="text-start">
-              A card component has a figure, a body part, and inside body there
-              are title and actions parts
-            </p>
-            <div className="card-actions justify-between">
-              <ButtonWrapper />
-              <IoMdShare className="text-2xl" />
-            </div>
-          </div>
+  <div className="flex flex-wrap gap-6 lg:gap-4 mt-10 justify-center items-center lg:items-stretch">
+    <div
+      ref={divleft}
+      className="card bg-white text-black card-sm sm:w-80 h-80 w-60 shadow-lg"
+    >
+      <figure>
+        <img src="/tree-pic.jpg" alt="Tree" />
+      </figure>
+      <div className="card-body">
+        <h2 className="card-title text-start">
+          Food Restoration and Rehabilitation material
+        </h2>
+        <p className="text-start">
+          A card component has a figure, a body part, and inside body there are title and actions parts
+        </p>
+        <div className="card-actions justify-between">
+        <button className="btn btn-accent px-6 py-2 rounded-lg bg-[#6F9D7E] text-[#FFE990]">Join Us</button>
+          <IoMdShare className="text-2xl" />
         </div>
       </div>
-
-      <ButtonWrapper2 />
     </div>
+
+    <div
+      ref={divdown}
+      className="card card-sm bg-white text-black sm:w-80 h-80 w-60 shadow-lg"
+    >
+      <figure>
+        <img src="/corn-pic.jpg" alt="Corn" />
+      </figure>
+      <div className="card-body">
+        <h2 className="card-title text-start">
+          The Clean-Up Team - Plastic waste reduction
+        </h2>
+        <p className="text-start">
+          A card component has a figure, a body part, and inside body there are title and actions parts
+        </p>
+        <div className="card-actions justify-between">
+        <button className="btn btn-accent px-6 py-2 rounded-lg bg-[#6F9D7E] text-[#FFE990]">Join Us</button>
+          <IoMdShare className="text-2xl" />
+        </div>
+      </div>
+    </div>
+
+    <div
+      ref={divright}
+      className="card z-50 card-sm bg-white text-black sm:w-80 h-80 w-60 shadow-lg"
+    >
+      <figure>
+        <img src="/tractor-pic.jpg" alt="Tractor" />
+      </figure>
+      <div className="card-body">
+        <h2 className="card-title text-start">
+          Panda Conservation: Promoting Protection
+        </h2>
+        <p className="text-start">
+          A card component has a figure, a body part, and inside body there are title and actions parts
+        </p>
+        <div className="card-actions justify-between">
+        <button className="btn btn-accent px-6 py-2 rounded-lg bg-[#6F9D7E] text-[#FFE990]">Join Us</button>
+        <button className="btn btn-accent px-6 py-2 rounded-lg bg-[#6F9D7E] text-[#FFE990]">Join Us</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button className="btn btn-outline btn-info mt-8">Explore more</button>
+  <img
+    src="/corn-anim-pic.png"
+    className="absolute -top-10  left-4/5 w-20 opacity-60 md:w-48 lg:w-40 z-0 animate-spin-slow"
+  />
+</div>
+
   );
 }
 

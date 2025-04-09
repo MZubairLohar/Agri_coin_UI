@@ -3,6 +3,60 @@
 import { useEffect,useRef } from "react";
 
 function Whatsnew() {
+  
+
+  const divup = useRef(null);
+useEffect(() => {
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("animate-slideInDown");
+        }
+      });
+    },
+    {
+      threshold: 0.1,
+    }
+  );
+
+  if (divup.current) {
+    observer.observe(divup.current);
+  }
+
+  return () => {
+    if (divup.current) {
+      observer.unobserve(divup.current);
+    }
+  };
+}, []);
+
+const divdown = useRef(null);
+useEffect(() => {
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("animate-slideInUp");
+        }
+      });
+    },
+    {
+      threshold: 0.1,
+    }
+  );
+
+  if (divdown.current) {
+    observer.observe(divdown.current);
+  }
+
+  return () => {
+    if (divdown.current) {
+      observer.unobserve(divdown.current);
+    }
+  };
+}, []);
+
 
   const divleft = useRef(null);
   useEffect(() => {
@@ -87,6 +141,10 @@ function Whatsnew() {
 
   return (
     <div className="relative flex flex-col items-center mt-20 text-center px-4 md:px-10 lg:px-20 w-full">
+      <img
+    src="/corn-anim-pic.png"
+    className="absolute -top-10 left-8 w-20 opacity-60 md:w-48 lg:w-40 z-0 animate-spin-slow"
+  />
   <div className="z-10 flex flex-col items-center w-full max-w-2xl space-y-4 md:space-y-6">
     <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-black">
       What's New
@@ -120,50 +178,71 @@ function Whatsnew() {
     </div>
 
     {/* Right Column with 3 Small Side Cards */}
-    <div
-      ref={divright}
-      className="flex flex-col justify-between w-full lg:w-1/2 space-y-4"
-    >
-      {[
-        {
-          img: 'pic2.png',
-          title: 'Getting kids outside: one of the best things',
-          date: '26/06/2023',
-        },
-        {
-          img: 'mountain-pic.jpg',
-          title: 'Understanding people is key to protecting nature',
-          date: '24/06/2023',
-        },
-        {
-          img: 'turtles-pic.jpg',
-          title: 'Protecting sea turtles across the pacific',
-          date: '18/06/2023',
-        },
-      ].map((card, idx) => (
-        <div
-          key={idx}
-          className="card flex-col sm:flex-row card-side bg-white border border-gray-300 text-black shadow-md h-auto lg:h-[8.7rem]"
-        >
-          <figure className="w-full sm:w-2/5 h-48 sm:h-full">
-            <img
-              src={card.img}
-              alt="Thumb"
-              className="object-cover w-full h-full"
-            />
-          </figure>
-          <div className="card-body w-full sm:w-2/3">
-            <h2 className="card-title text-start text-sm sm:text-md font-bold leading-snug">
-              {card.title}
-            </h2>
-            <div className="card-actions mt-auto text-xs justify-between items-center">
-              <p className="text-start">{card.date}</p>
-              <ButtonWrapper />
-            </div>
-          </div>
-        </div>
-      ))}
+    <div className="flex flex-col justify-between w-full lg:w-1/2 space-y-4">
+  <div
+  ref={divup}
+  className="card flex-col sm:flex-row card-side bg-white border border-gray-300 text-black shadow-md h-auto lg:h-[8.7rem]">
+    <figure className="w-full sm:w-2/5 h-48 sm:h-full">
+      <img
+        src="pic2.png"
+        alt="Thumb"
+        className="object-cover w-full h-full"
+      />
+    </figure>
+    <div className="card-body w-full sm:w-2/3">
+      <h2 className="card-title text-start text-sm sm:text-md font-bold leading-snug">
+        Getting kids outside: one of the best things
+      </h2>
+      <div className="card-actions mt-auto text-xs justify-between items-center">
+        <p className="text-start">26/06/2023</p>
+        <ButtonWrapper />
+      </div>
     </div>
+  </div>
+
+  <div
+  ref={divright}
+  className="card flex-col sm:flex-row card-side bg-white border border-gray-300 text-black shadow-md h-auto lg:h-[8.7rem]">
+    <figure className="w-full sm:w-2/5 h-48 sm:h-full">
+      <img
+        src="mountain-pic.jpg"
+        alt="Thumb"
+        className="object-cover w-full h-full"
+      />
+    </figure>
+    <div className="card-body w-full sm:w-2/3">
+      <h2 className="card-title text-start text-sm sm:text-md font-bold leading-snug">
+        Understanding people is key to protecting nature
+      </h2>
+      <div className="card-actions mt-auto text-xs justify-between items-center">
+        <p className="text-start">24/06/2023</p>
+        <ButtonWrapper />
+      </div>
+    </div>
+  </div>
+
+  <div
+  ref={divdown}
+  className="card flex-col sm:flex-row card-side bg-white border border-gray-300 text-black shadow-md h-auto lg:h-[8.7rem]">
+    <figure className="w-full sm:w-2/5 h-48 sm:h-full">
+      <img
+        src="turtles-pic.jpg"
+        alt="Thumb"
+        className="object-cover w-full h-full"
+      />
+    </figure>
+    <div className="card-body w-full sm:w-2/3">
+      <h2 className="card-title text-start text-sm sm:text-md font-bold leading-snug">
+        Protecting sea turtles across the pacific
+      </h2>
+      <div className="card-actions mt-auto text-xs justify-between items-center">
+        <p className="text-start">18/06/2023</p>
+        <ButtonWrapper />
+      </div>
+    </div>
+  </div>
+</div>
+
   </div>
 </div>
 
