@@ -196,7 +196,7 @@ useEffect(() => {
   <Navbar />
    <img
           src="/wheat-bg-pic.jpg"
-          className="absolute top-0 left-0 w-full h-[595px] opacity-30 object-cover z-0"
+          className="absolute top-0 left-0 w-full h-[550px] sm:h-[580px] md:h-[590px] lg:h-[605px] opacity-30 object-cover z-0"
         />
 
   <div className="z-10 pt-8 flex flex-col items-center w-full lg:w-full space-y-4 md:space-y-6">
@@ -209,8 +209,8 @@ useEffect(() => {
     </h2>
 
     <div className="flex flex-wrap sm:gap-3 gap-1 justify-center mt-6 md:-mt-4">
-    <button className="btn btn-accent px-6 py-2 rounded-lg bg-white text-[#6F9D7E]">Join Us</button>
-      <button className="btn btn-accent px-6 py-2 rounded-lg bg-[#6F9D7E] text-[#FFE990]">Donate</button>
+    <button className="btn btn-accent sm:px-6 sm:py-2 rounded-lg bg-white text-[#6F9D7E]">Join Us</button>
+      <button className="btn btn-accent sm:px-6 sm:py-2 rounded-lg bg-[#6F9D7E] text-[#FFE990]">Donate</button>
     </div>
 
     <div className="flex justify-center mt-20 gap-10 sm:mt-10 md:-mt-10 xl:gap-14">
@@ -222,10 +222,10 @@ useEffect(() => {
         <img className="w-32 h-20 sm:w-32 sm:h-28 md:w-48 md:h-40 lg:h-56 object-cover rounded-2xl" src="/farm-pic.jpg" />
       </div>
 
-      <div className="flex gap-6 sm:gap-6 -mt-10 sm:-mt-0 -ml-24 sm:-ml-12 md:-ml-6 xl:-ml-0 xl:gap-10">
+      <div className="flex gap-6 sm:gap-6 -mt-10 sm:-mt-0 lg:mt-8 xl:mt-0 -ml-24 sm:-ml-12 md:-ml-6 xl:-ml-0 xl:gap-10">
       <img
         ref={divlef}
-        className="w-20 h-20 object-cover sm:w-32 sm:h-32 md:w-32 md:h-40 lg:w-44 lg:h-40 xl:w-48 xl:h-56 rounded-2xl"
+        className="w-20 h-20 object-cover md:mt-8 lg:mt-0 sm:w-32 sm:h-32 md:w-32 md:h-40 lg:w-44 lg:h-40 xl:w-48 xl:h-56 rounded-2xl"
         src="/leaf-pic.jpg"
       />
       <img
@@ -235,14 +235,14 @@ useEffect(() => {
       />
       <img
         ref={divrigh}
-        className="w-20 h-20 object-cover sm:w-32 sm:h-32 md:w-32 md:h-40 lg:w-44 lg:h-40 xl:w-48 xl:h-56 rounded-2xl"
+        className="w-20 h-20 object-cover md:mt-8 lg:mt-0 sm:w-32 sm:h-32 md:w-32 md:h-40 lg:w-44 lg:h-40 xl:w-48 xl:h-56 rounded-2xl"
         src="/water-field.jpg"
       />
       </div>
 
       <div
         ref={divright}
-        className="flex flex-col space-y-4 ml-6 sm:ml-0 md:-mt-68 lg:-mt-60 md:ml-28 lg:ml-24 xl:ml-0 -mt-68"
+        className="flex flex-col space-y-4 ml-16 sm:ml-0 md:-mt-68 lg:-mt-60 md:ml-36 lg:ml-44 xl:ml-0 -mt-68"
       >
         <img className="w-32 h-20 sm:w-32 sm:h-28 md:w-48 md:h-40 lg:h-56 object-cover rounded-2xl" src="/farming-pic.jpg" />
         <img className="w-32 h-20 object-cover sm:w-32 sm:h-28 md:w-48 md:h-40 lg:h-56 rounded-2xl" src="/wheat-pic.jpg" />

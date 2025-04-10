@@ -102,11 +102,11 @@ useEffect(() => {
 
   <img
     src="/corn-anim-pic.png"
-    className="absolute top-80 left-10 w-20 opacity-60 md:w-48 lg:w-40 z-0 animate-spin-slow"
+    className="absolute -ml-8 sm:-ml-0 top-11/12 sm:top-11/12 md:top-5/6 xl:top-80 left-10 w-24 opacity-60 sm:w-28 md:w-28 xl:w-40 z-0 animate-spin-slow"
   />
 
   <div className="flex flex-col items-center w-full max-w-2xl space-y-4 md:space-y-6">
-    <h1 className="text-4xl font-semibold text-black">
+    <h1 className="text-4xl font-semibold text-black sm:text-pink-500 md:text-orange-600 lg:text-blue-800 xl:text-green-700">
       Take a look at our projects
     </h1>
   </div>
@@ -179,7 +179,7 @@ useEffect(() => {
   <button className="btn btn-outline btn-info mt-8">Explore more</button>
   <img
     src="/corn-anim-pic.png"
-    className="absolute -top-10  left-4/5 w-20 opacity-60 md:w-48 lg:w-40 z-0 animate-spin-slow"
+    className="absolute -top-14 left-2/3 sm:-top-16 md:-top-14 sm:left-4/5 w-20 sm:w-24 md:w-28 lg:w-40 opacity-60 z-0 animate-spin-slow"
   />
 </div>
 

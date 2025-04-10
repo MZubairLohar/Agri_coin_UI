@@ -143,7 +143,7 @@ useEffect(() => {
     <div className="relative flex flex-col items-center mt-20 text-center px-4 md:px-10 lg:px-20 w-full">
       <img
     src="/corn-anim-pic.png"
-    className="absolute -top-10 left-8 w-20 opacity-60 md:w-48 lg:w-40 z-0 animate-spin-slow"
+    className="absolute lg:-top-10 md:-top-14 sm:-top-10 -ml-6 sm:-ml-0 left-8 w-20 sm:w-28 md:w-36 lg:w-40 opacity-60 z-0 animate-spin-slow"
   />
   <div className="z-10 flex flex-col items-center w-full max-w-2xl space-y-4 md:space-y-6">
     <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-black">

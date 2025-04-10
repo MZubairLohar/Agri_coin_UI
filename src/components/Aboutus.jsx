@@ -90,7 +90,7 @@ function Aboutus() {
         {/* Right Section */}
         <div
   // ref={divright}
-  className="card-body w-full lg:w-1/2 flex justify-center items-center mt-6 lg:mt-0"
+  className="card-body w-full lg:w-1/2 flex justify-center items-center"
 >
   <div className="w-full h-60 sm:h-72 md:h-80 lg:h-full rounded-3xl overflow-hidden">
     <video className="w-full h-full object-cover" controls>
