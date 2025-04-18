@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect,useRef } from "react";
+import Image from "next/image";
+
 
 function Connected () {
 
@@ -139,11 +141,12 @@ useEffect(() => {
         };
     return(
         <>
-        <div className="card lg:card-side w-11/12 lg:w-4/5 rounded-2xl mt-16 bg-[#6F9D7E] h-auto lg:h-[400px] shadow-sm p-4 mx-auto">
-        
+<div className="card lg:card-side w-11/12 lg:w-4/5 rounded-2xl mt-16 bg-[#6F9D7E] h-auto lg:h-[400px] shadow-sm p-4 mx-auto">
   <div className="card-body w-full lg:w-2/5 text-[#FFE990]">
     <h2 className="card-title text-3xl sm:text-4xl">Stay Connected</h2>
-    <p className="text-md">Our mission is to conserve nature and reduce the most pressing threats to the diversity of life on earth.</p>
+    <p className="text-md">
+      Our mission is to conserve nature and reduce the most pressing threats to the diversity of life on earth.
+    </p>
     <div className="space-y-8 lg:space-y-4 xl:space-y-8 lg:mt-0 xl:mt-4">
       <input
         type="text"
@@ -151,41 +154,58 @@ useEffect(() => {
         className="input text-black input-warning bg-white w-full"
       />
       <textarea
-        type="text"
         placeholder="Your Message"
         className="textarea text-black textarea-warning bg-white w-full"
       ></textarea>
-     <button className="btn btn-accent px-6 py-2 rounded-lg bg-[#FFE990] text-[#6F9D7E]">Donate</button>
+      <button className="btn btn-accent px-6 py-2 rounded-lg bg-[#FFE990] text-[#6F9D7E]">Donate</button>
     </div>
   </div>
 
   <div className="card-body w-full lg:w-3/5 flex">
-    <div
-      className="flex gap-4 w-full flex-col sm:flex-row"
-    >
+    <div className="flex gap-4 w-full flex-col sm:flex-row">
+      
+      {/* Left Image */}
       <div className="flex items-center w-full lg:w-2/4 justify-center">
-        <img
-        ref={divleft}
-        src="pic3.png" className="rounded-lg h-44 sm:h-60 object-cover w-96 lg:w-80" />
-      </div>
-      <div className="space-y-4 w-full lg:w-2/4">
-      <div className="flex items-center justify-center">
-        <img
-        ref={divup}
-        src="wheat-pic.jpg" className="rounded-lg object-cover h-44 sm:-mt-5 w-96 sm:w-full" />
-        </div>
-        <div className="flex items-center justify-center">
-        <img
-        ref={divdown}
-          id="pic"
-          src="working-fields.jpg"
-          className="rounded-lg h-44 object-cover w-96 sm:w-full"
+        <Image
+         ref={divleft}
+          src="/pic3.png"
+          alt="pic3"
+          width={384}
+          height={240}
+          className="rounded-lg h-44 sm:h-60 object-cover w-96 lg:w-80"
         />
+      </div>
+
+      {/* Right Two Images */}
+      <div className="space-y-4 w-full lg:w-2/4">
+        
+        <div className="flex items-center justify-center">
+          <Image
+          ref={divup}
+            src="/wheat-pic.jpg"
+            alt="wheat"
+            width={384}
+            height={240}
+            className="rounded-lg object-cover h-44 sm:-mt-5 w-96 sm:w-full"
+          />
         </div>
+
+        <div className="flex items-center justify-center">
+          <Image
+          ref={divdown}
+            src="/working-fields.jpg"
+            alt="fields"
+            width={384}
+            height={240}
+            className="rounded-lg h-44 object-cover w-96 sm:w-full"
+          />
+        </div>
+
       </div>
     </div>
   </div>
 </div>
+
 
         </>
     )

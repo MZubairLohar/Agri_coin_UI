@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { IoMdShare } from "react-icons/io";
+import Image from "next/image";
 
 function Projects() {
 
@@ -98,12 +99,18 @@ useEffect(() => {
   );
 
   return (
-    <div className="relative z-10 flex flex-col items-center mt-20 text-center px-4 md:px-10 lg:px-20 w-full">
 
-  <img
-    src="/corn-anim-pic.png"
-    className="absolute -ml-8 sm:-ml-0 top-11/12 sm:top-11/12 md:top-5/6 xl:top-80 left-10 w-24 opacity-60 sm:w-28 md:w-28 xl:w-40 z-0 animate-spin-slow"
-  />
+
+<div className="relative z-10 flex flex-col items-center mt-20 text-center px-4 md:px-10 lg:px-20 w-full">
+  <div className="absolute -ml-8 sm:-ml-0 top-11/12 sm:top-11/12 md:top-5/6 xl:top-80 left-10 w-24 opacity-60 sm:w-28 md:w-28 xl:w-40 z-0 animate-spin-slow">
+    <Image
+      src="/corn-anim-pic.png"
+      alt="Spinning Corn"
+      width={160}
+      height={160}
+      className="w-full h-auto"
+    />
+  </div>
 
   <div className="flex flex-col items-center w-full max-w-2xl space-y-4 md:space-y-6">
     <h1 className="text-4xl font-semibold text-black sm:text-pink-500 md:text-orange-600 lg:text-blue-800 xl:text-green-700">
@@ -111,13 +118,18 @@ useEffect(() => {
     </h1>
   </div>
 
-  <div className="flex flex-wrap gap-6 lg:gap-4 mt-10 justify-center items-center lg:items-stretch">
-    <div
-      ref={divleft}
-      className="card bg-white text-black card-sm sm:w-80 h-80 w-60 shadow-lg"
-    >
-      <figure>
-        <img src="/tree-pic.jpg" alt="Tree" />
+  <div
+  ref={divleft}
+  className="flex flex-wrap gap-6 lg:gap-4 mt-10 justify-center items-center lg:items-stretch">
+    <div className="card bg-white text-black card-sm sm:w-80 h-80 w-60 shadow-lg">
+      <figure className="relative w-full h-40">
+        <Image
+          src="/tree-pic.jpg"
+          alt="Tree"
+          layout="fill"
+          objectFit="cover"
+          className="rounded-t-lg"
+        />
       </figure>
       <div className="card-body">
         <h2 className="card-title text-start">
@@ -127,18 +139,23 @@ useEffect(() => {
           A card component has a figure, a body part, and inside body there are title and actions parts
         </p>
         <div className="card-actions justify-between">
-        <button className="btn btn-accent px-6 py-2 rounded-lg bg-[#6F9D7E] text-[#FFE990]">Join Us</button>
+          <button className="btn btn-accent px-6 py-2 rounded-lg bg-[#6F9D7E] text-[#FFE990]">Join Us</button>
           <IoMdShare className="text-2xl" />
         </div>
       </div>
     </div>
 
     <div
-      ref={divdown}
-      className="card card-sm bg-white text-black sm:w-80 h-80 w-60 shadow-lg"
-    >
-      <figure>
-        <img src="/corn-pic.jpg" alt="Corn" />
+    ref={divdown}
+    className="card card-sm bg-white text-black sm:w-80 h-80 w-60 shadow-lg">
+      <figure className="relative w-full h-40">
+        <Image
+          src="/corn-pic.jpg"
+          alt="Corn"
+          layout="fill"
+          objectFit="cover"
+          className="rounded-t-lg"
+        />
       </figure>
       <div className="card-body">
         <h2 className="card-title text-start">
@@ -148,18 +165,23 @@ useEffect(() => {
           A card component has a figure, a body part, and inside body there are title and actions parts
         </p>
         <div className="card-actions justify-between">
-        <button className="btn btn-accent px-6 py-2 rounded-lg bg-[#6F9D7E] text-[#FFE990]">Join Us</button>
+          <button className="btn btn-accent px-6 py-2 rounded-lg bg-[#6F9D7E] text-[#FFE990]">Join Us</button>
           <IoMdShare className="text-2xl" />
         </div>
       </div>
     </div>
 
     <div
-      ref={divright}
-      className="card z-50 card-sm bg-white text-black sm:w-80 h-80 w-60 shadow-lg"
-    >
-      <figure>
-        <img src="/tractor-pic.jpg" alt="Tractor" />
+    ref={divright}
+    className="card z-50 card-sm bg-white text-black sm:w-80 h-80 w-60 shadow-lg">
+      <figure className="relative w-full h-40">
+        <Image
+          src="/tractor-pic.jpg"
+          alt="Tractor"
+          layout="fill"
+          objectFit="cover"
+          className="rounded-t-lg"
+        />
       </figure>
       <div className="card-body">
         <h2 className="card-title text-start">
@@ -169,18 +191,24 @@ useEffect(() => {
           A card component has a figure, a body part, and inside body there are title and actions parts
         </p>
         <div className="card-actions justify-between">
-        <button className="btn btn-accent px-6 py-2 rounded-lg bg-[#6F9D7E] text-[#FFE990]">Join Us</button>
-        <button className="btn btn-accent px-6 py-2 rounded-lg bg-[#6F9D7E] text-[#FFE990]">Join Us</button>
+          <button className="btn btn-accent px-6 py-2 rounded-lg bg-[#6F9D7E] text-[#FFE990]">Join Us</button>
+          <button className="btn btn-accent px-6 py-2 rounded-lg bg-[#6F9D7E] text-[#FFE990]">Join Us</button>
         </div>
       </div>
     </div>
   </div>
 
   <button className="btn btn-outline btn-info mt-8">Explore more</button>
-  <img
-    src="/corn-anim-pic.png"
-    className="absolute -top-14 left-2/3 sm:-top-16 md:-top-14 sm:left-4/5 w-20 sm:w-24 md:w-28 lg:w-40 opacity-60 z-0 animate-spin-slow"
-  />
+
+  <div className="absolute -top-14 left-2/3 sm:-top-16 md:-top-14 sm:left-4/5 w-20 sm:w-24 md:w-28 lg:w-40 opacity-60 z-0 animate-spin-slow">
+    <Image
+      src="/corn-anim-pic.png"
+      alt="Corn Animated"
+      width={160}
+      height={160}
+      className="w-full h-auto"
+    />
+  </div>
 </div>
 
   );

@@ -1,5 +1,5 @@
 "use client";
-
+import Image from "next/image";
 import { useEffect,useRef } from "react";
 
 function Whatsnew() {
@@ -140,28 +140,37 @@ useEffect(() => {
     };
 
   return (
-    <div className="relative flex flex-col items-center mt-20 text-center px-4 md:px-10 lg:px-20 w-full">
-      <img
+    <>
+    
+
+
+<div className="relative flex flex-col items-center mt-20 text-center px-4 md:px-10 lg:px-20 w-full">
+  <Image
     src="/corn-anim-pic.png"
+    alt="corn animation"
+    width={160}
+    height={160}
     className="absolute lg:-top-10 md:-top-14 sm:-top-10 -ml-6 sm:-ml-0 left-8 w-20 sm:w-28 md:w-36 lg:w-40 opacity-60 z-0 animate-spin-slow"
   />
+
   <div className="z-10 flex flex-col items-center w-full max-w-2xl space-y-4 md:space-y-6">
-    <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-black">
-      What's New
-    </h1>
+    <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-black">What's New</h1>
   </div>
 
   <div className="flex flex-col lg:flex-row gap-6 mt-10 w-full max-w-7xl">
+
     {/* Left Big Card */}
-    <div className="w-full lg:w-3/5">
+    <div
+    className="w-full lg:w-3/5">
       <div
-        ref={divleft}
-        className="card bg-white text-black border border-gray-300 shadow-lg h-auto lg:h-[28rem]"
-      >
+      ref={divleft}
+      className="card bg-white text-black border border-gray-300 shadow-lg h-auto lg:h-[28rem]">
         <figure className="h-60 sm:h-72 lg:h-80 overflow-hidden">
-          <img
-            src="beans-pic.jpg"
+          <Image
+            src="/beans-pic.jpg"
             alt="Main"
+            width={1000}
+            height={400}
             className="object-cover w-full h-full"
           />
         </figure>
@@ -179,72 +188,83 @@ useEffect(() => {
 
     {/* Right Column with 3 Small Side Cards */}
     <div className="flex flex-col justify-between w-full lg:w-1/2 space-y-4">
-  <div
-  ref={divup}
-  className="card flex-col sm:flex-row card-side bg-white border border-gray-300 text-black shadow-md h-auto lg:h-[8.7rem]">
-    <figure className="w-full sm:w-2/5 h-48 sm:h-full">
-      <img
-        src="pic2.png"
-        alt="Thumb"
-        className="object-cover w-full h-full"
-      />
-    </figure>
-    <div className="card-body w-full sm:w-2/3">
-      <h2 className="card-title text-start text-sm sm:text-md font-bold leading-snug">
-        Getting kids outside: one of the best things
-      </h2>
-      <div className="card-actions mt-auto text-xs justify-between items-center">
-        <p className="text-start">26/06/2023</p>
-        <ButtonWrapper />
-      </div>
-    </div>
-  </div>
 
-  <div
-  ref={divright}
-  className="card flex-col sm:flex-row card-side bg-white border border-gray-300 text-black shadow-md h-auto lg:h-[8.7rem]">
-    <figure className="w-full sm:w-2/5 h-48 sm:h-full">
-      <img
-        src="mountain-pic.jpg"
-        alt="Thumb"
-        className="object-cover w-full h-full"
-      />
-    </figure>
-    <div className="card-body w-full sm:w-2/3">
-      <h2 className="card-title text-start text-sm sm:text-md font-bold leading-snug">
-        Understanding people is key to protecting nature
-      </h2>
-      <div className="card-actions mt-auto text-xs justify-between items-center">
-        <p className="text-start">24/06/2023</p>
-        <ButtonWrapper />
+      {/* Card 1 */}
+      <div
+      ref={divup}
+      className="card flex-col sm:flex-row card-side bg-white border border-gray-300 text-black shadow-md h-auto lg:h-[8.7rem]">
+        <figure className="w-full sm:w-2/5 h-48 sm:h-full">
+          <Image
+            src="/pic2.png"
+            alt="Thumb"
+            width={300}
+            height={150}
+            className="object-cover w-full h-full"
+          />
+        </figure>
+        <div className="card-body w-full sm:w-2/3">
+          <h2 className="card-title text-start text-sm sm:text-md font-bold leading-snug">
+            Getting kids outside: one of the best things
+          </h2>
+          <div className="card-actions mt-auto text-xs justify-between items-center">
+            <p className="text-start">26/06/2023</p>
+            <ButtonWrapper />
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
 
-  <div
-  ref={divdown}
-  className="card flex-col sm:flex-row card-side bg-white border border-gray-300 text-black shadow-md h-auto lg:h-[8.7rem]">
-    <figure className="w-full sm:w-2/5 h-48 sm:h-full">
-      <img
-        src="turtles-pic.jpg"
-        alt="Thumb"
-        className="object-cover w-full h-full"
-      />
-    </figure>
-    <div className="card-body w-full sm:w-2/3">
-      <h2 className="card-title text-start text-sm sm:text-md font-bold leading-snug">
-        Protecting sea turtles across the pacific
-      </h2>
-      <div className="card-actions mt-auto text-xs justify-between items-center">
-        <p className="text-start">18/06/2023</p>
-        <ButtonWrapper />
+      {/* Card 2 */}
+      <div
+      ref={divright}
+      className="card flex-col sm:flex-row card-side bg-white border border-gray-300 text-black shadow-md h-auto lg:h-[8.7rem]">
+        <figure className="w-full sm:w-2/5 h-48 sm:h-full">
+          <Image
+            src="/mountain-pic.jpg"
+            alt="Thumb"
+            width={300}
+            height={150}
+            className="object-cover w-full h-full"
+          />
+        </figure>
+        <div className="card-body w-full sm:w-2/3">
+          <h2 className="card-title text-start text-sm sm:text-md font-bold leading-snug">
+            Understanding people is key to protecting nature
+          </h2>
+          <div className="card-actions mt-auto text-xs justify-between items-center">
+            <p className="text-start">24/06/2023</p>
+            <ButtonWrapper />
+          </div>
+        </div>
       </div>
+
+      {/* Card 3 */}
+      <div
+      ref={divdown}
+      className="card flex-col sm:flex-row card-side bg-white border border-gray-300 text-black shadow-md h-auto lg:h-[8.7rem]">
+        <figure className="w-full sm:w-2/5 h-48 sm:h-full">
+          <Image
+            src="/turtles-pic.jpg"
+            alt="Thumb"
+            width={300}
+            height={150}
+            className="object-cover w-full h-full"
+          />
+        </figure>
+        <div className="card-body w-full sm:w-2/3">
+          <h2 className="card-title text-start text-sm sm:text-md font-bold leading-snug">
+            Protecting sea turtles across the pacific
+          </h2>
+          <div className="card-actions mt-auto text-xs justify-between items-center">
+            <p className="text-start">18/06/2023</p>
+            <ButtonWrapper />
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </div>
-
-  </div>
-</div>
+</>
 
   );
 }
