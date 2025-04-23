@@ -97,57 +97,45 @@ const ChartTwo = () => {
   ];
 
   return (
-    <div className="col-span-12 rounded-xl border border-gray-300 bg-white p-7.5 shadow-default xl:col-span-4">
-      <div className="mb-4 justify-between gap-4 sm:flex">
-        <div>
-          <h4 className="text-xl font-lora font-semibold text-black">
-            Profit this week
-          </h4>
-        </div>
-        <div>
-          <div className="relative z-10 inline-block font-lora">
-            <select
-              name="#"
-              id="#"
-              className="relative z-10 text-black inline-flex appearance-none bg-transparent py-1 pl-3 pr-8 text-sm font-medium outline-none"
-            >
-              <option value="" className="text-black">
-                This Week
-              </option>
-              <option value="" className="text-black">
-                Last Week
-              </option>
-            </select>
-            <span className="absolute right-3 top-1/2 z-10 -translate-y-1/2">
-              <svg
-                width="10"
-                height="6"
-                viewBox="0 0 10 6"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M0.47072 1.08816C0.47072 1.02932 0.500141 0.955772 0.54427 0.911642C0.647241 0.808672 0.809051 0.808672 0.912022 0.896932L4.85431 4.60386C4.92785 4.67741 5.06025 4.67741 5.14851 4.60386L9.09079 0.896932C9.19376 0.793962 9.35557 0.808672 9.45854 0.911642C9.56151 1.01461 9.5468 1.17642 9.44383 1.27939L5.50155 4.98632C5.22206 5.23639 4.78076 5.23639 4.51598 4.98632L0.558981 1.27939C0.50014 1.22055 0.47072 1.16171 0.47072 1.08816Z"
-                  fill="#637381"
-                />
-              </svg>
-            </span>
-          </div>
+    <div className="col-span-12 rounded-xl border border-gray-300 bg-white p-3 pt-6 shadow-default xl:col-span-4">
+    <div className="mb-4">
+      <h4 className="text-xl font-lora text-center font-semibold text-black">Minting Update</h4>
+    </div>
+  
+    <div className="flex">
+      {/* Left Column */}
+      <div className="w-1/2 pr-4 border-r border-gray-300">
+        <div className="font-semibold text-gray-500 mb-2">Who Minted</div>
+        <div className="flex flex-col items-center text-md text-gray-400 font-medium gap-2">
+          <div>John</div>
+          <div>Alice</div>
+          <div>James</div>
+          <div>Bob</div>
+          <div>Martin</div>
+          <div>Josh</div>
+          <div>Luke</div>
+          <div>Steve</div>
         </div>
       </div>
-
-      <div>
-        <div id="chartTwo" className="-mb-9 -ml-5">
-          <ReactApexChart
-            options={options}
-            series={series}
-            type="bar"
-            height={350}
-            width={"100%"}
-          />
+  
+      {/* Right Column */}
+      <div className="w-1/2 pl-4">
+        <div className="font-semibold text-gray-500 mb-2">Minted amount</div>
+        <div className="flex flex-col text-[#6F9D7E] font-medium text-md items-center gap-2">
+          <div>33</div>
+          <div>21</div>
+          <div>42</div>
+          <div>55</div>
+          <div>12</div>
+          <div>36</div>
+          <div>13</div>
+          <div>40</div>
         </div>
       </div>
     </div>
+  </div>
+  
+  
   );
 };
 
