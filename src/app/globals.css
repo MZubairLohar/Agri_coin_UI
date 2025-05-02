@@ -2,8 +2,11 @@
 @plugin "daisyui";
 
 :root {
-  --background: #ffffff;
-  --foreground: #ffffff;
+  /* --background: #ffffff; */
+  /* --foreground: #ffffff; */
+
+  --baseYellow: #FFE990;
+  --baseGreen: #6f9d7e;
 }
 
 @keyframes slideInRight {
@@ -78,6 +81,24 @@
 .animate-spin-slow {
   animation: spin 20s linear infinite;
 }
+@keyframes spinHalf {
+  0% {
+    transform: rotate(-70deg);
+    translate: 0px;
+  }
+  50% {
+    transform: rotate(0deg);
+    translate: 80px;
+  }
+  100% {
+    transform: rotate(-70deg);
+    translate: 00px;
+  }
+}
+
+.animate-spin-half {
+  animation: spinHalf 10s linear infinite;
+}
 
 @theme inline {
   --color-background: var(--background);
@@ -97,4 +118,19 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+
+.bgBaseGreen{
+  background-color: var(--baseGreen);
+}
+.textBaseGreen{
+  color: var(--baseGreen);
+}
+
+.bgBaseYellow{
+  background-color: var(--baseYellow);
+}
+.textBaseYellow{
+  color: var(--baseYellow);
 }

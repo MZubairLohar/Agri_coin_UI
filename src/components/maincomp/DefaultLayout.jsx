@@ -6,7 +6,7 @@ export default function DefaultLayout({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   return (
     <>
-     <div className="flex">
+     <div className="flex ">
         {/* <!-- ===== Sidebar Start ===== --> */}
         <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
         {/* <!-- ===== Sidebar End ===== --> */}
@@ -19,15 +19,15 @@ export default function DefaultLayout({ children }) {
 
           {/* <!-- ===== Main Content Start ===== --> */}
           <main className="bg-white">
-            <div className="mx-auto bg-white max-w-screen-2xl p-4 md:p-6 2xl:p-10">
+            <div className="mx-auto  max-w-screen-2xl bg-[#FFE990]">
               {children}
             </div>
           </main>
           {/* <!-- ===== Main Content End ===== --> */}
         </div>
-        <div className="bg-white h-auto w-6 ]">
+        {/* <div className="bg-white h-auto w-6 ]">
          
-        </div>
+        </div> */}
         {/* <!-- ===== Content Area End ===== --> */}
       </div>
     </>
