@@ -27,7 +27,7 @@ const SidebarItem = ({ item, pageName, setPageName }) => {
         <Link
           href={item.route}
           onClick={handleClick}
-          className={`${isItemActive ? "font-lora bg-[#FFE990] text-[#FFFFFF]" : "text-[#FFE990]"} group relative flex items-center gap-2.5 font-lora rounded-sm px-4 py-2 font-medium hover:text-[#6F9D7E] text-[#FFE990] duration-300 ease-in-out hover:bg-[#FFE990]`}
+          className={`${isItemActive ? "font-lora text-[#FFE990]" : "text-[#FFE990]"} group relative flex items-center gap-2.5 font-lora rounded-sm px-4 py-2 font-medium hover:text-[#6F9D7E] text-[#FFE990] duration-300 ease-in-out hover:bg-[#FFE990]`}
         >
           {item.icon}
           {item.label}

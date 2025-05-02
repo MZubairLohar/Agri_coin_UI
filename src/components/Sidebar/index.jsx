@@ -9,47 +9,64 @@ import ClickOutside from "./Clickoutside";
 import useLocalStorage from "./useLocalstorage";
 import { IoHomeOutline } from "react-icons/io5";
 import { IoStatsChartOutline } from "react-icons/io5";
-import { Leaf, BarChart2, CloudRain, Users, Settings, HelpCircle, Home } from "lucide-react";
+import { Leaf, BarChart2, CloudRain, Users, Settings, HelpCircle, Home,History } from "lucide-react";
 
 const menuGroups = [
   {
-    name: "MENU",
+    name: "MENU INVENTORY",
     menuItems: [
       {
-        icon: (
-       <Home />
-        ),
-        label: "Home",
-        route: "/portfolio",
-      },
+        icon: <Leaf />,
+        label: "Market",
+        route: "/investordash",
+        children: [
+          {
+            label: "Pre-harvest",
+            route: "/payment/pre",
+          },
+          {
+            label: "Post-harvest",
+            route: "/payment/post",
+          },
+        ],
+      },      
       {
-        icon: (
-          <BarChart2 />
-        ),
-        label: "Dashboard",
-        route: "/payment",
-      },
+        icon: <BarChart2 />,
+        label: "Purchased",
+        route: "/investordash",
+        children: [
+          {
+            label: "Pre-harvest",
+            route: "/payment/pre",
+          },
+          {
+            label: "Post-harvest",
+            route: "/payment/post",
+          },
+        ],
+      },  
       {
-        icon: (
-          <Leaf />
-        ),
-        label: "Field Management",
-        route: "/mint",
-      },
-      {
-        icon: (
-          <CloudRain />
-        ),
-        label: "Weather",
-        route: "/mint",
-      },
-      {
-        icon: (
-          <Users />
-        ),
-        label: "Team",
-        route: "/mint",
-      },
+        icon: <History />,
+        label: "History",
+        route: "/investordash",
+        children: [
+          {
+            label: "Pre-harvest",
+            route: "/payment/pre",
+          },
+          {
+            label: "Post-harvest",
+            route: "/payment/post",
+          },
+        ],
+      },  
+      // {
+      //   icon: (
+      //     <Users />
+      //   ),
+      //   label: "Team",
+      //   route: "/mint",
+      // },
     ],
   },
 ];
