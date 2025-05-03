@@ -1,5 +1,5 @@
 "use client";
-
+import FarmerLayout from "@/components/maincomp/FarmerLayout";
 import { useState } from "react";
 
 export default function USFarmerLoanForm() {
@@ -66,8 +66,9 @@ export default function USFarmerLoanForm() {
   };
 
   return (
-    <div className="bg-gradient-to-b from-[#FFE990] to-[#6f9d7e] min-h-screen flex justify-center items-center px-4 py-4">
-      <div className="bg-white rounded-xl shadow-2xl flex w-full max-w-7xl overflow-hidden">
+    <FarmerLayout>
+    <div className="text-black min-h-screen flex justify-center items-center px-4 py-4">
+      <div className="bg-white border border-gray-200 rounded-xl shadow-2xl flex w-full max-w-7xl overflow-hidden">
         {/* <div className="w-1/3 bg-[#f4f4f4] p-6 flex flex-col items-center justify-center">
           <img src="/agri-logo.png" alt="Logo" className="w-48 mb-4" />
 
@@ -76,7 +77,7 @@ export default function USFarmerLoanForm() {
           </blockquote>
         </div> */}
 
-        <div className="w-full p-8 overflow-y-scroll">
+        <div className="w-full p-8">
           <h1 className="text-3xl font-bold mb-6 text-center">
             Pre-Harvest Loan Application
           </h1>
@@ -543,5 +544,6 @@ export default function USFarmerLoanForm() {
         </div>
       )}
     </div>
+    </FarmerLayout>
   );
 }

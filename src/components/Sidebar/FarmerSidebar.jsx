@@ -23,7 +23,7 @@ const menuGroups = [
         children: [
           {
             label: "Pre Harvest Request",
-            route: "/dashboard/preharvestrequest",
+            route: "/dashboard/preharvest",
           },
           {
             label: "Pre Harvest Status",
