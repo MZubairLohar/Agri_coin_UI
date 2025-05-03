@@ -1,8 +1,14 @@
+"use client";
 import Link from "next/link";
 import React from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 const Header = (props) => {
+    const router = useRouter();
+  function Route () {
+    router.push("../")
+  }
   return (
     <header className="sticky top-0 z-20 flex w-full bg-[#FFE990] drop-shadow-1 dark:drop-shadow-none">
       <div className="flex flex-grow items-center justify-between px-4 py-4 shadow-2 md:px-6 2xl:px-11">
@@ -55,7 +61,7 @@ const Header = (props) => {
         <button className="btn btn-success bg-[#6F9D7E] text-[#FFE990]">Connect Wallet</button>
         <div className="flex items-center gap-3 2xsm:gap-7">
           <ul className="flex items-center gap-2 2xsm:gap-4">
-          <button className="btn btn-success bg-[#6F9D7E] text-[#FFE990]">Logout</button>
+          <button onClick={Route} className="btn btn-success bg-[#6F9D7E] text-[#FFE990]">Logout</button>
           </ul>
         </div>
       </div>

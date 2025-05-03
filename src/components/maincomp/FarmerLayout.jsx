@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import Farmersidebar from "../Sidebar/FarmerSidebar";
+import Header from "../header";
 
 export default function FarmerLayout({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -14,7 +15,7 @@ export default function FarmerLayout({ children }) {
         {/* <!-- ===== Content Area Start ===== --> */}
         <div className="relative  flex flex-1 flex-col bg-white lg:ml-72.5">
           {/* <!-- ===== Header Start ===== --> */}
-        
+        <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
           {/* <!-- ===== Header End ===== --> */}
 
           {/* <!-- ===== Main Content Start ===== --> */}
@@ -24,9 +25,6 @@ export default function FarmerLayout({ children }) {
             </div>
           </main>
           {/* <!-- ===== Main Content End ===== --> */}
-        </div>
-        <div className="bg-white h-auto w-6 ]">
-         
         </div>
         {/* <!-- ===== Content Area End ===== --> */}
       </div>

@@ -1,4 +1,11 @@
+"use client";
+import { useRouter } from "next/navigation";
+
 function Navbar () {
+  const router = useRouter();
+  function Route () {
+    router.push("../signup")
+  }
     const ButtonWrapper = () => {
         return (
           <div className="bg-slate-100 flex items-center justify-center">
@@ -64,7 +71,7 @@ function Navbar () {
     </ul>
   </div>
   <div className="navbar-end z-10 mt-2 sm:mt-0">
-  <button className="btn btn-accent sm:px-6 sm:py-2 rounded-lg bg-[#6F9D7E] text-[#FFE990]">Donate</button>
+  <button onClick={Route} className="btn btn-accent sm:px-6 sm:py-2 rounded-lg bg-[#6F9D7E] text-[#FFE990]">SignUp</button>
   </div>
 </div>
         </>
