@@ -9,7 +9,7 @@ export default function FarmerLayout({ children }) {
     <>
       <div className="flex bg-white">
         {/* <!-- ===== Sidebar Start ===== --> */}
-        <Farmersidebar
+        <Farmersidebar className="xl:flex lg:flex hidden"
           sidebarOpen={sidebarOpen}
           setSidebarOpen={setSidebarOpen}
         />

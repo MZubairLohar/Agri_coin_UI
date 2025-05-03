@@ -115,7 +115,7 @@ const ChartTwo = () => {
           <div className="flex flex-col items-center text-md text-[#FFE990] font-medium gap-2">
             <ul className="w-full px-4 flex flex-col gap-1">
               {farmers
-                .filter((data) => data.id <= 8)
+                .filter((data) => data.id <= 11)
                 .map((data) => (
                   <li
                     className="w-full flex justify-between border py-2 px-4 rounded-md hover:bg-[#FFE990] hover:text-[#6F9D7E]"
