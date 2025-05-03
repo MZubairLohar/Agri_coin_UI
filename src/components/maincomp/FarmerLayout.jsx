@@ -7,7 +7,7 @@ export default function FarmerLayout({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   return (
     <>
-      <div className="flex">
+      <div className="flex bg-white">
         {/* <!-- ===== Sidebar Start ===== --> */}
         <Farmersidebar
           sidebarOpen={sidebarOpen}
@@ -18,7 +18,7 @@ export default function FarmerLayout({ children }) {
         {/* <!-- ===== Content Area Start ===== --> */}
         <div className="relative  flex flex-1 flex-col lg:ml-72.5">
           {/* <!-- ===== Header Start ===== --> */}
-        
+          <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
           {/* <!-- ===== Header End ===== --> */}
 
           {/* <!-- ===== Main Content Start ===== --> */}
@@ -26,9 +26,6 @@ export default function FarmerLayout({ children }) {
           <div className="mx-auto  max-w-screen-2xl p-4 w-full">{children}</div>
           {/* </main> */}
           {/* <!-- ===== Main Content End ===== --> */}
-        </div>
-        <div className="bg-white h-auto w-6 ]">
-         
         </div>
         {/* <!-- ===== Content Area End ===== --> */}
       </div>

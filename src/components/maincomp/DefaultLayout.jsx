@@ -16,6 +16,7 @@ export default function DefaultLayout({ children }) {
         <div className="relative  flex flex-1 flex-col bg-white lg:ml-72.5">
           {/* <!-- ===== Header Start ===== --> */}
           <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+          
           {/* <!-- ===== Header End ===== --> */}
 
           {/* <!-- ===== Main Content Start ===== --> */}
