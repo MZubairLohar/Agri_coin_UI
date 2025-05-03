@@ -10,38 +10,39 @@ import useLocalStorage from "./useLocalstorage";
 import { IoHomeOutline } from "react-icons/io5";
 import { IoStatsChartOutline } from "react-icons/io5";
 import { Leaf, BarChart2, CloudRain, Users, Settings, HelpCircle, Home,History } from "lucide-react";
+import { CircleDollarSign } from 'lucide-react';
 
 const menuGroups = [
   {
-    name: "MENU FARMER",
+    name: "MENU",
     menuItems: [
       {
-        icon: <Leaf />,
-        label: "Loan",
+        icon: <CircleDollarSign  />,
+        label: "Pre Harvest",
         route: "/dashboard",
         children: [
           {
-            label: "Pre-harvest",
-            route: "/payment/pre",
+            label: "Pre Harvest Request",
+            route: "/dashboard/preharvestrequest",
           },
           {
-            label: "Post-harvest",
-            route: "/payment/post",
+            label: "Pre Harvest Status",
+            route: "/dashboard/preharveststatus",
           },
         ],
       },      
       {
         icon: <BarChart2 />,
-        label: "Purchased",
+        label: "Post Harvest",
         route: "/dashboard",
         children: [
           {
-            label: "Pre-harvest",
-            route: "/payment/pre",
+            label: "Post Harvest Request",
+            route: "/dashboard/postharvestrequest",
           },
           {
-            label: "Post-harvest",
-            route: "/payment/post",
+            label: "Post Harvest Status",
+            route: "/dashboard/postharveststatus",
           },
         ],
       },  
@@ -51,12 +52,12 @@ const menuGroups = [
         route: "/dashboard",
         children: [
           {
-            label: "Pre-harvest",
-            route: "/payment/pre",
+            label: "Pre Harvest",
+            route: "/preharvest/status",
           },
           {
-            label: "Post-harvest",
-            route: "/payment/post",
+            label: "Post harvest",
+            route: "/postharvest/status",
           },
         ],
       },  
@@ -118,13 +119,14 @@ const Farmersidebar = ({ sidebarOpen, setSidebarOpen }) => {
           <nav className="px-4">
             {menuGroups.map((group, groupIndex) => (
               <div key={groupIndex}>
-                <h3 className="mb-4 ml-4 font-lora text-sm bg-[#6F9D7E] font-normal text-white">
+                <h3 className="mb-4 ml-4 font-lora text-sm bg-[#6F9D7E] font-normal ">
                   {group.name}
                 </h3>
 
-                <ul className="mb-6 flex  flex-col gap-1.5">
+                <ul className="mb-6 flex flex-col gap-1.5 text-[#FFE990] cursor-pointer">
                   {group.menuItems.map((menuItem, menuIndex) => (
                     <SidebarItem
+
                       key={menuIndex}
                       item={menuItem}
                       pageName={pageName}
