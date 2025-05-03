@@ -16,21 +16,21 @@ const ECommerce = () => {
     return (
       <a
         href={href}
-        className="w-72 h-32 pt-4 items-center space-y-1.5 rounded-xl p-2 border-[1px] border-gray-300 relative overflow-hidden group bg-white"
+        className="w-72 h-32 pt-4 items-center rounded-xl p-2 border-[1px] border-gray-300 relative overflow-hidden group bg-[#6F9D7E]"
       >
-         <h3 className="font-semibold font-lora text-xl text-black relative z-10 duration-300">
+         <h3 className="font-semibold font-lora text-xl text-[#FFE990] group-hover:text-[#6F9D7E] relative z-10 duration-300">
             {title}
           </h3>
-        <div className="absolute w-full inset-0 bg-white translate-y-[100%] group-hover:translate-y-[0%] transition-transform duration-300" />
+        <div className="absolute w-full inset-0 bg-[#FFE990] translate-y-[100%] group-hover:translate-y-[0%] transition-transform duration-300" />
        
         <div className="flex justify-between">
         <div>
-          <p className="text-gray-400 font-medium text-lg font-lora relative z-10 duration-300">
+          <p className="text-gray-200 group-hover:text-gray-400 font-medium text-lg font-lora relative z-10 duration-300">
             {subtitle1}
           </p>
         </div>
         <div>
-          <p className="text-gray-400 font-medium text-lg font-lora relative z-10 duration-300">
+          <p className="text-gray-200 group-hover:text-gray-400 font-medium text-lg font-lora relative z-10 duration-300">
             {subtitle2}
           </p>
         </div>
@@ -38,12 +38,12 @@ const ECommerce = () => {
 
         <div className="flex justify-between">
         <div>
-          <p className="text-[#6F9D7E] font-medium text-lg font-lora relative z-10 duration-300">
+          <p className="text-[#FFE990] group-hover:text-[#6F9D7E] font-medium text-lg font-lora relative z-10 duration-300">
             {value}
           </p>
         </div>
         <div>
-          <p className="text-lg text-[#6F9D7E] font-normal relative z-10 duration-300">
+          <p className="text-lg text-[#FFE990] group-hover:text-[#6F9D7E] font-normal relative z-10 duration-300">
             {worth}
           </p>
         </div>
@@ -66,12 +66,12 @@ const ECommerce = () => {
         worth="42$"
       />
       <Card
-        title="Pre-harvist"
+        title="Pre-harvest"
         subtitle1="No. of Tokens"
         value="46"
       />
       <Card
-       title="Post-harvist"
+       title="Post-harvest"
        subtitle1="No. of Tokens"
        value="37"
       />

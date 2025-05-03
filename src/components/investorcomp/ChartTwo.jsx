@@ -10,7 +10,7 @@ const ChartTwo = () => {
   };
 
   return (
-    <div className="col-span-12 rounded-xl border border-gray-300 bg-white p-5 shadow-default xl:col-span-4">
+    <div className="col-span-12 rounded-xl border border-gray-300 bg-[#6F9D7E] p-5 shadow-default xl:col-span-4">
       <div className="mb-5">
         <h4 className="text-xl font-lora text-center font-semibold text-black">Invested Details</h4>
       </div>

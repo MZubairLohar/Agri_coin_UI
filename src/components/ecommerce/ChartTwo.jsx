@@ -97,16 +97,16 @@ const ChartTwo = () => {
   ];
 
   return (
-    <div className="col-span-12 rounded-xl border border-gray-300 bg-white p-3 pt-6 shadow-default xl:col-span-4">
+    <div className="col-span-12 rounded-xl border border-gray-300 bg-[#6F9D7E] p-3 pt-6 shadow-default xl:col-span-4">
     <div className="mb-4">
-      <h4 className="text-xl font-lora text-center font-semibold text-black">Minting Update</h4>
+      <h4 className="text-xl font-lora text-center font-semibold text-[#FFE990]">Minting Update</h4>
     </div>
   
     <div className="flex">
       {/* Left Column */}
       <div className="w-1/2 pr-4 border-r border-gray-300">
-        <div className="font-semibold text-gray-500 mb-2">Who Minted</div>
-        <div className="flex flex-col items-center text-md text-gray-400 font-medium gap-2">
+        <div className="font-semibold text-gray-200 mb-2">Who Minted</div>
+        <div className="flex flex-col items-center text-md text-[#FFE990] font-medium gap-2">
           <div>John</div>
           <div>Alice</div>
           <div>James</div>
@@ -120,8 +120,8 @@ const ChartTwo = () => {
   
       {/* Right Column */}
       <div className="w-1/2 pl-4">
-        <div className="font-semibold text-gray-500 mb-2">Minted amount</div>
-        <div className="flex flex-col text-[#6F9D7E] font-medium text-md items-center gap-2">
+        <div className="font-semibold text-gray-200 mb-2">Minted amount</div>
+        <div className="flex flex-col text-[#FFE990] font-medium text-md items-center gap-2">
           <div>33</div>
           <div>21</div>
           <div>42</div>

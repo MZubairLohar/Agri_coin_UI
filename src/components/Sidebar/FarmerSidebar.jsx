@@ -13,50 +13,50 @@ import { Leaf, BarChart2, CloudRain, Users, Settings, HelpCircle, Home,History }
 
 const menuGroups = [
   {
-    name: "MENU INVENTORY",
+    name: "MENU FARMER",
     menuItems: [
       {
         icon: <Leaf />,
-        label: "Market",
-        route: "/investordash",
+        label: "Loan",
+        route: "/dashboard",
         children: [
           {
             label: "Pre-harvest",
-            route: "/market/pre-harvest",
+            route: "/payment/pre",
           },
           {
             label: "Post-harvest",
-            route: "/market/post-harvest",
+            route: "/payment/post",
           },
         ],
       },      
       {
         icon: <BarChart2 />,
         label: "Purchased",
-        route: "/investordash",
+        route: "/dashboard",
         children: [
           {
             label: "Pre-harvest",
-            route: "/purchase/pre-harvest",
+            route: "/payment/pre",
           },
           {
             label: "Post-harvest",
-            route: "/purchase/post-harvest",
+            route: "/payment/post",
           },
         ],
       },  
       {
         icon: <History />,
         label: "History",
-        route: "/investordash",
+        route: "/dashboard",
         children: [
           {
             label: "Pre-harvest",
-            route: "/history/pre-harvest",
+            route: "/payment/pre",
           },
           {
             label: "Post-harvest",
-            route: "/history/post-harvest",
+            route: "/payment/post",
           },
         ],
       },  
@@ -71,7 +71,7 @@ const menuGroups = [
   },
 ];
 
-const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
+const Farmersidebar = ({ sidebarOpen, setSidebarOpen }) => {
   const pathname = usePathname();
   const [pageName, setPageName] = useLocalStorage("selectedMenu", "dashboard");
 
@@ -141,4 +141,4 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
   );
 };
 
-export default Sidebar;
+export default Farmersidebar;

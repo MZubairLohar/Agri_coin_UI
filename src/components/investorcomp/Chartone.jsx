@@ -136,21 +136,21 @@ const ChartOne = () => {
   ];
 
   return (
-    <div className="col-span-12 h-96 font-lora rounded-xl border border-gray-300 bg-white px-5 pb-5 pt-7.5 shadow-default sm:px-7.5 xl:col-span-8">
+    <div className="col-span-12 h-68 font-lora rounded-xl border border-[#FFE990] bg-[#6F9D7E] px-5 pb-5 pt-7.5 shadow-default sm:px-7.5 xl:col-span-8">
       <div className="flex flex-wrap items-start justify-between gap-3 sm:flex-nowrap">
         <div className="flex w-full flex-wrap gap-3 sm:gap-5">
           <div className="flex min-w-47.5">
             <div className="w-full font-lora">
-              <p className="font-semibold text-black text-2xl">Investor</p>
+              <p className="font-semibold text-gray-200 text-2xl">Investor</p>
             </div>
           </div>
         </div>
         <div className="flex w-full justify-end">
-          <div className="inline-flex items-center rounded-md bg-whiter p-1.5 border border-[#6F9D7E]">
-            <button className="rounded bg-white px-3 py-1 text-md font-medium shadow-card hover:bg-white hover:shadow-card text-[#6F9D7E]">
+          <div className="inline-flex items-center rounded-md bg-[#FFE990] p-1.5 border border-[#6F9D7E]">
+            <button className="px-3 py-1 text-md font-medium shadow-card hover:shadow-card text-[#6F9D7E]">
               Total Amount
             </button>
-            <button className="rounded px-3 py-1 text-md font-medium hover:bg-white hover:shadow-card text-[#6F9D7E]">
+            <button className="px-3 py-1 text-md font-medium hover:shadow-card text-[#6F9D7E]">
               153$
             </button>
           </div>
@@ -158,29 +158,53 @@ const ChartOne = () => {
       </div>
       
     <div className="flex gap-6 mt-6">  
-      <div className="card w-44 bg-white border border-gray-300 text-black card-xs shadow-sm">
+      <div className="card w-44 bg-[#FFE990] border border-[#FFE990] text-black card-xs shadow-sm">
   <div className="card-body">
     <h2 className="card-title text-xl">Corn</h2>
     <p className="text-gray-500">A card component has a figure, a body part, and inside body there are title and actions parts</p>
   </div>
+  <div className="flex ml-2">
+    <div>
+    <h2 className=" text-lg">Price :</h2>
+    </div>
+    <div>
+    <h2 className="text-lg text-gray-500 ml-2">35$</h2>
+    </div>
+  </div>
 </div>
 
-<div className="card w-44 bg-white border border-gray-300 text-black card-xs shadow-sm">
+<div className="card w-44 bg-[#FFE990] border border-gray-300 text-black card-xs shadow-sm">
   <div className="card-body">
     <h2 className="card-title text-xl">Wheat</h2>
     <p className="text-gray-500">A card component has a figure, a body part, and inside body there are title and actions parts</p>
   </div>
+  <div className="flex ml-2">
+    <div>
+    <h2 className=" text-lg">Price :</h2>
+    </div>
+    <div>
+    <h2 className="text-lg text-gray-500 ml-2">35$</h2>
+    </div>
+  </div>
 </div>
 
-<div className="card w-44 bg-white border border-gray-300 text-black card-xs shadow-sm">
+<div className="card w-44 bg-[#FFE990] border border-gray-300 text-black card-xs shadow-sm">
   <div className="card-body">
     <h2 className="card-title text-xl">Rice</h2>
     <p className="text-gray-500">A card component has a figure, a body part, and inside body there are title and actions parts</p>
   </div>
+  <div className="flex ml-2">
+    <div>
+    <h2 className=" text-lg">Price :</h2>
+    </div>
+    <div>
+    <h2 className="text-lg text-gray-500 ml-2">35$</h2>
+    </div>
+  </div>
 </div>
 </div>
 
-<div className="flex gap-6 mt-6">  
+{/* <div className="flex gap-6 mt-6">  
       <div className="card w-44 bg-white border border-gray-300 text-black card-xs shadow-sm">
   <div className="card-body">
     <h2 className="card-title text-xl">Price :</h2>
@@ -201,7 +225,7 @@ const ChartOne = () => {
     <h2 className="text-xl text-gray-500">31$</h2>
   </div>
 </div>
-</div>
+</div> */}
 
     </div>
   );
