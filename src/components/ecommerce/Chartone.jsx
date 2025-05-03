@@ -85,8 +85,8 @@ const options = {
     type: "category",
     labels: {
       style: {
-        colors: "#6B7280", 
-        fontSize: "12px", 
+        colors: "#6B7280",
+        fontSize: "12px",
       },
     },
     categories: [
@@ -113,8 +113,8 @@ const options = {
   yaxis: {
     labels: {
       style: {
-        colors: "#6B7280", 
-        fontSize: "12px", 
+        colors: "#6B7280",
+        fontSize: "12px",
       },
     },
     title: {
@@ -136,7 +136,7 @@ const ChartOne = () => {
   ];
 
   return (
-    <div className="col-span-12 font-lora rounded-xl border border-gray-300 bg-[#6F9D7E] px-5 pb-5 pt-7.5 shadow-default sm:px-7.5 xl:col-span-8">
+    <div className="w-full col-span-12 font-lora rounded-xl border border-gray-300 bg-[#6F9D7E] px-5 pb-5 pt-7.5 shadow-default sm:px-7.5 xl:col-span-8">
       <div className="flex flex-wrap items-start justify-between gap-3 sm:flex-nowrap">
         <div className="flex w-full flex-wrap gap-3 sm:gap-5">
           <div className="flex min-w-47.5">
@@ -144,7 +144,7 @@ const ChartOne = () => {
               <span className="block h-2.5 w-full max-w-2.5 rounded-full"></span>
             </span>
             <div className="w-full font-lora">
-              <p className="font-semibold text-[#FFE990] text-xl">Investment</p>
+              <p className="font-semibold text-[#FFE990] text-2xl underline underline-offset-4 ">Investment</p>
             </div>
           </div>
           <div className="flex min-w-47.5">
@@ -157,15 +157,18 @@ const ChartOne = () => {
             </div> */}
           </div>
         </div>
-        <div className="flex w-full max-w-45 justify-end">
-          <div className="inline-flex items-center rounded-md bg-whiter p-1.5 border border-[#6F9D7E]">
-            <button className="rounded bg-white px-3 py-1 text-xs font-medium shadow-card hover:bg-white hover:shadow-card text-[#FFE990]">
+        <div className="flex  justify-end bg-[#FFE990] rounded-md p-2">
+          <div className=" items-center rounded-md bg-whiter p-1 flex gap-2">
+            <button className="rounded  px-3 py-1 text-xs font-medium  focus:bg-[#6F9D7E] text-[#6F9D7E] focus:text-[#FFE990] hover:shadow-card ">
               Day
             </button>
-            <button className="rounded px-3 py-1 text-xs font-medium hover:bg-white hover:shadow-card text-[#FFE990]">
+            <span className="-mt-1 text-[#6F9D7E]">|</span>
+
+            <button className="rounded px-3 py-1 text-xs font-medium focus:bg-[#6F9D7E] hover:shadow-card text-[#6F9D7E] focus:text-[#FFE990]">
               Week
             </button>
-            <button className="rounded px-3 py-1 text-xs font-medium hover:bg-white hover:shadow-card text-[#FFE990]">
+            <span className="-mt-1 text-[#6F9D7E]">|</span>
+            <button className="rounded px-3 py-1 text-xs font-medium focus:bg-[#6F9D7E] hover:shadow-card text-[#6F9D7E] focus:text-[#FFE990]">
               Month
             </button>
           </div>
