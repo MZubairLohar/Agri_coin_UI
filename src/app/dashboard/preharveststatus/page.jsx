@@ -16,8 +16,7 @@ function PreHarvestStatus() {
                 <li className="w-2/12 text-sm">{data.crops}</li>
                 <li className="w-1/12 text-sm">{data.loanAmount}</li>
                 <li className="w-2/12 text-sm">{data.crops}</li>
-                
-              </ul>
+             </ul>
             )}            
         </div>
       </div>
