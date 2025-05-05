@@ -68,13 +68,6 @@ const menuGroups = [
           },
         ],
       },  
-      // {
-      //   icon: (
-      //     <Users />
-      //   ),
-      //   label: "Team",
-      //   route: "/mint",
-      // },
     ],
   },
 ];
