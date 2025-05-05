@@ -2,11 +2,7 @@
 import FarmerLayout from "@/components/maincomp/FarmerLayout";
 import { useState } from "react";
 
-<<<<<<<< HEAD:src/app/dashboard/preharvestreq/page.jsx
-export default function PreHarvestRequestForm() {
-========
 export default function Preharvest() {
->>>>>>>> 5306dab4155503609ab3846d2252a59c29b0fcd9:src/app/dashboard/requestinvestment/preharvest/page.jsx
   const [formData, setFormData] = useState({
     fullName: "",
     ssn: "",
