@@ -13,7 +13,7 @@ const options = {
     position: "top",
     horizontalAlign: "left",
   },
-  colors: ["#6F9D7E", "#F1BE11"],
+  colors: ["#828185", "#F1BE11"],
   chart: {
     fontFamily: "Satoshi, sans-serif",
     height: 335,
@@ -69,8 +69,8 @@ const options = {
   },
   markers: {
     size: 4,
-    colors: "#FFE990",
-    strokeColors: ["#6F9D7E", "#80CAEE"],
+    colors: "#fff",
+    strokeColors: ["#E22D2C", "#80CAEE"],
     strokeWidth: 3,
     strokeOpacity: 0.9,
     strokeDashArray: 0,
@@ -85,11 +85,15 @@ const options = {
     type: "category",
     labels: {
       style: {
-        colors: "#6F9D7E",
+        colors: "#6B7280",
         fontSize: "12px",
       },
     },
     categories: [
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
       "Jan",
       "Feb",
       "Mar",
@@ -98,10 +102,6 @@ const options = {
       "Jun",
       "Jul",
       "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec",
     ],
     axisBorder: {
       show: false,
@@ -113,7 +113,7 @@ const options = {
   yaxis: {
     labels: {
       style: {
-        colors: "#6F9D7E",
+        colors: "#6B7280",
         fontSize: "12px",
       },
     },
@@ -176,7 +176,7 @@ const ChartOne = () => {
       </div>
 
       <div>
-        <div id="chartOne" className=" bg-white">
+        <div id="chartOne" className="-ml-5">
           <ReactApexChart
             options={options}
             series={series}

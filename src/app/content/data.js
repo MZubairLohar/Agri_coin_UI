@@ -1,6 +1,356 @@
+export const cropTypes = [
+    "Cereals (Rice, Wheat, Maize, etc.)",
+    "Pulses (Chana, Moong, Toor, etc.)",
+    "Oilseeds (Soybean, Mustard, Groundnut, etc.)",
+    "Vegetables (Tomato, Onion, Potato, etc.)",
+    "Fruits (Mango, Banana, Apple, etc.)",
+    "Spices (Chilli, Turmeric, Cumin, etc.)",
+    "Commercial Crops (Cotton, Sugarcane, Tobacco, etc.)",
+    "Dairy Products",
+    "Poultry Products",
+    "Fisheries",
+    "Other (Please specify)"
+  ];
 
 
+  export const commodityOptions = [
+    "Grains (Corn, Wheat, Soybeans)",
+    "Fruits (Apples, Berries, Citrus)",
+    "Vegetables (Potatoes, Tomatoes, Leafy Greens)",
+    "Nuts (Almonds, Walnuts, Pecans)",
+    "Dairy",
+    "Livestock",
+    "Other"
+  ];
 
+export const investmentOptions = [
+    "Cold Storage Facility",
+    "Processing Equipment",
+    "Packaging Line",
+    "Transportation Vehicles",
+    "Value-Added Product Development",
+    "Food Safety Certification",
+    "Market Access Infrastructure"
+  ];
+
+    export const cropInvestments = [
+      {
+        id: 1,
+        cropName: "Corn",
+        totalRequested: 15000,
+        approvedAmount: 12000,
+        status: "approved",
+        date: "2023-10-15",
+        purpose: "Pre-harvest equipment"
+      },
+      {
+        id: 2,
+        cropName: "Soybean",
+        totalRequested: 8000,
+        approvedAmount: 5000,
+        status: "partial",
+        date: "2023-09-28",
+        purpose: "Irrigation system"
+      },
+      {
+        id: 3,
+        cropName: "Wheat",
+        totalRequested: 10000,
+        approvedAmount: 0,
+        status: "rejected",
+        date: "2023-11-02",
+        purpose: "Storage facility"
+      },
+      {
+        id: 4,
+        cropName: "Tomatoes",
+        totalRequested: 5000,
+        approvedAmount: 5000,
+        status: "approved",
+        date: "2023-08-20",
+        purpose: "Greenhouse setup"
+      },
+      {
+        id: 5,
+        cropName: "Apples",
+        totalRequested: 20000,
+        approvedAmount: null,
+        status: "pending",
+        date: "2023-12-10",
+        purpose: "Cold storage"
+      },
+      {
+        id: 6,
+        cropName: "Cotton",
+        totalRequested: 12000,
+        approvedAmount: 8000,
+        status: "partial",
+        date: "2023-07-15",
+        purpose: "Harvesting tools"
+      },
+      {
+        id: 7,
+        cropName: "Potatoes",
+        totalRequested: 7000,
+        approvedAmount: 7000,
+        status: "approved",
+        date: "2023-06-22",
+        purpose: "Seed purchase"
+      },
+      {
+        id: 8,
+        cropName: "Berries",
+        totalRequested: 9000,
+        approvedAmount: null,
+        status: "pending",
+        date: "2024-01-05",
+        purpose: "Drip irrigation"
+      }
+    ];
+
+    export const postHarvestInvestments = [
+      {
+        id: 1,
+        cropName: "Corn",
+        bushels: 15000,
+        totalRequested: 25000,
+        approvedAmount: 20000,
+        status: "approved",
+        date: "2023-10-15",
+        facilityType: "Cold Storage",
+        storageCapacity: 20000,
+        purpose: "Temperature-controlled storage"
+      },
+      {
+        id: 2,
+        cropName: "Soybean",
+        bushels: 8000,
+        totalRequested: 15000,
+        approvedAmount: 10000,
+        status: "partial",
+        date: "2023-09-28",
+        facilityType: "Grain Bin",
+        storageCapacity: 10000,
+        purpose: "On-farm grain storage"
+      },
+      {
+        id: 3,
+        cropName: "Wheat",
+        bushels: 12000,
+        totalRequested: 22000,
+        approvedAmount: 22000,
+        status: "approved",
+        date: "2023-08-10",
+        facilityType: "Warehouse",
+        storageCapacity: 25000,
+        purpose: "Bulk storage for export"
+      },
+      {
+        id: 4,
+        cropName: "Barley",
+        bushels: 6000,
+        totalRequested: 12000,
+        approvedAmount: 8000,
+        status: "partial",
+        date: "2023-07-22",
+        facilityType: "Silo",
+        storageCapacity: 15000,
+        purpose: "Feed grain storage"
+      },
+      {
+        id: 5,
+        cropName: "Rice",
+        bushels: 20000,
+        totalRequested: 30000,
+        approvedAmount: 30000,
+        status: "approved",
+        date: "2023-11-01",
+        facilityType: "Cold Storage",
+        storageCapacity: 30000,
+        purpose: "High-humidity storage"
+      },
+      {
+        id: 6,
+        cropName: "Oats",
+        bushels: 5000,
+        totalRequested: 9000,
+        approvedAmount: 6000,
+        status: "partial",
+        date: "2023-06-30",
+        facilityType: "Shed",
+        storageCapacity: 7000,
+        purpose: "Short-term storage"
+      },
+      {
+        id: 7,
+        cropName: "Sorghum",
+        bushels: 14000,
+        totalRequested: 26000,
+        approvedAmount: 26000,
+        status: "approved",
+        date: "2023-10-05",
+        facilityType: "Grain Elevator",
+        storageCapacity: 27000,
+        purpose: "Bulk grain handling"
+      },
+      {
+        id: 8,
+        cropName: "Sunflower",
+        bushels: 4000,
+        totalRequested: 8000,
+        approvedAmount: 4000,
+        status: "partial",
+        date: "2023-08-19",
+        facilityType: "Warehouse",
+        storageCapacity: 10000,
+        purpose: "Oil seed storage"
+      },
+      {
+        id: 9,
+        cropName: "Peanut",
+        bushels: 10000,
+        totalRequested: 18000,
+        approvedAmount: 18000,
+        status: "approved",
+        date: "2023-09-14",
+        facilityType: "Cold Storage",
+        storageCapacity: 20000,
+        purpose: "Moisture-controlled storage"
+      },
+      {
+        id: 10,
+        cropName: "Cotton",
+        bushels: 7000,
+        totalRequested: 14000,
+        approvedAmount: 14000,
+        status: "approved",
+        date: "2023-07-07",
+        facilityType: "Warehouse",
+        storageCapacity: 15000,
+        purpose: "Bale storage"
+      },
+      {
+        id: 11,
+        cropName: "Canola",
+        bushels: 9000,
+        totalRequested: 16000,
+        approvedAmount: 12000,
+        status: "partial",
+        date: "2023-06-15",
+        facilityType: "Grain Bin",
+        storageCapacity: 13000,
+        purpose: "Seed oil storage"
+      },
+      {
+        id: 12,
+        cropName: "Lentils",
+        bushels: 3000,
+        totalRequested: 6000,
+        approvedAmount: 6000,
+        status: "approved",
+        date: "2023-11-20",
+        facilityType: "Shed",
+        storageCapacity: 7000,
+        purpose: "Dry legume storage"
+      },
+      {
+        id: 13,
+        cropName: "Millet",
+        bushels: 4500,
+        totalRequested: 7500,
+        approvedAmount: 4000,
+        status: "partial",
+        date: "2023-09-09",
+        facilityType: "Silo",
+        storageCapacity: 8000,
+        purpose: "Small-grain storage"
+      },
+      {
+        id: 14,
+        cropName: "Quinoa",
+        bushels: 2500,
+        totalRequested: 5000,
+        approvedAmount: 5000,
+        status: "approved",
+        date: "2023-08-01",
+        facilityType: "Cold Storage",
+        storageCapacity: 6000,
+        purpose: "Specialty grain storage"
+      },
+      {
+        id: 15,
+        cropName: "Alfalfa",
+        bushels: 11000,
+        totalRequested: 20000,
+        approvedAmount: 16000,
+        status: "partial",
+        date: "2023-10-25",
+        facilityType: "Shed",
+        storageCapacity: 12000,
+        purpose: "Forage storage"
+      },
+      {
+        id: 16,
+        cropName: "Flaxseed",
+        bushels: 3500,
+        totalRequested: 7000,
+        approvedAmount: 7000,
+        status: "approved",
+        date: "2023-11-10",
+        facilityType: "Grain Bin",
+        storageCapacity: 8000,
+        purpose: "Oilseed storage"
+      },
+      {
+        id: 17,
+        cropName: "Hemp",
+        bushels: 6000,
+        totalRequested: 12000,
+        approvedAmount: 10000,
+        status: "partial",
+        date: "2023-07-29",
+        facilityType: "Warehouse",
+        storageCapacity: 13000,
+        purpose: "Fiber and seed storage"
+      },
+      {
+        id: 18,
+        cropName: "Chickpeas",
+        bushels: 5500,
+        totalRequested: 10000,
+        approvedAmount: 10000,
+        status: "approved",
+        date: "2023-09-01",
+        facilityType: "Silo",
+        storageCapacity: 11000,
+        purpose: "Pulses storage"
+      },
+      {
+        id: 19,
+        cropName: "Beans",
+        bushels: 7800,
+        totalRequested: 13000,
+        approvedAmount: 9000,
+        status: "partial",
+        date: "2023-08-14",
+        facilityType: "Cold Storage",
+        storageCapacity: 14000,
+        purpose: "Protein-rich crop storage"
+      },
+      {
+        id: 20,
+        cropName: "Rye",
+        bushels: 9500,
+        totalRequested: 17000,
+        approvedAmount: 17000,
+        status: "approved",
+        date: "2023-10-02",
+        facilityType: "Grain Elevator",
+        storageCapacity: 18000,
+        purpose: "Export-ready storage"
+      }
+    ];
+    
 
 export const farmers = [
   { id: 1, name: "Rice", number: 12 },
