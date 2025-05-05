@@ -2,7 +2,7 @@
 import FarmerLayout from "@/components/maincomp/FarmerLayout";
 import { useState } from "react";
 
-export default function USFarmerLoanForm() {
+export default function Preharvest() {
   const [formData, setFormData] = useState({
     fullName: "",
     ssn: "",

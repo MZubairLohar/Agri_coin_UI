@@ -17,47 +17,54 @@ const menuGroups = [
     name: "MENU",
     menuItems: [
       {
+           icon: (
+             <Users />
+           ),
+           label: "Dashboard",
+           route: "/dashboard",
+         },
+      {
         icon: <CircleDollarSign  />,
-        label: "Pre Harvest",
+        label: "Request Investment",
         route: "/dashboard",
         children: [
           {
             label: "Pre Harvest Request",
-            route: "/dashboard/preharvest",
+            route: "/dashboard/requestinvestment/preharvest",
           },
           {
-            label: "Pre Harvest Status",
-            route: "/dashboard/preharveststatus",
+            label: "Post Harvest Request",
+            route: "/dashboard/requestinvestment/postharvest",
           },
         ],
       },      
       {
         icon: <BarChart2 />,
-        label: "Post Harvest",
+        label: "Status",
         route: "/dashboard",
         children: [
           {
-            label: "Post Harvest Request",
-            route: "/dashboard/postharvestrequest",
+            label: "Pre Harvest Status",
+            route: "/dashboard/status/preharvest",
           },
           {
             label: "Post Harvest Status",
-            route: "/dashboard/postharveststatus",
+            route: "/dashboard/status/postharvest",
           },
         ],
       },  
       {
         icon: <History />,
-        label: "History",
+        label: "Token History",
         route: "/dashboard",
         children: [
           {
-            label: "Pre Harvest",
-            route: "/preharvest/status",
+            label: "Pre Harvest History",
+            route: "/dashboard/history/preharvest",
           },
           {
-            label: "Post harvest",
-            route: "/postharvest/status",
+            label: "Post harvest History",
+            route: "/dashboard/history/postharvest",
           },
         ],
       },  
