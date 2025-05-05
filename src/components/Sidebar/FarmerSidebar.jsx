@@ -14,7 +14,7 @@ import { CircleDollarSign } from 'lucide-react';
 
 const menuGroups = [
   {
-    name: "MENU FARMER",
+    name: "MENU",
     menuItems: [
       {
            icon: (
@@ -30,7 +30,7 @@ const menuGroups = [
         children: [
           {
             label: "Pre Harvest Request",
-            route: "/dashboard/preharvestreq",
+            route: "/dashboard/requestinvestment/preharvest",
           },
           {
             label: "Post Harvest Request",
@@ -68,6 +68,13 @@ const menuGroups = [
           },
         ],
       },  
+      // {
+      //   icon: (
+      //     <Users />
+      //   ),
+      //   label: "Team",
+      //   route: "/mint",
+      // },
     ],
   },
 ];

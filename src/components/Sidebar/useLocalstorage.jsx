@@ -14,6 +14,8 @@ function useLocalStorage(key, initialValue) {
     }
   });
 
+  
+
   useEffect(() => {
     try {
       const valueToStore =
