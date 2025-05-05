@@ -35,12 +35,12 @@ export default function Signin() {
                   <input
                     type="email"
                     placeholder="Email"
-                    className="w-full border border-gray-300 p-2 rounded bg-white"
+                    className="w-full border border-gray-300 text-black p-2 rounded bg-white"
                   />
                   <input
                     type="password"
                     placeholder="Password"
-                    className="w-full border border-gray-300 p-2 rounded bg-white"
+                    className="w-full border border-gray-300 text-black p-2 rounded bg-white"
                   />
                   <button
                     type="submit"
@@ -60,17 +60,17 @@ export default function Signin() {
                   <input
                     type="text"
                     placeholder="Full Name"
-                    className="w-full border border-gray-300 p-2 rounded bg-white"
+                    className="w-full border border-gray-300 text-black p-2 rounded bg-white"
                   />
                   <input
                     type="email"
                     placeholder="Email"
-                    className="w-full border border-gray-300 p-2 rounded bg-white"
+                    className="w-full border border-gray-300 text-black p-2 rounded bg-white"
                   />
                   <input
                     type="password"
                     placeholder="Password"
-                    className="w-full border border-gray-300 p-2 rounded bg-white"
+                    className="w-full border border-gray-300 text-black p-2 rounded bg-white"
                   />
                   <button
                     type="submit"
