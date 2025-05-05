@@ -8,17 +8,17 @@ export default function Signin() {
   const [isSignIn, setIsSignIn] = useState(true);
 
   return (
-    <>
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-[#6f9d7e] to-[#FFE990] px-4 relative">
-    <div className="absolute -ml-8 sm:-ml-0 top-11/12 sm:top-11/12 md:top-5/6 xl:top-80 left-10 w-24 opacity-60 sm:w-28 md:w-28 xl:w-40 z-50 animate-spin-half">
-        <Image
-          src="/corn-anim-pic.png"
-          alt="Spinning Corn"
-          width={160}
-          height={160}
-          className="w-full h-auto"
-        />
-      </div>
+    <div className="bg-blue-400 w-screen">
+      <div className="w-full min-h-screen flex items-center justify-center bg-gradient-to-r from-[#6f9d7e] to-[#FFE990] px-4 relative">
+        <div className="absolute -ml-8 sm:-ml-0 top-11/12 sm:top-11/12 md:top-5/6 xl:top-80 left-10 w-24 opacity-60 sm:w-28 md:w-28 xl:w-40 z-50 animate-spin-half">
+          <Image
+            src="/corn-anim-pic.png"
+            alt="Spinning Corn"
+            width={160}
+            height={160}
+            className="w-full h-auto"
+          />
+        </div>
 
         <div className="relative w-full max-w-4xl h-[550px]  rounded-2xl overflow-hidden shadow-2xl bg-transparent">
           <div
@@ -121,8 +121,7 @@ export default function Signin() {
             className="w-full h-auto"
           />
         </div>
-    
       </div>
-    </>
+    </div>
   );
 }
