@@ -61,7 +61,19 @@ const Header = (props) => {
         <button className="btn btn-success bg-[#6F9D7E] text-[#FFE990]">Connect Wallet</button>
         <div className="flex items-center gap-3 2xsm:gap-7">
           <ul className="flex items-center gap-2 2xsm:gap-4">
-          <button onClick={Route} className="btn btn-success bg-[#6F9D7E] text-[#FFE990]">Logout</button>
+          <div className="dropdown dropdown-end">
+  <div tabIndex={0} role="button" className="avatar">
+    <div className="w-12 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+      <img src="https://www.shutterstock.com/image-vector/profile-picture-vector-260nw-404138239.jpg" />
+    </div>
+  </div>
+  <ul tabIndex={0} className="dropdown-content z-[1] menu -space-y-2 shadow text-black border border-gray-400 bg-white rounded-box w-52">
+    <li><span className="font-bold">John Doe</span></li>
+    <li><span>johndoe@gmail.com</span></li>
+    <li><button className="btn btn-sm btn-success bg-[#FFE990] text-black mt-2">Logout</button></li>
+  </ul>
+</div>
+
           </ul>
         </div>
       </div>

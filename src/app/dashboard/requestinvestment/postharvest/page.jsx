@@ -2,11 +2,7 @@
 import FarmerLayout from "@/components/maincomp/FarmerLayout";
 import { useState } from "react";
 
-<<<<<<<< HEAD:src/app/dashboard/preharvestreq/page.jsx
-export default function PreHarvestRequestForm() {
-========
-export default function Preharvest() {
->>>>>>>> 5306dab4155503609ab3846d2252a59c29b0fcd9:src/app/dashboard/requestinvestment/preharvest/page.jsx
+export default function Postharvest() {
   const [formData, setFormData] = useState({
     fullName: "",
     ssn: "",
@@ -83,7 +79,7 @@ export default function Preharvest() {
 
         <div className="w-full p-8">
           <h1 className="text-3xl font-bold mb-6 text-center">
-            Pre-Harvest Loan Application
+            Post-Harvest Loan Application
           </h1>
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

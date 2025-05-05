@@ -1,8 +1,8 @@
-import DefaultLayout from "@/components/maincomp/DefaultLayout";
+import FarmerLayout from "@/components/maincomp/FarmerLayout";
 
 function Postharvest () {
     return(
-        <DefaultLayout>
+        <FarmerLayout>
   <div className="p-6 text-[#FFE990]">
       <h1 className="text-3xl font-bold text-black mb-4">Pre-Harvest Overview of History</h1>
 
@@ -23,7 +23,7 @@ function Postharvest () {
         </div>
       </div>
     </div>
-        </DefaultLayout>
+        </FarmerLayout>
     )
 }
 
