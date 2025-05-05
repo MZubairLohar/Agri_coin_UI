@@ -60,11 +60,11 @@ const menuGroups = [
         children: [
           {
             label: "Pre Harvest Status",
-            route: "/admindashboard/status/preharvest",
+            route: "/admindashboard/allstatus/preharvest",
           },
           {
             label: "Post Harvest Status",
-            route: "/admindashboard/status/postharvest",
+            route: "/admindashboard/allstatus/postharvest",
           },
         ],
       },  
@@ -75,11 +75,11 @@ const menuGroups = [
         children: [
           {
             label: "Pre Harvest History",
-            route: "/admindashboard/history/preharvest",
+            route: "/admindashboard/allhistory/preharvest",
           },
           {
             label: "Post harvest History",
-            route: "/admindashboard/history/postharvest",
+            route: "/admindashboard/allhistory/postharvest",
           },
         ],
       },  

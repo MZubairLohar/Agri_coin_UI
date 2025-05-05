@@ -4,7 +4,7 @@ import React from 'react'
 function page() {
   return (
     <AdminLayout>
-    <div>All Status Pre Harvest</div>
+    <div>All Investment Pre Harvest</div>
     </AdminLayout>
   )
 }
