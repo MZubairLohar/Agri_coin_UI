@@ -76,81 +76,14 @@ export default function PostHarvest() {
   return (
     <FarmerLayout>
       <div className="p-2 text-black">
-        <h1 className="text-2xl font-bold mb-6 flex items-center text-[#6f9d7e]">
-          <FaWarehouse className="mr-2" /> Post-Harvest Investment Status
+        <h1 className="text-2xl font-bold mb-4 flex items-center text-[#6f9d7e]">
+          <FaWarehouse className="mr-2" /> Post-Harvest Status
         </h1>
 
-        {/* Filter Section */}
-        <div className="bg-white p-4 rounded-lg shadow border border-[#6f9d7e] mb-6">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {/* Search Input */}
-            <div className="relative">
-              <label className="block text-sm text-[#6F9D7E] mb-1">Search Text</label>
-              <div className="justify-between absolute inset-y-0 left-0 top-7 pl-3 flex items-center pointer-events-none">
-                
-              </div>
-              {/* <input
-                type="text"
-                placeholder="Search crops or facility type..."
-                className="pl-10 w-full border p-2 rounded"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-              /> */}
-              <input type="text" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} placeholder="Search crops or facility type..." className="input input-success bg-white" />
-            </div>
-
-            {/* Status Filter */}
-            <div>
-              <label className="block text-sm text-[#6F9D7E] mb-1">Status</label>
-              {/* <select
-                className="w-full border p-2 rounded"
-                value={statusFilter}
-                onChange={(e) => setStatusFilter(e.target.value)}
-              >
-                <option value="all">All Statuses</option>
-                <option value="approved">Approved</option>
-                <option value="partial">Partially Approved</option>
-                <option value="pending">Pending</option>
-                <option value="rejected">Rejected</option>
-              </select> */}
-              <select
-              value={statusFilter}
-              onChange={(e) => setStatusFilter(e.target.value)}
-              defaultValue="Pick a Runtime" className="select select-success text-gray-500 bg-white">
-  <option value="all">All Statuses</option>
-  <option value="approved">Approved</option>
-  <option value="partial">Partially Approved</option>
-  <option value="pending">Pending</option>
-  <option value="rejected">Rejected</option>
-</select>
-            </div>
-
-            {/* Date Filter */}
-            <div>
-              <label className="block text-sm text-[#6F9D7E] mb-1">Date</label>
-              {/* <select
-                className="w-full border p-2 rounded"
-                value={dateFilter}
-                onChange={(e) => setDateFilter(e.target.value)}
-              >
-                <option value="all">All Dates</option>
-                <option value="recent">Last 30 Days</option>
-                <option value="upcoming">Upcoming</option>
-              </select> */}
-               <select
-              value={dateFilter}
-              onChange={(e) => setDateFilter(e.target.value)}
-              defaultValue="Pick a Runtime" className="select text-gray-500 select-success bg-white">
-  <option value="all">All Dates</option>
-  <option value="approved">Last 30 Days</option>
-  <option value="partial">Upcoming</option>
-</select>
-            </div>
-          </div>
-        </div>
-
+   <div className="flex flex-col gap-4">
+    
         {/* Summary Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8 text-[#6F9D7E]">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4  text-[#6F9D7E]">
           <div className="bg-[#FFE990] p-4 rounded-lg shadow border border-[#6F9D7E]">
             <h3 className="text-gray-500 text-sm">Total Requests</h3>
             <p className="text-2xl font-bold">{totalRequests}</p>
@@ -172,6 +105,57 @@ export default function PostHarvest() {
             <p className="text-2xl font-bold">{approvalRate}%</p>
           </div>
         </div>
+
+
+            {/* Filter Section */}
+            <div className="bg-white p-4 rounded-lg shadow border border-[#6f9d7e]">
+          <div className="flex justify-between items-center gap-4 w-full">
+            {/* Search Input */}
+            <div className="w-full flex flex-col">
+              <label className="text-sm text-[#6F9D7E] mb-1">Search Text</label>
+              <input
+                type="text"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                placeholder="Search crops or facility type..."
+                className="input input-success bg-white w-full"
+              />
+            </div>
+
+            {/* Status Filter */}
+            <div className="w-full flex flex-col ">
+              <label className="block text-sm text-[#6F9D7E] mb-1">
+                Status
+              </label>
+              <select
+                value={statusFilter}
+                onChange={(e) => setStatusFilter(e.target.value)}
+                className="select select-success text-gray-500 bg-white w-full"
+              >
+                <option value="all">All Statuses</option>
+                <option value="approved">Approved</option>
+                <option value="partial">Partially Approved</option>
+                <option value="pending">Pending</option>
+                <option value="rejected">Rejected</option>
+              </select>
+            </div>
+
+            {/* Date Filter */}
+            <div className="w-full flex flex-col">
+              <label className="text-sm text-[#6F9D7E] mb-1">Date</label>
+              <select
+                value={dateFilter}
+                onChange={(e) => setDateFilter(e.target.value)}
+                className="select text-gray-500 select-success bg-white w-full"
+              >
+                <option value="all">All Dates</option>
+                <option value="recent">Last 30 Days</option>
+                <option value="upcoming">Upcoming</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
 
         {/* Investment Cards - 4 per row */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -243,6 +227,9 @@ export default function PostHarvest() {
           ))}
         </div>
 
+
+        
+
         {/* Empty State */}
         {filteredInvestments.length === 0 && (
           <div className="bg-white p-6 rounded-lg shadow border border-gray-200">
@@ -276,6 +263,7 @@ export default function PostHarvest() {
             </div>
           </div>
         )}
+        </div>
       </div>
     </FarmerLayout>
   );

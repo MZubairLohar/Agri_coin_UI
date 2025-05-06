@@ -9,22 +9,29 @@ import ClickOutside from "./Clickoutside";
 import useLocalStorage from "./useLocalstorage";
 import { IoHomeOutline } from "react-icons/io5";
 import { IoStatsChartOutline } from "react-icons/io5";
-import { Leaf, BarChart2, CloudRain, Users, Settings, HelpCircle, Home,History } from "lucide-react";
-import { CircleDollarSign } from 'lucide-react';
+import {
+  Leaf,
+  BarChart2,
+  CloudRain,
+  Users,
+  Settings,
+  HelpCircle,
+  Home,
+  History,
+} from "lucide-react";
+import { CircleDollarSign } from "lucide-react";
 
 const menuGroups = [
   {
-    name: "MENU",
+    name: "ADMIN MENU",
     menuItems: [
       {
-           icon: (
-             <Users />
-           ),
-           label: "AdminDashboard",
-           route: "/admindashboard",
-         },
+        icon: <Users />,
+        label: "AdminDashboard",
+        route: "/admindashboard",
+      },
       {
-        icon: <CircleDollarSign  />,
+        icon: <CircleDollarSign />,
         label: "All Requests",
         route: "/admindashboard",
         children: [
@@ -37,36 +44,22 @@ const menuGroups = [
             route: "/admindashboard/allrequest/postharvest",
           },
         ],
-      },  
-       {
-                 icon: (
-                   <Users />
-                 ),
-                 label: "Pending Requests",
-                 route: "/admindashboard/pendingrequest",
-               },  
-               {
-                icon: (
-                  <Users />
-                ),
-                label: "Approved Requests",
-                route: "/admindashboard/approverequest",
-              },    
+      },      
       {
-        icon: <CircleDollarSign  />,
-        label: "All Investment",
+        icon: <CircleDollarSign />,
+        label: "All Categories",
         route: "/admindashboard",
         children: [
           {
-            label: "Pre Harvest Investments",
-            route: "/admindashboard/allinvestment/preharvest",
+            label: "Pre Harvest Categories",
+            route: "/admindashboard/allcategories/preharvest",
           },
           {
-            label: "Post Harvest Investments",
-            route: "/admindashboard/allinvestment/postharvest",
+            label: "Post Harvest Categories",
+            route: "/admindashboard/allcategories/postharvest",
           },
         ],
-      },      
+      },
       {
         icon: <BarChart2 />,
         label: "All Status",
@@ -81,7 +74,7 @@ const menuGroups = [
             route: "/admindashboard/allstatus/postharvest",
           },
         ],
-      },  
+      },
       {
         icon: <History />,
         label: "All Token History",
@@ -96,9 +89,7 @@ const menuGroups = [
             route: "/admindashboard/allhistory/postharvest",
           },
         ],
-      },  
-     
-     
+      },
     ],
   },
 ];
@@ -150,14 +141,13 @@ const Adminsidebar = ({ sidebarOpen, setSidebarOpen }) => {
           <nav className="px-4">
             {menuGroups.map((group, groupIndex) => (
               <div key={groupIndex}>
-                <h3 className="mb-4 ml-4 font-lora text-sm bg-[#6F9D7E] font-normal ">
+                <h3 className="mb-4 ml-4 font-lora text-sm bg-[#6F9D7E]  text-white font-semibold ">
                   {group.name}
                 </h3>
 
                 <ul className="mb-6 flex flex-col gap-1.5 text-[#FFE990] cursor-pointer">
                   {group.menuItems.map((menuItem, menuIndex) => (
                     <SidebarItem
-
                       key={menuIndex}
                       item={menuItem}
                       pageName={pageName}

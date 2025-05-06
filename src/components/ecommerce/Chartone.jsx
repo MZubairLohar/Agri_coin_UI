@@ -143,7 +143,7 @@ const ChartOne = () => {
             <span className="mr-2 mt-1 flex h-4 w-full max-w-4  items-center justify-center rounded-full border border-[#6F9D7E]">
               <span className="block h-2.5 w-full max-w-2.5 rounded-full"></span>
             </span>
-            <div className="w-full font-lora">
+            <div className="w-full font-lora -mt-2">
               <p className="font-semibold text-[#FFE990] text-2xl underline underline-offset-4 ">Investment</p>
             </div>
           </div>
@@ -157,7 +157,7 @@ const ChartOne = () => {
             </div> */}
           </div>
         </div>
-        <div className="flex  justify-end bg-[#FFE990] -mt-3 rounded-md p-2">
+        <div className="flex  justify-end bg-[#FFE990] -mt-3 mb-4  rounded-md p-2">
           <div className=" items-center rounded-md bg-whiter p-1 flex gap-2">
             <button className="rounded  px-3 py-1 text-xs font-medium  focus:bg-[#6F9D7E] text-[#6F9D7E] focus:text-[#FFE990] hover:shadow-card ">
               Day
