@@ -32,23 +32,6 @@ function Pendingreq() {
     <AdminLayout>
       <div className=" text-[#FFE990] ">
         <h1 className="text-3xl font-bold text-[#6f9d7e] mb-4">Pending Requests</h1>
-
-        <div className="flex gap-4 justify-between items-center mb-4 w-full ">
-          <div className="bg-[#6F9D7E] p-4 shadow w-11/12 rounded-xl border">
-            <h2 className="text-xl font-semibold mb-2">Crop Planning</h2>
-            <p className="text-gray-200">Details about planned crops, timelines, and expected yield.</p>
-          </div>
-
-          <div className="bg-[#6F9D7E] p-4 shadow w-11/12 rounded-xl border">
-            <h2 className="text-xl font-semibold mb-2">Investment Allocation</h2>
-            <p className="text-gray-200">Information on where the investor's money is being used in the pre-harvest phase.</p>
-          </div>
-
-          <div className="bg-[#6F9D7E] p-4 shadow w-11/12 rounded-xl border">
-            <h2 className="text-xl font-semibold mb-2 ">Farmer Updates</h2>
-            <p className="text-gray-200">Updates from the farmers related to seeding, soil preparation, and equipment usage.</p>
-          </div>
-        </div>
       </div>
 
       <div className="p-6 bg-[#6F9D7E] w-full  mx-auto text-black border border-[#FFE990] rounded-lg shadow">
@@ -95,8 +78,8 @@ function Pendingreq() {
                   </td>
                   <td className="py-3 px-4">
   <div className="flex gap-2">
-    <button className="btn btn-outline btn-success btn-sm">Accept</button>
-    <button className="btn btn-outline btn-warning btn-sm">Reject</button>
+    <button className="btn btn-success btn-sm">Accept</button>
+    <button className="btn btn-error btn-sm">Reject</button>
   </div>
 </td>
 
