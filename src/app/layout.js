@@ -30,7 +30,8 @@
 // app/layout.js
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import LoaderWrapper from "@/components/LoadWrapper"; // ✅ import the client component
+import LoaderWrapper from "@/components/LoadWrapper";
+// import Loader from "@/components/loader/loader"; // ✅ import the client component
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -51,9 +52,11 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        {/* <LoaderWrapper> */}
         <LoaderWrapper>
           {children}
-        </LoaderWrapper>
+          </LoaderWrapper>
+        {/* </LoaderWrapper> */}
       </body>
     </html>
   );

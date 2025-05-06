@@ -21,50 +21,50 @@ const menuGroups = [
              <Users />
            ),
            label: "Dashboard",
-           route: "/dashboard",
+           route: "/farmerdashboard",
          },
       {
         icon: <CircleDollarSign  />,
         label: "Request Investment",
-        route: "/dashboard",
+        route: "/farmerdashboard",
         children: [
           {
             label: "Pre Harvest Request",
-            route: "/dashboard/requestinvestment/preharvest",
+            route: "/farmerdashboard/requestinvestment/preharvest",
           },
           {
             label: "Post Harvest Request",
-            route: "/dashboard/requestinvestment/postharvest",
+            route: "/farmerdashboard/requestinvestment/postharvest",
           },
         ],
       },      
       {
         icon: <BarChart2 />,
         label: "Status",
-        route: "/dashboard",
+        route: "/farmerdashboard",
         children: [
           {
             label: "Pre Harvest Status",
-            route: "/dashboard/status/preharvest",
+            route: "/farmerdashboard/status/preharvest",
           },
           {
             label: "Post Harvest Status",
-            route: "/dashboard/status/postharvest",
+            route: "/farmerdashboard/status/postharvest",
           },
         ],
       },  
       {
         icon: <History />,
         label: "Token History",
-        route: "/dashboard",
+        route: "/farmerdashboard",
         children: [
           {
             label: "Pre Harvest History",
-            route: "/dashboard/history/preharvest",
+            route: "/farmerdashboard/history/preharvest",
           },
           {
             label: "Post harvest History",
-            route: "/dashboard/history/postharvest",
+            route: "/farmerdashboard/history/postharvest",
           },
         ],
       },  

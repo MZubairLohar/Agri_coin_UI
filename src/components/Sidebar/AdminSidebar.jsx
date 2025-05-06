@@ -37,7 +37,21 @@ const menuGroups = [
             route: "/admindashboard/allrequest/postharvest",
           },
         ],
-      },      
+      },  
+       {
+                 icon: (
+                   <Users />
+                 ),
+                 label: "Pending Requests",
+                 route: "/admindashboard/pendingrequest",
+               },  
+               {
+                icon: (
+                  <Users />
+                ),
+                label: "Approved Requests",
+                route: "/admindashboard/approverequest",
+              },    
       {
         icon: <CircleDollarSign  />,
         label: "All Investment",

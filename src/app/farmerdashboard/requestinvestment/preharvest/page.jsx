@@ -76,26 +76,38 @@ export default function Preharvest() {
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label>Full Name</label>
-                  <input
+                  <h1 className="text-gray-500">Full Name</h1>
+                  {/* <input
                     name="fullName"
                     value={formData.fullName}
                     onChange={handleChange}
                     placeholder="John Doe"
                     className="w-full border p-2 rounded"
                     required
-                  />
+                  /> */}
+                  <input
+                  value={formData.fullName}
+                  onChange={handleChange}
+                  type="text"
+                  placeholder="John Doe"
+                  className="input bg-white w-full input-success" />
                 </div>
                 <div>
                   <label>SSN</label>
-                  <input
+                  {/* <input
                     name="ssn"
                     value={formData.ssn}
                     onChange={handleChange}
                     placeholder="123-45-6789"
                     className="w-full border p-2 rounded"
                     required
-                  />
+                  /> */}
+                  <input
+                  value={formData.ssn}
+                  onChange={handleChange}
+                  type="text"
+                  placeholder="John Doe"
+                  className="input bg-white w-full input-success" />
                 </div>
 
                 <div>

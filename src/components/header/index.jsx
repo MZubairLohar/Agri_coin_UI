@@ -63,7 +63,7 @@ const Header = (props) => {
           <ul className="flex items-center gap-2 2xsm:gap-4">
           <div className="dropdown dropdown-end">
   <div tabIndex={0} role="button" className="avatar">
-    <div className="w-12 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+    <div className="w-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
       <img src="https://www.shutterstock.com/image-vector/profile-picture-vector-260nw-404138239.jpg" />
     </div>
   </div>

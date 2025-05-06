@@ -72,7 +72,7 @@ export default function Preharvest() {
 
   return (
     <FarmerLayout>
-      <div className="p-2">
+      <div className="p-2 text-black">
         <h1 className="text-2xl font-bold mb-6 flex items-center text-[#6f9d7e]">
           <FaTractor className="mr-2" /> Pre-Harvest Investment Status
         </h1>

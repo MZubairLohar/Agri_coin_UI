@@ -15,10 +15,6 @@ const ECommerce = () => {
   return (
     <>
       <div className="" >
-        <h1 className="text-3xl font-bold text-[#6f9d7e]">Farmer Dashboard</h1>
-        <h1 className="text-gray-500 mt-2">
-          Monitor your farm's performance and market trends
-        </h1>
         <div className="flex gap-4 h-full overflow-hidden flex-col lg:flex-row ">
           <div className="lg:w-8/12 w-full flex flex-col items-center gap-4 mt-4 lg:items-start">
             <div className=" flex justify-between items-center gap-4 w-full">

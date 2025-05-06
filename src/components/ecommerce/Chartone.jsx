@@ -13,14 +13,14 @@ const options = {
     position: "top",
     horizontalAlign: "left",
   },
-  colors: ["#828185", "#F1BE11"],
+  colors: ["#6F9D7E", "#6F9D7E"],
   chart: {
     fontFamily: "Satoshi, sans-serif",
     height: 335,
     type: "area",
     dropShadow: {
       enabled: true,
-      color: "#623CEA14",
+      color: "#6F9D7E",
       top: 10,
       blur: 4,
       left: 0,
@@ -69,8 +69,8 @@ const options = {
   },
   markers: {
     size: 4,
-    colors: "#fff",
-    strokeColors: ["#E22D2C", "#80CAEE"],
+    colors: "#FFE990",
+    strokeColors: ["#6F9D7E", "#6F9D7E"],
     strokeWidth: 3,
     strokeOpacity: 0.9,
     strokeDashArray: 0,
@@ -85,7 +85,7 @@ const options = {
     type: "category",
     labels: {
       style: {
-        colors: "#6B7280",
+        colors: "#6F9D7E",
         fontSize: "12px",
       },
     },
@@ -113,7 +113,7 @@ const options = {
   yaxis: {
     labels: {
       style: {
-        colors: "#6B7280",
+        colors: "#6F9D7E",
         fontSize: "12px",
       },
     },
@@ -176,7 +176,7 @@ const ChartOne = () => {
       </div>
 
       <div>
-        <div id="chartOne" className="-ml-5">
+        <div id="chartOne" className="bg-white">
           <ReactApexChart
             options={options}
             series={series}

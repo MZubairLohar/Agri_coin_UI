@@ -75,33 +75,34 @@ export default function PostHarvest() {
 
   return (
     <FarmerLayout>
-      <div className="p-2">
+      <div className="p-2 text-black">
         <h1 className="text-2xl font-bold mb-6 flex items-center text-[#6f9d7e]">
           <FaWarehouse className="mr-2" /> Post-Harvest Investment Status
         </h1>
 
         {/* Filter Section */}
-        <div className="bg-white p-4 rounded-lg shadow border border-gray-200 mb-6">
+        <div className="bg-white p-4 rounded-lg shadow border border-[#6f9d7e] mb-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {/* Search Input */}
             <div className="relative">
-              <label className="block text-sm text-gray-500 mb-1">Search Text</label>
+              <label className="block text-sm text-[#6F9D7E] mb-1">Search Text</label>
               <div className="justify-between absolute inset-y-0 left-0 top-7 pl-3 flex items-center pointer-events-none">
-                <FaSearch className="text-gray-400" />
+                
               </div>
-              <input
+              {/* <input
                 type="text"
                 placeholder="Search crops or facility type..."
                 className="pl-10 w-full border p-2 rounded"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-              />
+              /> */}
+              <input type="text" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} placeholder="Search crops or facility type..." className="input input-success bg-white" />
             </div>
 
             {/* Status Filter */}
             <div>
-              <label className="block text-sm text-gray-500 mb-1">Status</label>
-              <select
+              <label className="block text-sm text-[#6F9D7E] mb-1">Status</label>
+              {/* <select
                 className="w-full border p-2 rounded"
                 value={statusFilter}
                 onChange={(e) => setStatusFilter(e.target.value)}
@@ -111,13 +112,23 @@ export default function PostHarvest() {
                 <option value="partial">Partially Approved</option>
                 <option value="pending">Pending</option>
                 <option value="rejected">Rejected</option>
-              </select>
+              </select> */}
+              <select
+              value={statusFilter}
+              onChange={(e) => setStatusFilter(e.target.value)}
+              defaultValue="Pick a Runtime" className="select select-success text-gray-500 bg-white">
+  <option value="all">All Statuses</option>
+  <option value="approved">Approved</option>
+  <option value="partial">Partially Approved</option>
+  <option value="pending">Pending</option>
+  <option value="rejected">Rejected</option>
+</select>
             </div>
 
             {/* Date Filter */}
             <div>
-              <label className="block text-sm text-gray-500 mb-1">Date</label>
-              <select
+              <label className="block text-sm text-[#6F9D7E] mb-1">Date</label>
+              {/* <select
                 className="w-full border p-2 rounded"
                 value={dateFilter}
                 onChange={(e) => setDateFilter(e.target.value)}
@@ -125,44 +136,52 @@ export default function PostHarvest() {
                 <option value="all">All Dates</option>
                 <option value="recent">Last 30 Days</option>
                 <option value="upcoming">Upcoming</option>
-              </select>
+              </select> */}
+               <select
+              value={dateFilter}
+              onChange={(e) => setDateFilter(e.target.value)}
+              defaultValue="Pick a Runtime" className="select text-gray-500 select-success bg-white">
+  <option value="all">All Dates</option>
+  <option value="approved">Last 30 Days</option>
+  <option value="partial">Upcoming</option>
+</select>
             </div>
           </div>
         </div>
 
         {/* Summary Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
-          <div className="bg-white p-4 rounded-lg shadow border border-gray-200">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8 text-[#6F9D7E]">
+          <div className="bg-[#FFE990] p-4 rounded-lg shadow border border-[#6F9D7E]">
             <h3 className="text-gray-500 text-sm">Total Requests</h3>
             <p className="text-2xl font-bold">{totalRequests}</p>
           </div>
-          <div className="bg-white p-4 rounded-lg shadow border border-gray-200">
+          <div className="bg-[#FFE990] p-4 rounded-lg shadow border border-[#6F9D7E]">
             <h3 className="text-gray-500 text-sm">Total Requested</h3>
             <p className="text-2xl font-bold">
               ${totalRequested.toLocaleString()}
             </p>
           </div>
-          <div className="bg-white p-4 rounded-lg shadow border border-gray-200">
+          <div className="bg-[#FFE990] p-4 rounded-lg shadow border border-[#6F9D7E]">
             <h3 className="text-gray-500 text-sm">Total Approved</h3>
             <p className="text-2xl font-bold">
               ${totalApproved.toLocaleString()}
             </p>
           </div>
-          <div className="bg-white p-4 rounded-lg shadow border border-gray-200">
+          <div className="bg-[#FFE990] p-4 rounded-lg shadow border border-[#6F9D7E]">
             <h3 className="text-gray-500 text-sm">Approval Rate</h3>
             <p className="text-2xl font-bold">{approvalRate}%</p>
           </div>
         </div>
 
         {/* Investment Cards - 4 per row */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {filteredInvestments.map((investment) => (
             <div
               key={investment.id}
-              className="bg-white p-4 rounded-lg shadow border border-gray-200 hover:shadow-md transition-shadow"
+              className="bg-[#6F9D7E] p-4 rounded-lg shadow border border-[#FFE990] hover:shadow-md transition-shadow"
             >
               <div className="flex justify-between items-start mb-3">
-                <h2 className="text-lg font-semibold">{investment.cropName}</h2>
+                <h2 className="text-lg font-semibold text-[#FFE990]">{investment.cropName}</h2>
                 <span
                   className={`text-xs px-2 py-1 rounded-full ${
                     statusConfig[investment.status].color
@@ -175,22 +194,22 @@ export default function PostHarvest() {
 
               <div className="space-y-2">
                 <div className="flex justify-between">
-                  <span className="text-gray-600">Harvest Quantity:</span>
-                  <span className="font-medium">
+                  <span className="text-gray-200 font-semibold">Harvest Quantity:</span>
+                  <span className="font-medium text-[#FFE990]">
                     {investment.bushels.toLocaleString()} bushels
                   </span>
                 </div>
 
                 <div className="flex justify-between">
-                  <span className="text-gray-600">Requested:</span>
-                  <span className="font-medium">
+                  <span className="text-gray-200 font-semibold">Requested:</span>
+                  <span className="font-medium text-[#FFE990]">
                     ${investment.totalRequested.toLocaleString()}
                   </span>
                 </div>
 
                 <div className="flex justify-between">
-                  <span className="text-gray-600">Approved:</span>
-                  <span className="font-medium">
+                  <span className="text-gray-200 font-semibold">Approved:</span>
+                  <span className="font-medium text-[#FFE990]">
                     {investment.approvedAmount
                       ? `$${investment.approvedAmount.toLocaleString()}`
                       : "N/A"}
@@ -198,26 +217,26 @@ export default function PostHarvest() {
                 </div>
 
                 <div className="flex justify-between">
-                  <span className="text-gray-600">Facility Type:</span>
-                  <span className="text-right text-sm">
+                  <span className="text-gray-200 font-semibold">Facility Type:</span>
+                  <span className="text-right text-[#FFE990] text-sm">
                     {investment.facilityType}
                   </span>
                 </div>
 
                 <div className="flex justify-between">
-                  <span className="text-gray-600">Storage Capacity:</span>
-                  <span className="text-sm">
+                  <span className="text-gray-200 font-semibold">Storage Capacity:</span>
+                  <span className="text-sm text-[#FFE990]">
                     {investment.storageCapacity} bushels
                   </span>
                 </div>
 
-                <div className="flex justify-between text-sm mt-3 pt-2 border-t">
-                  <span className="text-gray-500">Request Date:</span>
-                  <span>{new Date(investment.date).toLocaleDateString()}</span>
+                <div className="flex justify-between text-sm mt-3 pt-2 border-[#FFE990] border-t">
+                  <span className="text-gray-200 font-semibold">Request Date:</span>
+                  <span className="text-[#FFE990]">{new Date(investment.date).toLocaleDateString()}</span>
                 </div>
               </div>
 
-              <button className="mt-3 w-full py-1 bg-[#6f9d7e] text-white rounded text-sm hover:bg-[#5a8a6a] transition">
+              <button className="mt-3 w-full py-1 bg-[#6f9d7e] text-[#FFE990] border border-[#FFE990] rounded text-sm hover:bg-[#5a8a6a] transition">
                 View Details
               </button>
             </div>
