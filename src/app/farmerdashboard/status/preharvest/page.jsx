@@ -12,10 +12,10 @@ import {
   FaFilter,
   FaWarehouse,
   FaBoxes,
-  FaTruck,
+  FaTruck
 } from "react-icons/fa";
 
-export default function PreHarvest() {
+export default function PostHarvest() {
   // State for filters
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
@@ -76,12 +76,39 @@ export default function PreHarvest() {
   return (
     <FarmerLayout>
       <div className="p-2 text-black">
-        <h1 className="text-2xl font-bold mb-6 flex items-center text-[#6f9d7e]">
-          <FaWarehouse className="mr-2" /> Pre-Harvest Investment Status
+        <h1 className="text-2xl font-bold mb-4 flex items-center text-[#6f9d7e]">
+          <FaWarehouse className="mr-2" /> Pre-Harvest Status
         </h1>
 
-        {/* Filter Section */}
-        <div className="bg-white p-4 rounded-lg shadow border border-[#6f9d7e] mb-6">
+   <div className="flex flex-col gap-4">
+    
+        {/* Summary Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4  text-[#6F9D7E]">
+          <div className="bg-[#FFE990] p-4 rounded-lg shadow border border-[#6F9D7E]">
+            <h3 className="text-gray-500 text-sm">Total Requests</h3>
+            <p className="text-2xl font-bold">{totalRequests}</p>
+          </div>
+          <div className="bg-[#FFE990] p-4 rounded-lg shadow border border-[#6F9D7E]">
+            <h3 className="text-gray-500 text-sm">Total Requested</h3>
+            <p className="text-2xl font-bold">
+              ${totalRequested.toLocaleString()}
+            </p>
+          </div>
+          <div className="bg-[#FFE990] p-4 rounded-lg shadow border border-[#6F9D7E]">
+            <h3 className="text-gray-500 text-sm">Total Approved</h3>
+            <p className="text-2xl font-bold">
+              ${totalApproved.toLocaleString()}
+            </p>
+          </div>
+          <div className="bg-[#FFE990] p-4 rounded-lg shadow border border-[#6F9D7E]">
+            <h3 className="text-gray-500 text-sm">Approval Rate</h3>
+            <p className="text-2xl font-bold">{approvalRate}%</p>
+          </div>
+        </div>
+
+
+            {/* Filter Section */}
+            <div className="bg-white p-4 rounded-lg shadow border border-[#6f9d7e]">
           <div className="flex justify-between items-center gap-4 w-full">
             {/* Search Input */}
             <div className="w-full flex flex-col">
@@ -129,29 +156,6 @@ export default function PreHarvest() {
           </div>
         </div>
 
-        {/* Summary Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8 text-[#6F9D7E]">
-          <div className="bg-[#FFE990] p-4 rounded-lg shadow border border-[#6F9D7E]">
-            <h3 className="text-gray-500 text-sm">Total Requests</h3>
-            <p className="text-2xl font-bold">{totalRequests}</p>
-          </div>
-          <div className="bg-[#FFE990] p-4 rounded-lg shadow border border-[#6F9D7E]">
-            <h3 className="text-gray-500 text-sm">Total Requested</h3>
-            <p className="text-2xl font-bold">
-              ${totalRequested.toLocaleString()}
-            </p>
-          </div>
-          <div className="bg-[#FFE990] p-4 rounded-lg shadow border border-[#6F9D7E]">
-            <h3 className="text-gray-500 text-sm">Total Approved</h3>
-            <p className="text-2xl font-bold">
-              ${totalApproved.toLocaleString()}
-            </p>
-          </div>
-          <div className="bg-[#FFE990] p-4 rounded-lg shadow border border-[#6F9D7E]">
-            <h3 className="text-gray-500 text-sm">Approval Rate</h3>
-            <p className="text-2xl font-bold">{approvalRate}%</p>
-          </div>
-        </div>
 
         {/* Investment Cards - 4 per row */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -161,9 +165,7 @@ export default function PreHarvest() {
               className="bg-[#6F9D7E] p-4 rounded-lg shadow border border-[#FFE990] hover:shadow-md transition-shadow"
             >
               <div className="flex justify-between items-start mb-3">
-                <h2 className="text-lg font-semibold text-[#FFE990]">
-                  {investment.cropName}
-                </h2>
+                <h2 className="text-lg font-semibold text-[#FFE990]">{investment.cropName}</h2>
                 <span
                   className={`text-xs px-2 py-1 rounded-full ${
                     statusConfig[investment.status].color
@@ -176,18 +178,14 @@ export default function PreHarvest() {
 
               <div className="space-y-2">
                 <div className="flex justify-between">
-                  <span className="text-gray-200 font-semibold">
-                    Harvest Quantity:
-                  </span>
+                  <span className="text-gray-200 font-semibold">Harvest Quantity:</span>
                   <span className="font-medium text-[#FFE990]">
                     {investment.bushels.toLocaleString()} bushels
                   </span>
                 </div>
 
                 <div className="flex justify-between">
-                  <span className="text-gray-200 font-semibold">
-                    Requested:
-                  </span>
+                  <span className="text-gray-200 font-semibold">Requested:</span>
                   <span className="font-medium text-[#FFE990]">
                     ${investment.totalRequested.toLocaleString()}
                   </span>
@@ -203,30 +201,22 @@ export default function PreHarvest() {
                 </div>
 
                 <div className="flex justify-between">
-                  <span className="text-gray-200 font-semibold">
-                    Facility Type:
-                  </span>
+                  <span className="text-gray-200 font-semibold">Facility Type:</span>
                   <span className="text-right text-[#FFE990] text-sm">
                     {investment.facilityType}
                   </span>
                 </div>
 
                 <div className="flex justify-between">
-                  <span className="text-gray-200 font-semibold">
-                    Storage Capacity:
-                  </span>
+                  <span className="text-gray-200 font-semibold">Storage Capacity:</span>
                   <span className="text-sm text-[#FFE990]">
                     {investment.storageCapacity} bushels
                   </span>
                 </div>
 
                 <div className="flex justify-between text-sm mt-3 pt-2 border-[#FFE990] border-t">
-                  <span className="text-gray-200 font-semibold">
-                    Request Date:
-                  </span>
-                  <span className="text-[#FFE990]">
-                    {new Date(investment.date).toLocaleDateString()}
-                  </span>
+                  <span className="text-gray-200 font-semibold">Request Date:</span>
+                  <span className="text-[#FFE990]">{new Date(investment.date).toLocaleDateString()}</span>
                 </div>
               </div>
 
@@ -236,6 +226,9 @@ export default function PreHarvest() {
             </div>
           ))}
         </div>
+
+
+        
 
         {/* Empty State */}
         {filteredInvestments.length === 0 && (
@@ -270,6 +263,7 @@ export default function PreHarvest() {
             </div>
           </div>
         )}
+        </div>
       </div>
     </FarmerLayout>
   );

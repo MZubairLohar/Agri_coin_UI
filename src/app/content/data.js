@@ -617,18 +617,6 @@ export const farmingName = [
 ]
 
 
-// export const tableHeaders = [
-//   { id: 1, label: "", key: "selection" }, // Empty header for checkboxes/selection
-//   { id: 2, label: "Name", key: "name" },
-//   { id: 3, label: "Job", key: "job" },
-//   { id: 4, label: "Company", key: "company" },
-//   { id: 5, label: "Location", key: "location" },
-//   { id: 6, label: "Last Login", key: "lastLogin" },
-//   { id: 7, label: "Favorite Color", key: "favoriteColor" }
-// ];
-
-
-
 export const preharveststatus = [
   {
     fullName: "John Smith",

@@ -23,7 +23,7 @@ import { CircleDollarSign } from "lucide-react";
 
 const menuGroups = [
   {
-    name: "MENU",
+    name: "ADMIN MENU",
     menuItems: [
       {
         icon: <Users />,
@@ -47,16 +47,16 @@ const menuGroups = [
       },      
       {
         icon: <CircleDollarSign />,
-        label: "All Investment",
+        label: "All Categories",
         route: "/admindashboard",
         children: [
           {
-            label: "Pre Harvest Investments",
-            route: "/admindashboard/allinvestment/preharvest",
+            label: "Pre Harvest Categories",
+            route: "/admindashboard/allcategories/preharvest",
           },
           {
-            label: "Post Harvest Investments",
-            route: "/admindashboard/allinvestment/postharvest",
+            label: "Post Harvest Categories",
+            route: "/admindashboard/allcategories/postharvest",
           },
         ],
       },
@@ -141,7 +141,7 @@ const Adminsidebar = ({ sidebarOpen, setSidebarOpen }) => {
           <nav className="px-4">
             {menuGroups.map((group, groupIndex) => (
               <div key={groupIndex}>
-                <h3 className="mb-4 ml-4 font-lora text-sm bg-[#6F9D7E] font-normal ">
+                <h3 className="mb-4 ml-4 font-lora text-sm bg-[#6F9D7E]  text-white font-semibold ">
                   {group.name}
                 </h3>
 
