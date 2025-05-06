@@ -1,6 +1,7 @@
 "use client";
 import FarmerLayout from "@/components/maincomp/FarmerLayout";
 import { useState } from "react";
+import "cally";
 
 export default function Preharvest() {
   const [formData, setFormData] = useState({
@@ -76,38 +77,27 @@ export default function Preharvest() {
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <h1 className="text-gray-500">Full Name</h1>
-                  {/* <input
+                  <h1>Full Name</h1>
+                  <input
                     name="fullName"
                     value={formData.fullName}
                     onChange={handleChange}
                     placeholder="John Doe"
                     className="w-full border p-2 rounded"
                     required
-                  /> */}
-                  <input
-                  value={formData.fullName}
-                  onChange={handleChange}
-                  type="text"
-                  placeholder="John Doe"
-                  className="input bg-white w-full input-success" />
+                  />
                 </div>
                 <div>
                   <label>SSN</label>
-                  {/* <input
+                  <input
                     name="ssn"
                     value={formData.ssn}
                     onChange={handleChange}
                     placeholder="123-45-6789"
                     className="w-full border p-2 rounded"
                     required
-                  /> */}
-                  <input
-                  value={formData.ssn}
-                  onChange={handleChange}
-                  type="text"
-                  placeholder="John Doe"
-                  className="input bg-white w-full input-success" />
+                  />
+                 
                 </div>
 
                 <div>

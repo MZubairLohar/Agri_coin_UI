@@ -157,7 +157,7 @@ const ChartOne = () => {
             </div> */}
           </div>
         </div>
-        <div className="flex  justify-end bg-[#FFE990] rounded-md p-2">
+        <div className="flex  justify-end bg-[#FFE990] -mt-3 rounded-md p-2">
           <div className=" items-center rounded-md bg-whiter p-1 flex gap-2">
             <button className="rounded  px-3 py-1 text-xs font-medium  focus:bg-[#6F9D7E] text-[#6F9D7E] focus:text-[#FFE990] hover:shadow-card ">
               Day

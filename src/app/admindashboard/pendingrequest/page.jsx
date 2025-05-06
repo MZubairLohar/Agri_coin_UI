@@ -3,14 +3,15 @@ import { useState } from "react";
 import AdminLayout from "@/components/maincomp/AdminLayout";
 
 function Pendingreq() {
-  const tokens = [
-    { id: 'ry671p7vl', farmer: 'John Doe', crop: 'Wheat', quantity: '100 kg', amount: '5000 Bushels',type: 'Pre-Harvest', status: 'Requested' },
-    { id: 'ss5rb8gce', farmer: 'Alice Smith', crop: 'Corn', quantity: '150 kg', amount: '4000 Bushels',type: 'Pre-Harvest', status: 'Created' },
-    { id: '1hesf8j42', farmer: 'Bob Johnson', crop: 'Rice', quantity: '130 kg', amount: '2000 Bushels',type: 'Post-Harvest', status: 'Approved' },
-    { id: '9jtqugxf8', farmer: 'Emily Brown', crop: 'Soybeans', quantity: '110 kg', amount: '6000 Bushels',type: 'Post-Harvest', status: 'Rejected' },
-    { id: 'pcrz0ypqu', farmer: 'David Wilson', crop: 'Barley', quantity: '160 kg', amount: '4000 Bushels',type: 'Pre-Harvest', status: 'Created' },
-    { id: 'hckh147cb', farmer: 'Joe Denly', crop: 'Potato', quantity: '190 kg', amount: '3000 Bushels',type: 'Post-Harvest', status: 'Completed' },
-  ];
+    const tokens = [
+        { id: 'ry671p7vl', farmer: 'John Doe', crop: 'Wheat', quantity: '100 kg', amount: '5000 Bushels', type: 'Pre-Harvest', status: 'Requested', action: 'Accept' },
+        { id: 'ss5rb8gce', farmer: 'Alice Smith', crop: 'Corn', quantity: '150 kg', amount: '4000 Bushels', type: 'Pre-Harvest', status: 'Created', action: 'Reject' },
+        { id: '1hesf8j42', farmer: 'Bob Johnson', crop: 'Rice', quantity: '130 kg', amount: '2000 Bushels', type: 'Post-Harvest', status: 'Approved', action: 'Reject' },
+        { id: '9jtqugxf8', farmer: 'Emily Brown', crop: 'Soybeans', quantity: '110 kg', amount: '6000 Bushels', type: 'Post-Harvest', status: 'Rejected', action: 'Accept' },
+        { id: 'pcrz0ypqu', farmer: 'David Wilson', crop: 'Barley', quantity: '160 kg', amount: '4000 Bushels', type: 'Pre-Harvest', status: 'Created', action: 'Reject' },
+        { id: 'hckh147cb', farmer: 'Joe Denly', crop: 'Potato', quantity: '190 kg', amount: '3000 Bushels', type: 'Post-Harvest', status: 'Completed', action: 'Reject' },
+      ];
+      
 
   const statusColors = {
     Requested: 'bg-yellow-100 text-yellow-800',
@@ -30,7 +31,7 @@ function Pendingreq() {
   return (
     <AdminLayout>
       <div className=" text-[#FFE990] ">
-        <h1 className="text-3xl font-bold text-[#6f9d7e] mb-4">Post-Harvest Overview of History</h1>
+        <h1 className="text-3xl font-bold text-[#6f9d7e] mb-4">Pending Requests</h1>
 
         <div className="flex gap-4 justify-between items-center mb-4 w-full ">
           <div className="bg-[#6F9D7E] p-4 shadow w-11/12 rounded-xl border">
@@ -75,6 +76,7 @@ function Pendingreq() {
                 <th className="py-3 px-4 font-semibold text-lg">Amount</th>
                 <th className="py-3 px-4 font-semibold text-lg">Type</th>
                 <th className="py-3 px-4 font-semibold text-lg">Status</th>
+                <th className="py-3 px-4 font-semibold text-lg">Actions</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-300 text-gray-200">
@@ -91,6 +93,13 @@ function Pendingreq() {
                       {token.status}
                     </span>
                   </td>
+                  <td className="py-3 px-4">
+  <div className="flex gap-2">
+    <button className="btn btn-outline btn-success btn-sm">Accept</button>
+    <button className="btn btn-outline btn-warning btn-sm">Reject</button>
+  </div>
+</td>
+
                 </tr>
               ))}
               {filteredTokens.length === 0 && (
