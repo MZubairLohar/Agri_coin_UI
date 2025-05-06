@@ -1,10 +1,14 @@
 "use client";
 
 import Image from "next/image";
-
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function Signin() {
+  const router = useRouter();
+  function Route () {
+    router.push("../farmerdashboard")
+  }
   const [isSignIn, setIsSignIn] = useState(true);
 
   return (
@@ -44,6 +48,7 @@ export default function Signin() {
                   />
                   <button
                     type="submit"
+                    onClick={Route}
                     className="w-full bg-[#6f9d7e] text-white p-2 rounded hover:bg-[#5c896e]"
                   >
                     Sign In
@@ -74,6 +79,7 @@ export default function Signin() {
                   />
                   <button
                     type="submit"
+                    onClick={Route}
                     className="w-full bg-[#6f9d7e] text-white p-2 rounded hover:bg-[#5c896e]"
                   >
                     Sign Up

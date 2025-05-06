@@ -74,7 +74,7 @@ export default function PostHarvest() {
     <AdminLayout>
       <div className="p-2 text-black">
         <h1 className="text-2xl font-bold mb-4 flex items-center text-[#6f9d7e]">
-          <FaWarehouse className="mr-2" /> Post-Harvest Categories
+          <FaWarehouse className="mr-2" /> Pre-Harvest Categories
         </h1>
 
         <div className="flex flex-col gap-4">
