@@ -70,7 +70,7 @@ const Header = (props) => {
   <ul tabIndex={0} className="dropdown-content z-[1] menu -space-y-2 shadow text-black border border-gray-400 bg-white rounded-box w-52">
     <li><span className="font-bold">John Doe</span></li>
     <li><span>johndoe@gmail.com</span></li>
-    <li><button className="btn btn-sm btn-success bg-[#FFE990] text-black mt-2">Logout</button></li>
+    <li><button onClick={Route} className="btn btn-sm btn-success bg-[#FFE990] text-black mt-2">Logout</button></li>
   </ul>
 </div>
 

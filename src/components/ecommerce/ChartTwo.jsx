@@ -2,7 +2,7 @@
 
 import React from "react";
 import dynamic from "next/dynamic";
-import { farmers } from "/src/app/content/data";
+import { farmingName } from "/src/app/content/data";
 
 const ReactApexChart = dynamic(() => import("react-apexcharts"), {
   ssr: false,
@@ -114,7 +114,7 @@ const ChartTwo = () => {
           </div>
           <div className="flex flex-col items-center text-md text-[#FFE990] font-medium gap-2">
             <ul className="w-full px-4 flex flex-col gap-1">
-              {farmers
+              {farmingName
                 .filter((data) => data.id <= 11)
                 .map((data) => (
                   <li

@@ -80,71 +80,52 @@ export default function PostHarvest() {
           <FaWarehouse className="mr-2" /> Post-Harvest Investment Status
         </h1>
 
+   
         {/* Filter Section */}
         <div className="bg-white p-4 rounded-lg shadow border border-[#6f9d7e] mb-6">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="flex justify-between items-center gap-4 w-full">
             {/* Search Input */}
-            <div className="relative">
-              <label className="block text-sm text-[#6F9D7E] mb-1">Search Text</label>
-              <div className="justify-between absolute inset-y-0 left-0 top-7 pl-3 flex items-center pointer-events-none">
-                
-              </div>
-              {/* <input
+            <div className="w-full flex flex-col">
+              <label className="text-sm text-[#6F9D7E] mb-1">Search Text</label>
+              <input
                 type="text"
-                placeholder="Search crops or facility type..."
-                className="pl-10 w-full border p-2 rounded"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-              /> */}
-              <input type="text" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} placeholder="Search crops or facility type..." className="input input-success bg-white" />
+                placeholder="Search crops or facility type..."
+                className="input input-success bg-white w-full"
+              />
             </div>
 
             {/* Status Filter */}
-            <div>
-              <label className="block text-sm text-[#6F9D7E] mb-1">Status</label>
-              {/* <select
-                className="w-full border p-2 rounded"
+            <div className="w-full flex flex-col ">
+              <label className="block text-sm text-[#6F9D7E] mb-1">
+                Status
+              </label>
+              <select
                 value={statusFilter}
                 onChange={(e) => setStatusFilter(e.target.value)}
+                className="select select-success text-gray-500 bg-white w-full"
               >
                 <option value="all">All Statuses</option>
                 <option value="approved">Approved</option>
                 <option value="partial">Partially Approved</option>
                 <option value="pending">Pending</option>
                 <option value="rejected">Rejected</option>
-              </select> */}
-              <select
-              value={statusFilter}
-              onChange={(e) => setStatusFilter(e.target.value)}
-              defaultValue="Pick a Runtime" className="select select-success text-gray-500 bg-white">
-  <option value="all">All Statuses</option>
-  <option value="approved">Approved</option>
-  <option value="partial">Partially Approved</option>
-  <option value="pending">Pending</option>
-  <option value="rejected">Rejected</option>
-</select>
+              </select>
             </div>
 
             {/* Date Filter */}
-            <div>
-              <label className="block text-sm text-[#6F9D7E] mb-1">Date</label>
-              {/* <select
-                className="w-full border p-2 rounded"
+            <div className="w-full flex flex-col">
+              <label className="text-sm text-[#6F9D7E] mb-1">Date</label>
+              <select
                 value={dateFilter}
                 onChange={(e) => setDateFilter(e.target.value)}
+                className="select text-gray-500 select-success bg-white w-full"
               >
                 <option value="all">All Dates</option>
                 <option value="recent">Last 30 Days</option>
                 <option value="upcoming">Upcoming</option>
-              </select> */}
-               <select
-              value={dateFilter}
-              onChange={(e) => setDateFilter(e.target.value)}
-              defaultValue="Pick a Runtime" className="select text-gray-500 select-success bg-white">
-  <option value="all">All Dates</option>
-  <option value="approved">Last 30 Days</option>
-  <option value="partial">Upcoming</option>
-</select>
+              </select>
             </div>
           </div>
         </div>
