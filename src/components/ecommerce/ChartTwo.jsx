@@ -113,7 +113,7 @@ const ChartTwo = () => {
             <span>Minted Amount</span>
           </div>
           <div className="flex flex-col items-center text-md text-[#FFE990] font-medium gap-2">
-            <ul className="w-full px-4 flex flex-col gap-1">
+            <ul className="w-full px-4 flex flex-col gap-4 sm:gap-1">
               {farmingName
                 .filter((data) => data.id <= 11)
                 .map((data) => (

@@ -194,7 +194,7 @@ useEffect(() => {
 
 <div
   className="relative min-h-screen flex flex-col items-center text-center px-4 md:px-10 lg:px-20 
-    bg-white bg-cover bg-center bg-no-repeat z-10 pt-4"
+    bg-white bg-cover bg-center bg-no-repeat pt-4"
 >
   <Navbar />
 
@@ -207,7 +207,7 @@ useEffect(() => {
     priority
   />
 
-  <div className="z-10 pt-8 flex flex-col items-center w-full lg:w-full space-y-4 md:space-y-6 mt-4">
+  <div className="pt-8 flex flex-col items-center w-full lg:w-full space-y-4 md:space-y-6 mt-4">
     <h1 className="text-xl sm:text-2xl md:text-5xl font-bold text-black w-2/4">
       Save More of Nature's Treasures
     </h1>

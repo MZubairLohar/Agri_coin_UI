@@ -102,10 +102,10 @@ export default function PostHarvest() {
             </div>
           </div>
 
+
           {/* Filter Section */}
           <div className="bg-white p-4 rounded-lg shadow border border-[#6f9d7e]">
             <div className="flex justify-between items-center gap-4 w-full">
-              {/* Search Input */}
               <div className="w-full flex flex-col">
                 <label className="text-sm text-[#6F9D7E] mb-1">Search Text</label>
                 <input
@@ -117,7 +117,6 @@ export default function PostHarvest() {
                 />
               </div>
 
-              {/* Status Filter */}
               <div className="w-full flex flex-col">
                 <label className="block text-sm text-[#6F9D7E] mb-1">
                   Status
@@ -135,7 +134,6 @@ export default function PostHarvest() {
                 </select>
               </div>
 
-              {/* Date Filter */}
               <div className="w-full flex flex-col">
                 <label className="text-sm text-[#6F9D7E] mb-1">Date</label>
                 <select

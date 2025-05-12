@@ -35,7 +35,7 @@ export default function Signin() {
                 <h2 className="text-2xl font-bold text-[#6f9d7e] mb-6">
                   Sign In
                 </h2>
-                <form className="w-full max-w-sm space-y-4">
+                <div className="w-full max-w-sm space-y-4">
                   <input
                     type="email"
                     placeholder="Email"
@@ -53,7 +53,7 @@ export default function Signin() {
                   >
                     Sign In
                   </button>
-                </form>
+                </div>
               </div>
             ) : (
               // Sign Up Form
@@ -61,7 +61,7 @@ export default function Signin() {
                 <h2 className="text-2xl font-bold text-[#6f9d7e] mb-6">
                   Sign Up
                 </h2>
-                <form className="w-full max-w-sm space-y-4">
+                <div className="w-full max-w-sm space-y-4">
                   <input
                     type="text"
                     placeholder="Full Name"
@@ -84,7 +84,7 @@ export default function Signin() {
                   >
                     Sign Up
                   </button>
-                </form>
+                </div>
               </div>
             )}
           </div>

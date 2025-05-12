@@ -4,20 +4,15 @@ import ChartOne from "./Chartone";
 import ChartTwo from "./ChartTwo";
 import { useContext } from "react";
 import { Leaf } from "lucide-react";
-import Card from "../Card";
-// import  {WalletContext} from "./contextApiWallet";
+import Card from "../Card"
 
 const ECommerce = () => {
-  //   const { walletAddress} =
-  //   useContext(WalletContext);
-  //   console.log("this is Wallet Address from useContext",walletAddress)
-
   return (
     <>
       <div className="" >
         <div className="flex gap-4 h-full overflow-hidden flex-col lg:flex-row ">
           <div className="lg:w-8/12 w-full flex flex-col items-center gap-4 mt-4 lg:items-start">
-            <div className=" flex justify-between items-center gap-4 w-full">
+            <div className="sm:flex justify-between space-y-4 sm:space-y-0 items-center gap-4 w-full">
               <Card
                 title="DAO Token"
                 subtitle1="Minted"
@@ -37,10 +32,8 @@ const ECommerce = () => {
           </div>
         </div>
       </div>
-
-      {/* <div className="mt-4 grid grid-cols-12 gap-4 md:mt-6 md:gap-6 2xl:mt-7.5 2xl:gap-7.5"> */}
-      {/* </div> */}
       <div></div>
+      
     </>
   );
 };

@@ -29,32 +29,45 @@ function Posthistory() {
 
   return (
     <FarmerLayout>
-      <div className=" text-[#FFE990] ">
-        <h1 className="text-3xl font-bold text-[#6f9d7e] mb-4">Pre-Harvest Overview of History</h1>
+      <div className="text-[#FFE990] px-4">
+        <h1 className="text-2xl sm:text-3xl font-bold text-[#6f9d7e] mb-6">
+          Pre-Harvest Overview of History
+        </h1>
 
-        <div className="flex gap-4 justify-between items-center mb-4 w-full ">
-          <div className="bg-[#6F9D7E] p-4 shadow w-11/12 rounded-xl border">
-            <h2 className="text-xl font-semibold mb-2">Crop Planning</h2>
-            <p className="text-gray-200">Details about planned crops, timelines, and expected yield.</p>
+        {/* Responsive Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+          <div className="bg-[#6F9D7E] p-4 shadow rounded-xl border">
+            <h2 className="text-lg sm:text-xl font-semibold mb-2">Crop Planning</h2>
+            <p className="text-gray-200 text-sm sm:text-base">
+              Details about planned crops, timelines, and expected yield.
+            </p>
           </div>
 
-          <div className="bg-[#6F9D7E] p-4 shadow w-11/12 rounded-xl border">
-            <h2 className="text-xl font-semibold mb-2">Investment Allocation</h2>
-            <p className="text-gray-200">Information on where the investor's money is being used in the pre-harvest phase.</p>
+          <div className="bg-[#6F9D7E] p-4 shadow rounded-xl border">
+            <h2 className="text-lg sm:text-xl font-semibold mb-2">Investment Allocation</h2>
+            <p className="text-gray-200 text-sm sm:text-base">
+              Information on where the investor's money is being used in the pre-harvest phase.
+            </p>
           </div>
 
-          <div className="bg-[#6F9D7E] p-4 shadow w-11/12 rounded-xl border">
-            <h2 className="text-xl font-semibold mb-2 ">Farmer Updates</h2>
-            <p className="text-gray-200">Updates from the farmers related to seeding, soil preparation, and equipment usage.</p>
+          <div className="bg-[#6F9D7E] p-4 shadow rounded-xl border">
+            <h2 className="text-lg sm:text-xl font-semibold mb-2">Farmer Updates</h2>
+            <p className="text-gray-200 text-sm sm:text-base">
+              Updates from the farmers related to seeding, soil preparation, and equipment usage.
+            </p>
           </div>
         </div>
       </div>
 
-      <div className="p-6 bg-[#6F9D7E] w-full  mx-auto text-black border border-[#FFE990] rounded-lg shadow">
-        <div className="flex justify-between items-center mb-4">
-          <h2 className="text-xl font-semibold text-white">Showing {filteredTokens.length} tokens</h2>
+      {/* Filter + Table */}
+      <div className="p-4 sm:p-6 bg-[#6F9D7E] w-full mx-auto text-black border border-[#FFE990] rounded-lg shadow">
+        {/* Header and Filter */}
+        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-4">
+          <h2 className="text-lg sm:text-xl font-semibold text-white">
+            Showing {filteredTokens.length} tokens
+          </h2>
           <select
-            className="border rounded px-3 py-2 text-sm text-black bg-white focus:outline-none"
+            className="w-full sm:w-auto border rounded px-3 py-2 text-sm text-black bg-white focus:outline-none"
             value={selectedStatus}
             onChange={(e) => setSelectedStatus(e.target.value)}
           >
@@ -64,7 +77,8 @@ function Posthistory() {
           </select>
         </div>
 
-        <div className="overflow-x-auto">
+        {/* Responsive Table */}
+        <div className="overflow-x-auto hidden sm:block">
           <table className="min-w-full divide-y divide-gray-200 text-sm">
             <thead className="text-left text-[#FFE990]">
               <tr>
@@ -85,22 +99,43 @@ function Posthistory() {
                   <td className="py-3 px-4">{token.type}</td>
                   <td className="py-3 px-4">{token.date}</td>
                   <td className="py-3 px-4">
-                    <span className={`px-3 py-1 text-xs font-medium rounded-full ${statusColors[token.status]}`}>
+                    <span
+                      className={`px-3 py-1 text-xs font-medium rounded-full ${statusColors[token.status]}`}
+                    >
                       {token.status}
                     </span>
                   </td>
                 </tr>
               ))}
-              {filteredTokens.length === 0 && (
-                <tr>
-                  <td colSpan="6" className="py-6 text-center text-gray-200">
-                    No tokens found for selected status.
-                  </td>
-                </tr>
-              )}
             </tbody>
           </table>
         </div>
+
+        {/* Stacked view for mobile */}
+        <div className="block sm:hidden space-y-4">
+          {filteredTokens.map((token, index) => (
+            <div key={index} className="bg-[#5d8667] p-4 rounded-lg shadow border border-[#FFE990] text-white">
+              <div><strong className="text-[#FFE990]">Crop:</strong> {token.crop}</div>
+              <div><strong className="text-[#FFE990]">Quantity:</strong> {token.quantity}</div>
+              <div><strong className="text-[#FFE990]">Amount:</strong> {token.amount}</div>
+              <div><strong className="text-[#FFE990]">Type:</strong> {token.type}</div>
+              <div><strong className="text-[#FFE990]">Date:</strong> {token.date}</div>
+              <div>
+                <strong className="text-[#FFE990]">Status:</strong>{" "}
+                <span
+                  className={`px-3 py-1 text-xs font-medium rounded-full inline-block mt-1 ${statusColors[token.status]}`}
+                >
+                  {token.status}
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* No tokens case */}
+        {filteredTokens.length === 0 && (
+          <p className="py-6 text-center text-white">No tokens found for selected status.</p>
+        )}
       </div>
     </FarmerLayout>
   );
