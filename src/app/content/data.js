@@ -600,7 +600,6 @@ export const farmingName = [
   { id: 4, name: "Soybean", number: 91 },
   { id: 5, name: "Barley", number: 25 },
   { id: 6, name: "Cotton", number: 63 },
-  { id: 7, name: "Potato", number: 48 },
   { id: 8, name: "Tomato", number: 76 },
   { id: 9, name: "Sugarcane", number: 19 },
   { id: 10, name: "Coffee", number: 52 },

@@ -1,10 +1,12 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function SignUpnew() {
   const [isSignUp, setIsSignUp] = useState(true);
   const [isSignIn, setIsSignIn] = useState(false);
+  
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#FFE990]">

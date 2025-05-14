@@ -5,6 +5,7 @@ import Web3Modal from "web3modal";
 import { CoinbaseWalletSDK } from "@coinbase/wallet-sdk";
 import WalletConnectProvider from "@walletconnect/web3-provider";
 import { useEffect, useState } from "react";
+
 function getProvider() {
   const provider = window.safepalProvider; // Check if SafePal provider is injected
   if (!provider) {
@@ -177,7 +178,7 @@ function Navbar () {
       Disconnect: {account.slice(0, 3)}...{account.slice(-2)}
     </button>
   ) : (
-    <button onClick={connectWallet} className="btn bg-[#6F9D7E] text-[#FFE990]">
+    <button onClick={connectWallet} className="btn bg-[#6F9D7E] border border-[#FFE990] text-[#FFE990]">
       Connect Wallet
     </button>
   )}

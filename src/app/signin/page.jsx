@@ -3,8 +3,15 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Leaf } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const Signup = () => {
+
+const router = useRouter();
+  function Route () {
+    router.push("../farmerdashboard")
+  }
+
   return (
     <div className="min-h-screen w-full flex items-center justify-center bg-gradient-to-br from-green-50 to-emerald-50">
       <Card className="w-full max-w-md mx-4 bg-white">
@@ -17,7 +24,7 @@ const Signup = () => {
           <CardDescription className="text-gray-500">Enter your credentials to access your account</CardDescription>
         </CardHeader>
         <CardContent>
-          <form className="space-y-4 text-black">
+          <div className="space-y-4 text-black">
             <div className="space-y-2">
              <h1>Email</h1>
              <input type="text" placeholder="Enter your email" className="input input-success bg-white w-full" />
@@ -26,10 +33,10 @@ const Signup = () => {
               <h1>Password</h1>
               <div className="relative">
               <input type="password" placeholder="Enter your password" className="input input-success bg-white w-full" />
-                <button className="btn btn-success bg-[#16A34A] text-white btn-block mt-4">Sign in</button>
+                <button onClick={Route} className="btn btn-success bg-[#16A34A] text-white btn-block mt-4">Sign in</button>
               </div>
             </div>
-        </form>
+        </div>
 
           <div className="mt-4 text-center text-black text-sm">
             Don't have an account?{" "}
