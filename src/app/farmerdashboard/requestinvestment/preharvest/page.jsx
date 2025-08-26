@@ -1,7 +1,7 @@
 "use client";
 import FarmerLayout from "@/components/maincomp/FarmerLayout";
-import { useState } from "react";
-
+import { useEffect, useState } from "react";
+import { getDecodedAuthToken } from "@/content/data";
 export default function Preharvest() {
   const [formData, setFormData] = useState({
     fullName: "",
@@ -42,7 +42,7 @@ export default function Preharvest() {
     creditScore: "",
     agree: false,
   });
-
+  const [userId, setUserId] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleChange = (e) => {
@@ -57,12 +57,42 @@ export default function Preharvest() {
     const selected = Array.from(e.target.selectedOptions).map((o) => o.value);
     setFormData((prev) => ({ ...prev, crops: selected }));
   };
+  useEffect(() => {
+    const userData = getDecodedAuthToken();
+    // console.log("userData", userData);
+    if (userData) {
+      console.log("User Info:", userData);
+      setUserId(userData?._id || userData?.id);
+    } else {
+      console.log("No valid token found");
+    }
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form Data:", formData);
+    const payload = { ...formData, userId };
+    console.log("Form Data:", payload);
+    try {
+      const res = await fetch("/api/farmer/preHarvest", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
 
-    setIsSubmitted(true);
+      if (!res.ok) {
+        throw new Error("Failed to submit form");
+      }
+
+      const data = await res.json();
+      console.log("Server Response:", data);
+
+      setIsSubmitted(true);
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      alert("Something went wrong, please try again.");
+    }
   };
 
   return (
@@ -96,7 +126,6 @@ export default function Preharvest() {
                     className="w-full border p-2 rounded"
                     required
                   />
-                 
                 </div>
 
                 <div>
@@ -533,7 +562,6 @@ export default function Preharvest() {
               <button
                 onClick={() => setIsSubmitted(false)}
                 className="bg-[#6f9d7e] text-[#FFE990] px-4 py-2 rounded  hover:bg-[#FFE990] hover:text-[#6f9d7e] transition duration-200 ease-in-out"
-
               >
                 Close
               </button>

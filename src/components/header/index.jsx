@@ -21,7 +21,6 @@ function getProvider() {
   return provider;
 }
 const providerOptions = {
-  
   coinbasewallet: {
     package: CoinbaseWalletSDK,
     options: {
@@ -46,72 +45,72 @@ const Header = (props) => {
   const router = useRouter();
 
   function Route() {
+    localStorage.clear();
     router.push("../");
   }
 
   const [account, setAccount] = useState(null);
-          const [signer, setSigner] = useState(null);
-            
-            const connectWallet = async () => {
-              console.log("connectting");
-                  try {
-                    const web3Modal = new Web3Modal({
-                      cacheProvider: false,
-                      providerOptions,
-                      themeVariables: {
-                        '--w3m-color-mix': '#00BB7F',
-                        '--w3m-color-mix-strength': 40
-                      }
-                    });
-              
-                    const web3modalInstance = await web3Modal.connect();
-                    const web3modalProvider = new ethers.providers.Web3Provider(
-                      web3modalInstance
-                    );
-                    let provider;
-                    if (window.safepalProvider) {
-                      provider = new ethers.providers.Web3Provider(getProvider()); // SafePal provider
-                    } else {
-                      // Fallback to Web3Modal provider
-                      provider = new ethers.providers.Web3Provider(web3modalInstance);
-                    }
-                    const signer = web3modalProvider.getSigner();
-                    console.log(signer);
-                               // Update state with wallet details
-                               const address = await signer.getAddress();
-        
-              setSigner(signer);
-              setAccount(address);
-                    return true;
-                  } catch (error) {
-                    console.log("Error connecting wallet:", error);
-        
-                  }
-            };
-            const disconnectWallet = async () => {
-              try {
-                const web3Modal = new Web3Modal({
-                  cacheProvider: false,
-                  providerOptions,
-                });
-            
-                // Clear cache
-                web3Modal.clearCachedProvider();
-            
-                // If the provider has a disconnect method, call it
-                if (window.ethereum?.disconnect) {
-                  await window.ethereum.disconnect();
-                }
-            
-                // Reset state
-                setAccount(null);
-                setSigner(null);
-            
-                console.log("Wallet disconnected");
-              } catch (error) {
-                console.log("Error disconnecting wallet:", error);
-              }
-            };
+  const [signer, setSigner] = useState(null);
+
+  const connectWallet = async () => {
+    console.log("connectting");
+    try {
+      const web3Modal = new Web3Modal({
+        cacheProvider: false,
+        providerOptions,
+        themeVariables: {
+          "--w3m-color-mix": "#00BB7F",
+          "--w3m-color-mix-strength": 40,
+        },
+      });
+
+      const web3modalInstance = await web3Modal.connect();
+      const web3modalProvider = new ethers.providers.Web3Provider(
+        web3modalInstance
+      );
+      let provider;
+      if (window.safepalProvider) {
+        provider = new ethers.providers.Web3Provider(getProvider()); // SafePal provider
+      } else {
+        // Fallback to Web3Modal provider
+        provider = new ethers.providers.Web3Provider(web3modalInstance);
+      }
+      const signer = web3modalProvider.getSigner();
+      console.log(signer);
+      // Update state with wallet details
+      const address = await signer.getAddress();
+
+      setSigner(signer);
+      setAccount(address);
+      return true;
+    } catch (error) {
+      console.log("Error connecting wallet:", error);
+    }
+  };
+  const disconnectWallet = async () => {
+    try {
+      const web3Modal = new Web3Modal({
+        cacheProvider: false,
+        providerOptions,
+      });
+
+      // Clear cache
+      web3Modal.clearCachedProvider();
+
+      // If the provider has a disconnect method, call it
+      if (window.ethereum?.disconnect) {
+        await window.ethereum.disconnect();
+      }
+
+      // Reset state
+      setAccount(null);
+      setSigner(null);
+
+      console.log("Wallet disconnected");
+    } catch (error) {
+      console.log("Error disconnecting wallet:", error);
+    }
+  };
 
   return (
     <header className="sticky top-0 z-20 w-full bg-[#FFE990] drop-shadow-md">
@@ -129,29 +128,34 @@ const Header = (props) => {
               <span className="absolute block w-full h-0.5 bg-black transition-all duration-200 ease-in-out top-3" />
             </span>
           </button>
-        <Link href="/" className="block lg:hidden">
-  <Image
-    src="/agri-logo.png"
-    alt="Logo"
-    width={72}
-    height={72}
-    className="object-contain max-h-12 scale-125" // scale logo but restrict max height
-  />
-</Link>
-
+          <Link href="/" className="block lg:hidden">
+            <Image
+              src="/agri-logo.png"
+              alt="Logo"
+              width={72}
+              height={72}
+              className="object-contain max-h-12 scale-125" // scale logo but restrict max height
+            />
+          </Link>
         </div>
 
         {/* Wallet Button - Responsive */}
         <div className="flex items-center justify-center mt-3 lg:mt-0 lg:ml-auto lg:mr-6">
           {account ? (
-    <button onClick={disconnectWallet} className="btn bg-red-500 text-white">
-      Disconnect: {account.slice(0, 3)}...{account.slice(-2)}
-    </button>
-  ) : (
-    <button onClick={connectWallet} className="btn bg-[#6F9D7E] border border-[#FFE990] text-[#FFE990]">
-      Connect Wallet
-    </button>
-  )}
+            <button
+              onClick={disconnectWallet}
+              className="btn bg-red-500 text-white"
+            >
+              Disconnect: {account.slice(0, 3)}...{account.slice(-2)}
+            </button>
+          ) : (
+            <button
+              onClick={connectWallet}
+              className="btn bg-[#6F9D7E] border border-[#FFE990] text-[#FFE990]"
+            >
+              Connect Wallet
+            </button>
+          )}
         </div>
 
         {/* User Dropdown */}
