@@ -40,6 +40,11 @@ const LoanApplicationSchema = new mongoose.Schema(
     routingNumber: String,
     creditScore: String,
     agree: Boolean,
+    status: {
+      type: String,
+      enum: ["pending", "approved", "rejected"],
+      default: "pending",
+    },
   },
   { timestamps: true }
 );
