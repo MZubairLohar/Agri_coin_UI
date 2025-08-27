@@ -1,8 +1,6 @@
 import { NextResponse } from "next/server";
 
-const stripe = require("stripe")(
-  "sk_test_51Q47vSG124FIRgpMYy2XfP1PthkORGJdpoYLHnLtq8YZsD3YkyckDXIh2cKas6JwxGvHgVU3oFuHfunyaK5qUqtL00cIlfws6N"
-);
+const stripe = require("stripe")("");
 
 export async function POST(req) {
   const { userId, tokenId, status, from, amount, type, paymentType } =
