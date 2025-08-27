@@ -108,9 +108,46 @@ function Prereq() {
       ? tokens
       : tokens.filter((token) => token.status === selectedStatus);
 
+  // const mintNFT = async () => {
+  //   try {
+  //     if (!signer || !walletAddress) alert("connect Wallet");
+
+  //     const contract = new ethers.Contract(
+  //       preHarvestNFT,
+  //       preHarvestAbi,
+  //       signer
+  //     );
+
+  //     // Admin ke address par NFT mint hoga
+  //     const tx = await contract.mint(adminAddress);
+  //     const receipt = await tx.wait();
+
+  //     // Transfer event se tokenId nikal lo
+  //     const transferEvent = receipt.logs
+  //       .map((log) => {
+  //         try {
+  //           return contract.interface.parseLog(log);
+  //         } catch {
+  //           return null;
+  //         }
+  //       })
+  //       .filter((e) => e && e.name === "Transfer")[0];
+
+  //     const tokenId = transferEvent?.args?.tokenId?.toString();
+
+  //     console.log("Minted Token ID:", tokenId);
+  //     return tokenId;
+  //   } catch (err) {
+  //     console.error("Minting failed:", err);
+  //     throw err;
+  //   }
+  // };
   const mintNFT = async () => {
     try {
-      if (!signer || !walletAddress) alert("connect Wallet");
+      if (!signer || !walletAddress) {
+        alert("Connect Wallet first!");
+        return null;
+      }
 
       const contract = new ethers.Contract(
         preHarvestNFT,
@@ -118,11 +155,12 @@ function Prereq() {
         signer
       );
 
-      // Admin ke address par NFT mint hoga
       const tx = await contract.mint(adminAddress);
       const receipt = await tx.wait();
 
-      // Transfer event se tokenId nikal lo
+      console.log("Tx Receipt:", receipt);
+
+      // Find Transfer event
       const transferEvent = receipt.logs
         .map((log) => {
           try {
@@ -131,17 +169,18 @@ function Prereq() {
             return null;
           }
         })
-        .filter((e) => e && e.name === "Transfer")[0];
+        .find((e) => e && e.name === "Transfer");
 
       const tokenId = transferEvent?.args?.tokenId?.toString();
+      console.log("✅ Minted Token ID:", tokenId);
 
-      console.log("Minted Token ID:", tokenId);
       return tokenId;
     } catch (err) {
-      console.error("Minting failed:", err);
+      console.error("❌ Minting failed:", err);
       throw err;
     }
   };
+
   // const updateStatus = async (recordId, newStatus) => {
   //   try {
   //     const res = await fetch("/api/farmer/preHarvest/updateRequest", {
@@ -156,37 +195,67 @@ function Prereq() {
   //     console.error("Error updating status:", error);
   //   }
   // };
+  // const updateStatus = async (recordId, newStatus) => {
+  //   try {
+  //     console.log("working");
+  //     let tokenId = "";
+  //     console.log(recordId, newStatus);
+  //     if (newStatus === "accepted") {
+  //       tokenId = await mintNFT(); // minting admin ke address pe hogi
+  //       if (tokenId) {
+  //         const res = await fetch("/api/farmer/preHarvest/updateRequest", {
+  //           method: "PUT",
+  //           headers: { "Content-Type": "application/json" },
+  //           body: JSON.stringify({ recordId, status: newStatus, tokenId }),
+  //         });
+
+  //         const data = await res.json();
+  //         console.log("Status Update Response:", data);
+  //       }
+  //     } else if (newStatus === "rejected") {
+  //       const res = await fetch("/api/farmer/preHarvest/updateRequest", {
+  //         method: "PUT",
+  //         headers: { "Content-Type": "application/json" },
+  //         body: JSON.stringify({ recordId, status: newStatus }),
+  //       });
+
+  //       const data = await res.json();
+  //       console.log("Status Update Response:", data);
+  //     }
+  //   } catch (error) {
+  //     console.error("Error updating status:", error);
+  //   }
+  // };
   const updateStatus = async (recordId, newStatus) => {
     try {
-      console.log("working");
-      let tokenId = "";
-      console.log(recordId, newStatus);
-      if (newStatus === "accepted") {
-        tokenId = await mintNFT(); // minting admin ke address pe hogi
-        if (tokenId) {
-          const res = await fetch("/api/farmer/preHarvest/updateRequest", {
-            method: "PUT",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ recordId, status: newStatus, tokenId }),
-          });
+      console.log("Updating:", recordId, newStatus);
+      let tokenId = null;
 
-          const data = await res.json();
-          console.log("Status Update Response:", data);
-        }
-      } else if (newStatus === "rejected") {
-        const res = await fetch("/api/farmer/preHarvest/updateRequest", {
-          method: "PUT",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ recordId, status: newStatus }),
-        });
-
-        const data = await res.json();
-        console.log("Status Update Response:", data);
+      if (newStatus === "approved") {
+        tokenId = await mintNFT();
       }
+
+      const res = await fetch("/api/farmer/preHarvest/updateRequest", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ recordId, status: newStatus, tokenId }),
+      });
+
+      if (!res.ok) {
+        throw new Error(`Failed to update: ${res.statusText}`);
+      }
+
+      const data = await res.json();
+      console.log("✅ Status Update Response:", data);
+
+      return data;
+      fetchData();
     } catch (error) {
-      console.error("Error updating status:", error);
+      console.error("❌ Error updating status:", error);
+      throw error;
     }
   };
+
   return (
     <AdminLayout>
       <div className="text-[#FFE990] px-4">
