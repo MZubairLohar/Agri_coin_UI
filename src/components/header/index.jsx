@@ -122,11 +122,30 @@ const Header = (props) => {
       const signer = await provider.getSigner();
       const address = await signer.getAddress();
       setWalletAddress(address);
+      console.log("address", address);
+      setAccount(address);
       setSigner(signer);
+      console.log("signer", signer);
     } catch (err) {
       console.error("Wallet connection failed:", err);
     }
   };
+  const disconnectWallet = async () => {
+    try {
+      if (web3ModalRef.current) {
+        await web3ModalRef.current.clearCachedProvider();
+      }
+
+      setWalletAddress(null);
+      setAccount(null);
+      setSigner(null);
+
+      console.log("Wallet disconnected successfully");
+    } catch (err) {
+      console.error("Wallet disconnection failed:", err);
+    }
+  };
+
   return (
     <header className="sticky top-0 z-20 w-full bg-[#FFE990] drop-shadow-md">
       <div className="flex flex-wrap items-center justify-between px-4 py-3 md:px-6 lg:px-11">
@@ -158,7 +177,7 @@ const Header = (props) => {
         <div className="flex items-center justify-center mt-3 lg:mt-0 lg:ml-auto lg:mr-6">
           {account ? (
             <button
-              // onClick={disconnectWallet}
+              onClick={disconnectWallet}
               className="btn bg-red-500 text-white"
             >
               Disconnect: {account.slice(0, 3)}...{account.slice(-2)}
