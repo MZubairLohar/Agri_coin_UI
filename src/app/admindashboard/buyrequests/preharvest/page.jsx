@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { postHarvestInvestments } from "@/app/content/data";
 import {
   FaCheckCircle,
@@ -7,7 +7,7 @@ import {
   FaTimesCircle,
   FaWarehouse,
   FaSearch,
-  FaFilter
+  FaFilter,
 } from "react-icons/fa";
 import AdminLayout from "@/components/maincomp/AdminLayout";
 
@@ -16,7 +16,61 @@ export default function PreHarvest() {
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
   const [dateFilter, setDateFilter] = useState("all");
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
+  useEffect(() => {
+    const fetchPayments = async () => {
+      try {
+        setLoading(true);
+
+        // Build API URL with optional userId query
+        let url = "/api/investor/buyNFT";
+
+        const res = await fetch(url);
+        const json = await res.json();
+
+        if (!res.ok) {
+          throw new Error(json.error || "Failed to fetch data");
+        }
+        console.log("json.data", json.data);
+        // ✅ Ensure always an array
+        setData(Array.isArray(json.data) ? json.data : [json.data]);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPayments();
+  }, []);
+  const updateStatus = async (tokenId, newStatus) => {
+    try {
+      console.log("Updating:", tokenId, newStatus);
+
+      if (newStatus === "approved") {
+        const res = await fetch("/api/farmer/preHarvest/updateRequest", {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ tokenId, status: newStatus }),
+        });
+
+        if (!res.ok) {
+          throw new Error(`Failed to update: ${res.statusText}`);
+        }
+
+        const data = await res.json();
+        console.log("✅ Status Update Response:", data);
+
+        return data;
+      }
+    } catch (error) {
+      console.error("❌ Error updating status:", error);
+      throw error;
+    }
+  };
   // Calculate summary data
   const totalRequests = postHarvestInvestments.length;
   const totalRequested = postHarvestInvestments.reduce(
@@ -34,7 +88,10 @@ export default function PreHarvest() {
   const filteredInvestments = postHarvestInvestments.filter((investment) => {
     const matchesSearch =
       investment.cropName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      (investment.facilityType && investment.facilityType.toLowerCase().includes(searchTerm.toLowerCase()));
+      (investment.facilityType &&
+        investment.facilityType
+          .toLowerCase()
+          .includes(searchTerm.toLowerCase()));
 
     const matchesStatus =
       statusFilter === "all" || investment.status === statusFilter;
@@ -101,12 +158,13 @@ export default function PreHarvest() {
             </div>
           </div>
 
-
           {/* Filter Section */}
           <div className="bg-white p-4 rounded-lg shadow border border-[#6f9d7e]">
             <div className="flex justify-between items-center gap-4 w-full">
               <div className="w-full flex flex-col">
-                <label className="text-sm text-[#6F9D7E] mb-1">Search Text</label>
+                <label className="text-sm text-[#6F9D7E] mb-1">
+                  Search Text
+                </label>
                 <input
                   type="text"
                   value={searchTerm}
@@ -149,35 +207,53 @@ export default function PreHarvest() {
           </div>
 
           {/* Investments Table */}
-          <div className="rounded-lg shadow border bg-[#6F9D7E] border-[#6f9d7e] overflow-hidden">
+          {/* <div className="rounded-lg shadow border bg-[#6F9D7E] border-[#6f9d7e] overflow-hidden">
             <div className="overflow-x-auto bg-[#6F9D7E] ">
               <table className="min-w-full divide-y divide-gray-200">
                 <thead className="bg-[#6F9D7E]">
                   <tr>
-                    
-                    
-                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-[#FFE990] uppercase tracking-wider">
+                    <th
+                      scope="col"
+                      className="px-6 py-3 text-left text-xs font-medium text-[#FFE990] uppercase tracking-wider"
+                    >
                       S.No
                     </th>
-                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-[#FFE990] uppercase tracking-wider">
+                    <th
+                      scope="col"
+                      className="px-6 py-3 text-left text-xs font-medium text-[#FFE990] uppercase tracking-wider"
+                    >
                       Crop Name
                     </th>
-                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-[#FFE990] uppercase tracking-wider">
+                    <th
+                      scope="col"
+                      className="px-6 py-3 text-left text-xs font-medium text-[#FFE990] uppercase tracking-wider"
+                    >
                       Status
                     </th>
-                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-[#FFE990] uppercase tracking-wider">
+                    <th
+                      scope="col"
+                      className="px-6 py-3 text-left text-xs font-medium text-[#FFE990] uppercase tracking-wider"
+                    >
                       Requested
                     </th>
-                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-[#FFE990] uppercase tracking-wider">
+                    <th
+                      scope="col"
+                      className="px-6 py-3 text-left text-xs font-medium text-[#FFE990] uppercase tracking-wider"
+                    >
                       Approved
                     </th>
-                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-[#FFE990] uppercase tracking-wider">
+                    <th
+                      scope="col"
+                      className="px-6 py-3 text-left text-xs font-medium text-[#FFE990] uppercase tracking-wider"
+                    >
                       Facility Type
                     </th>
-                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-[#FFE990] uppercase tracking-wider">
+                    <th
+                      scope="col"
+                      className="px-6 py-3 text-left text-xs font-medium text-[#FFE990] uppercase tracking-wider"
+                    >
                       Date
                     </th>
-                   
                   </tr>
                 </thead>
                 <tbody className=" divide-y divide-gray-200 ">
@@ -185,16 +261,26 @@ export default function PreHarvest() {
                     filteredInvestments.map((investment, ind) => (
                       <tr key={investment.id} className="">
                         <td className="px-6 py-4 whitespace-nowrap">
-                          <div className="text-sm font-medium text-gray-200">{ind + 1}</div>
+                          <div className="text-sm font-medium text-gray-200">
+                            {ind + 1}
+                          </div>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
-                          <div className="text-sm font-medium text-gray-200">{investment.cropName}</div>
+                          <div className="text-sm font-medium text-gray-200">
+                            {investment.cropName}
+                          </div>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
-                          <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${statusConfig[investment.status].color}`}>
+                          <span
+                            className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
+                              statusConfig[investment.status].color
+                            }`}
+                          >
                             <span className="flex items-center">
                               {statusConfig[investment.status].icon}
-                              <span className="ml-1 capitalize">{investment.status}</span>
+                              <span className="ml-1 capitalize">
+                                {investment.status}
+                              </span>
                             </span>
                           </span>
                         </td>
@@ -202,7 +288,9 @@ export default function PreHarvest() {
                           ${investment.totalRequested.toLocaleString()}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-200">
-                          {investment.approvedAmount ? `$${investment.approvedAmount.toLocaleString()}` : "N/A"}
+                          {investment.approvedAmount
+                            ? `$${investment.approvedAmount.toLocaleString()}`
+                            : "N/A"}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-200">
                           {investment.facilityType || "N/A"}
@@ -210,7 +298,6 @@ export default function PreHarvest() {
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-200">
                           {new Date(investment.date).toLocaleDateString()}
                         </td>
-                       
                       </tr>
                     ))
                   ) : (
@@ -239,6 +326,125 @@ export default function PreHarvest() {
                             Reset All Filters
                           </button>
                         </div>
+                      </td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </div>
+          </div> */}
+          {/* Payments Table */}
+          <div className="rounded-lg shadow border bg-[#6F9D7E] border-[#6f9d7e] overflow-hidden">
+            <div className="overflow-x-auto bg-[#6F9D7E] ">
+              <table className="min-w-full divide-y divide-gray-200">
+                <thead className="bg-[#6F9D7E]">
+                  <tr>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-[#FFE990] uppercase">
+                      S.No
+                    </th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-[#FFE990] uppercase">
+                      From
+                    </th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-[#FFE990] uppercase">
+                      Amount
+                    </th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-[#FFE990] uppercase">
+                      Payment Type
+                    </th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-[#FFE990] uppercase">
+                      Type
+                    </th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-[#FFE990] uppercase">
+                      Status
+                    </th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-[#FFE990] uppercase">
+                      Created At
+                    </th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-[#FFE990] uppercase">
+                      Tx Hash
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-200">
+                  {loading ? (
+                    <tr>
+                      <td colSpan="8" className="text-center p-4 text-white">
+                        Loading...
+                      </td>
+                    </tr>
+                  ) : error ? (
+                    <tr>
+                      <td colSpan="8" className="text-center p-4 text-red-200">
+                        Error: {error}
+                      </td>
+                    </tr>
+                  ) : data.length > 0 ? (
+                    data.map((item, ind) => (
+                      <tr key={item._id}>
+                        <td className="px-6 py-4 text-sm text-gray-200">
+                          {ind + 1}
+                        </td>
+                        <td className="px-6 py-4 text-sm text-gray-200">
+                          {item.from}
+                        </td>
+                        <td className="px-6 py-4 text-sm text-gray-200">
+                          ${item.amount}
+                        </td>
+                        <td className="px-6 py-4 text-sm text-gray-200">
+                          {item.paymentType}
+                        </td>
+                        <td className="px-6 py-4 text-sm text-gray-200">
+                          {item.type}
+                        </td>
+                        {/* <td className="px-6 py-4">
+                          <span
+                            className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
+                              statusConfig[item.status]?.color ||
+                              "bg-gray-200 text-gray-800"
+                            }`}
+                          >
+                            <span className="flex items-center">
+                              {statusConfig[item.status]?.icon}
+                              <span className="ml-1 capitalize">
+                                {item.status}
+                              </span>
+                            </span>
+                          </span>
+                        </td> */}
+                        <td className="space-x-2">
+                          <button
+                            onClick={() =>
+                              updateStatus(item.tokenId, "approved")
+                            }
+                            className="px-4 py-2 bg-green-600 text-white rounded-lg shadow-md hover:bg-green-700 hover:shadow-lg transition duration-200 ease-in-out"
+                          >
+                            ✅ Accept
+                          </button>
+                          <button
+                            onClick={() =>
+                              updateStatus(item.tokenId, "rejected")
+                            }
+                            className="px-4 py-2 bg-red-600 text-white rounded-lg shadow-md hover:bg-red-700 hover:shadow-lg transition duration-200 ease-in-out"
+                          >
+                            ❌ Reject
+                          </button>
+                        </td>
+
+                        <td className="px-6 py-4 text-sm text-gray-200">
+                          {new Date(item.createdAt).toLocaleString()}
+                        </td>
+                        <td className="px-6 py-4 text-sm text-gray-200">
+                          {item.hash || "N/A"}
+                        </td>
+                      </tr>
+                    ))
+                  ) : (
+                    <tr>
+                      <td
+                        colSpan="8"
+                        className="px-6 py-4 text-center text-white"
+                      >
+                        No records found
                       </td>
                     </tr>
                   )}
