@@ -1,5 +1,11 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import { getDecodedAuthToken } from "@/content/data";
+import { adminAddress, usdtAbi, usdtToken } from "@/content/tokenData";
+import { WalletContext } from "@/context/WalletContext";
+import axios from "axios";
+import { Contract, ethers } from "ethers";
+import { useRouter } from "next/navigation";
+import React, { useContext, useEffect, useState } from "react";
 import {
   FaCheckCircle,
   FaClock,
@@ -18,6 +24,7 @@ function PreHarvest() {
   const [showPaymentOptions, setShowPaymentOptions] = useState(false);
   const [selectedPaymentItem, setSelectedPaymentItem] = useState(null);
   const [showCryptoOptions, setShowCryptoOptions] = useState(false);
+  const [userId, setUserId] = useState(null);
 
   const fetchData = async () => {
     try {
@@ -51,8 +58,16 @@ function PreHarvest() {
       setLoading(false);
     }
   };
-
+  const router = useRouter();
   useEffect(() => {
+    const userData = getDecodedAuthToken();
+    // console.log("userData", userData);
+    if (userData) {
+      console.log("User Info:", userData);
+      setUserId(userData?._id || userData?.id);
+    } else {
+      console.log("No valid token found");
+    }
     fetchData();
   }, []);
 
@@ -87,18 +102,87 @@ function PreHarvest() {
     setShowPaymentOptions(true);
   };
 
+  const { walletAddress, setWalletAddress, signer, setSigner } =
+    useContext(WalletContext);
   // Handle stripe payment
   const handleStripePayment = () => {
     console.log("Connected with Stripe for item:", selectedPaymentItem._id);
+
+    if (!signer || !walletAddress) {
+      return alert("Kindly connect your wallet first");
+    }
     setShowPaymentOptions(false);
     setShowCryptoOptions(false);
+    axios
+      .post("/api/stripe/stripe-checkout", {
+        userId: userId,
+        tokenId: selectedPaymentItem?.tokenId,
+        status: "pending",
+        from: walletAddress,
+        amount: selectedPaymentItem?.loanAmount,
+        type: "preHarvest",
+        paymentType: "stripe",
+      })
+      .then((response) => {
+        router.push(response?.data?.message?.url);
+      })
+      .catch((error) => {
+        console.error("Stripe checkout error:", error);
+      });
   };
 
   // Handle crypto payment selection
   const handleCryptoPayment = () => {
     setShowCryptoOptions(true);
   };
+  const handleUsdtEthPayment = async () => {
+    console.log("Processing USDT (Ethereum) payment...");
 
+    try {
+      const contract = new Contract(usdtToken, usdtAbi, signer);
+
+      // ✅ USDT has 6 decimals
+      const parsedAmount = ethers.parseUnits(
+        selectedPaymentItem?.loanAmount.toString(),
+        6
+      );
+      console.log("Parsed amount:", parsedAmount.toString());
+      const tx = await contract.transfer(adminAddress, parsedAmount);
+      console.log("🔁 Transaction sent to admin:", tx.hash);
+
+      const receipt = await tx.wait();
+      if (!receipt.status) {
+        throw new Error("Blockchain transaction failed (reverted).");
+      }
+
+      console.log("✅ Transaction confirmed. Saving to backend...");
+
+      const response = await fetch("/api/investor/buyNFT", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          userId: userId,
+          tokenId: selectedPaymentItem?.tokenId,
+          status: "pending",
+          from: walletAddress,
+          amount: selectedPaymentItem?.loanAmount,
+          type: "preHarvest",
+          paymentType: "usd",
+          hash: tx.hash,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Failed to save transaction to backend.");
+      }
+
+      console.log("✅ Transaction saved to DB successfully.");
+    } catch (err) {
+      console.error("❌ Payment failed:", err?.message || err);
+    }
+  };
   // Handle specific crypto payment
   const handleCryptoOption = (cryptoType) => {
     console.log(
@@ -107,6 +191,7 @@ function PreHarvest() {
     );
     setShowPaymentOptions(false);
     setShowCryptoOptions(false);
+    handleUsdtEthPayment();
   };
 
   // Close all modals
