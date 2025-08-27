@@ -46,7 +46,7 @@ const farmerSchema = new mongoose.Schema(
     agreeTerms: { type: Boolean, default: false },
     status: {
       type: String,
-      enum: ["pending", "approved", "rejected"],
+      enum: ["pending", "approved", "rejected", "bought"],
       default: "pending",
     },
   },
