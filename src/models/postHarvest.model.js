@@ -4,6 +4,10 @@ const farmerSchema = new mongoose.Schema(
   {
     // Section 1: Farmer & Farm Details
     userId: { type: mongoose.Schema.Types.ObjectId, ref: "Auth" },
+    tokenId: {
+      type: String,
+      default: "",
+    },
     fullName: { type: String, required: true },
     usdaFarmNumber: { type: String },
     farmLocation: { type: String },

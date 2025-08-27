@@ -3,6 +3,10 @@ import mongoose from "mongoose";
 const LoanApplicationSchema = new mongoose.Schema(
   {
     userId: { type: mongoose.Schema.Types.ObjectId, ref: "Auth" },
+    tokenId: {
+      type: String,
+      default: "",
+    },
     fullName: String,
     ssn: String,
     dob: String,
