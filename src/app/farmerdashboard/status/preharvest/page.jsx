@@ -329,7 +329,6 @@
 
 
 
-
 "use client";
 import { useEffect, useState } from "react";
 import { preHarvestInvestments } from "@/app/content/data";
@@ -368,12 +367,21 @@ export default function PostHarvest() {
       }
 
       const result = await res.json();
-      console.log("result", result);
-      // ✅ Sirf pending data filter karo
-
-      setData(result.data);
+      console.log("API Response:", result);
+      
+      // ✅ Check if result.data is an array, if not, convert it to an array
+      if (result.data && !Array.isArray(result.data)) {
+        // If data is a single object, wrap it in an array
+        setData([result.data]);
+      } else if (Array.isArray(result.data)) {
+        setData(result.data);
+      } else {
+        console.error("Unexpected data format:", result);
+        setData([]);
+      }
     } catch (error) {
       console.error("❌ Error fetching postharvest data:", error);
+      setData([]);
     } finally {
       setLoading(false);
     }
@@ -390,36 +398,46 @@ export default function PostHarvest() {
     }
   }, []);
 
-  // Calculate summary data from API data
-  const totalRequests = data.length;
-  // const totalRequested = data.reduce(
-  //   (sum, item) => sum + (parseFloat(item.loanAmount) || 0),
-  //   0
-  // );
-  const totalApproved = data.reduce(
-    (sum, item) => sum + (item.status === "approved" ? parseFloat(item.loanAmount) || 0 : 0),
-    0
-  );
+  // Calculate summary data from API data - with safe array checks
+  const totalRequests = Array.isArray(data) ? data.length : 0;
+  
+  const totalRequested = Array.isArray(data) 
+    ? data.reduce((sum, item) => sum + (parseFloat(item.loanAmount) || 0), 0)
+    : 0;
+    
+  const totalApproved = Array.isArray(data) 
+    ? data.reduce(
+        (sum, item) => sum + (item.status === "approved" ? parseFloat(item.loanAmount) || 0 : 0),
+        0
+      )
+    : 0;
+    
   const approvalRate =
     totalRequested > 0 ? Math.round((totalApproved / totalRequested) * 100) : 0;
 
   // Filter investments based on search and filters
-  const filteredInvestments = data.filter((item) => {
-    const matchesSearch =
-      (item.crops && item.crops.join(", ").toLowerCase().includes(searchTerm.toLowerCase())) ||
-      (item.loanPurpose && item.loanPurpose.toLowerCase().includes(searchTerm.toLowerCase()));
+  const filteredInvestments = Array.isArray(data) 
+    ? data.filter((item) => {
+        const matchesSearch =
+          (item.crops && item.crops.join(", ").toLowerCase().includes(searchTerm.toLowerCase())) ||
+          (item.loanPurpose && item.loanPurpose.toLowerCase().includes(searchTerm.toLowerCase())) ||
+          (item.fullName && item.fullName.toLowerCase().includes(searchTerm.toLowerCase()));
 
-    const matchesStatus =
-      statusFilter === "all" || item.status === statusFilter;
+        const matchesStatus =
+          statusFilter === "all" || (item.status || "pending") === statusFilter;
 
-    const matchesDate =
-      dateFilter === "all" ||
-      (dateFilter === "recent" &&
-        new Date(item.createdAt) > new Date(Date.now() - 30 * 24 * 60 * 60 * 1000)) ||
-      (dateFilter === "upcoming" && new Date(item.disbursementDate) > new Date());
+        const matchesDate =
+          dateFilter === "all" ||
+          (dateFilter === "recent" &&
+            item.createdAt &&
+            new Date(item.createdAt) > new Date(Date.now() - 30 * 24 * 60 * 60 * 1000)) ||
+          (dateFilter === "upcoming" && 
+            item.disbursementDate && 
+            new Date(item.disbursementDate) > new Date());
 
-    return matchesSearch && matchesStatus && matchesDate;
-  });
+        return matchesSearch && matchesStatus && matchesDate;
+      })
+    : [];
 
   // Status colors and icons
   const statusConfig = {
@@ -502,7 +520,7 @@ export default function PostHarvest() {
                     type="text"
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    placeholder="Search crops or loan purpose..."
+                    placeholder="Search crops, purpose, or name..."
                     className="input input-success bg-white w-full"
                   />
                 </div>
@@ -519,7 +537,7 @@ export default function PostHarvest() {
                   >
                     <option value="all">All Statuses</option>
                     <option value="approved">Approved</option>
-                    <option value="partial">Partially Approved</option>
+                    {/* <option value="partial">Partially Approved</option> */}
                     <option value="pending">Pending</option>
                     <option value="rejected">Rejected</option>
                   </select>
@@ -543,115 +561,116 @@ export default function PostHarvest() {
 
             {/* Investment Cards - 4 per row */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {filteredInvestments.map((item) => (
-                <div
-                  key={item._id}
-                  className="bg-[#6F9D7E] p-4 rounded-lg shadow border border-[#FFE990] hover:shadow-md transition-shadow"
-                >
-                  <div className="flex justify-between items-start mb-3">
-                    <h2 className="text-lg font-semibold text-[#FFE990]">
-                      {item.crops ? item.crops.join(", ") : "N/A"}
-                    </h2>
-                    <span
-                      className={`text-xs px-2 py-1 rounded-full ${
-                        statusConfig[item.status]?.color || statusConfig.pending.color
-                      } flex items-center`}
+              {filteredInvestments.length > 0 ? (
+                filteredInvestments.map((item) => (
+                  <div
+                    key={item._id}
+                    className="bg-[#6F9D7E] p-4 rounded-lg shadow border border-[#FFE990] hover:shadow-md transition-shadow"
+                  >
+                    <div className="flex justify-between items-start mb-3">
+                      <h2 className="text-lg font-semibold text-[#FFE990]">
+                        {item.crops ? item.crops.join(", ") : "N/A"}
+                      </h2>
+                      <span
+                        className={`text-xs px-2 py-1 rounded-full ${
+                          statusConfig[item.status]?.color || statusConfig.pending.color
+                        } flex items-center`}
+                      >
+                        {statusConfig[item.status]?.icon || statusConfig.pending.icon}
+                        <span className="ml-1 capitalize">{item.status || "pending"}</span>
+                      </span>
+                    </div>
+
+                    <div className="space-y-2">
+                      <div className="flex justify-between">
+                        <span className="text-gray-200 font-semibold">
+                          Land Size:
+                        </span>
+                        <span className="font-medium text-[#FFE990]">
+                          {item.landSize || "N/A"}
+                        </span>
+                      </div>
+
+                      <div className="flex justify-between">
+                        <span className="text-gray-200 font-semibold">
+                          Requested Amount:
+                        </span>
+                        <span className="font-medium text-[#FFE990]">
+                          ${item.loanAmount ? parseFloat(item.loanAmount).toLocaleString() : "N/A"}
+                        </span>
+                      </div>
+
+                      <div className="flex justify-between">
+                        <span className="text-gray-200 font-semibold">
+                          Farm Location:
+                        </span>
+                        <span className="text-right text-[#FFE990] text-sm">
+                          {item.farmLocation || "N/A"}
+                        </span>
+                      </div>
+
+                      <div className="flex justify-between">
+                        <span className="text-gray-200 font-semibold">
+                          Loan Purpose:
+                        </span>
+                        <span className="text-sm text-[#FFE990]">
+                          {item.loanPurpose || "N/A"}
+                        </span>
+                      </div>
+
+                      <div className="flex justify-between text-sm mt-3 pt-2 border-[#FFE990] border-t">
+                        <span className="text-gray-200 font-semibold">
+                          Request Date:
+                        </span>
+                        <span className="text-[#FFE990]">
+                          {item.createdAt ? new Date(item.createdAt).toLocaleDateString() : "N/A"}
+                        </span>
+                      </div>
+                    </div>
+
+                    <button 
+                      onClick={() => handleViewDetails(item)}
+                      className="mt-3 w-full py-1 bg-[#6f9d7e] text-[#FFE990] border border-[#FFE990] rounded text-sm hover:bg-[#5a8a6a] transition"
                     >
-                      {statusConfig[item.status]?.icon || statusConfig.pending.icon}
-                      <span className="ml-1 capitalize">{item.status || "pending"}</span>
-                    </span>
+                      View Details
+                    </button>
                   </div>
+                ))
+              ) : (
+                <div className="col-span-full">
+                  <div className="bg-white p-6 rounded-lg shadow border border-gray-200">
+                    <div className="flex flex-col md:flex-row items-center justify-center gap-6">
+                      {/* Icon */}
+                      <div className="w-16 h-16 bg-gray-50 rounded-full flex items-center justify-center">
+                        <FaFilter className="text-gray-400 text-2xl" />
+                      </div>
 
-                  <div className="space-y-2">
-                    <div className="flex justify-between">
-                      <span className="text-gray-200 font-semibold">
-                        Land Size:
-                      </span>
-                      <span className="font-medium text-[#FFE990]">
-                        {item.landSize || "N/A"}
-                      </span>
-                    </div>
+                      {/* Text Content */}
+                      <div className="text-center md:text-left">
+                        <h3 className="text-lg font-medium text-gray-900">
+                          No matching investments found
+                        </h3>
+                        <p className="mt-1 text-gray-500">
+                          Try adjusting your search criteria or filters
+                        </p>
+                      </div>
 
-                    <div className="flex justify-between">
-                      <span className="text-gray-200 font-semibold">
-                        Requested Amount:
-                      </span>
-                      <span className="font-medium text-[#FFE990]">
-                        ${item.loanAmount ? parseFloat(item.loanAmount).toLocaleString() : "N/A"}
-                      </span>
-                    </div>
-
-                    <div className="flex justify-between">
-                      <span className="text-gray-200 font-semibold">
-                        Farm Location:
-                      </span>
-                      <span className="text-right text-[#FFE990] text-sm">
-                        {item.farmLocation || "N/A"}
-                      </span>
-                    </div>
-
-                    <div className="flex justify-between">
-                      <span className="text-gray-200 font-semibold">
-                        Loan Purpose:
-                      </span>
-                      <span className="text-sm text-[#FFE990]">
-                        {item.loanPurpose || "N/A"}
-                      </span>
-                    </div>
-
-                    <div className="flex justify-between text-sm mt-3 pt-2 border-[#FFE990] border-t">
-                      <span className="text-gray-200 font-semibold">
-                        Request Date:
-                      </span>
-                      <span className="text-[#FFE990]">
-                        {item.createdAt ? new Date(item.createdAt).toLocaleDateString() : "N/A"}
-                      </span>
+                      {/* Reset Button */}
+                      <button
+                        className="px-4 py-2 bg-[#6f9d7e] text-white rounded-md hover:bg-[#5a8a6a] transition-colors whitespace-nowrap"
+                        onClick={() => {
+                          setSearchTerm("");
+                          setStatusFilter("all");
+                          setDateFilter("all");
+                        }}
+                      >
+                        Reset All Filters
+                      </button>
                     </div>
                   </div>
-
-                  <button 
-                    onClick={() => handleViewDetails(item)}
-                    className="mt-3 w-full py-1 bg-[#6f9d7e] text-[#FFE990] border border-[#FFE990] rounded text-sm hover:bg-[#5a8a6a] transition"
-                  >
-                    View Details
-                  </button>
                 </div>
-              ))}
+              )}
             </div>
-
-            {/* Empty State */}
-            {filteredInvestments.length === 0 && (
-              <div className="bg-white p-6 rounded-lg shadow border border-gray-200">
-                <div className="flex flex-col md:flex-row items-center justify-center gap-6">
-                  {/* Icon */}
-                  <div className="w-16 h-16 bg-gray-50 rounded-full flex items-center justify-center">
-                    <FaFilter className="text-gray-400 text-2xl" />
-                  </div>
-
-                  {/* Text Content */}
-                  <div className="text-center md:text-left">
-                    <h3 className="text-lg font-medium text-gray-900">
-                      No matching investments found
-                    </h3>
-                    <p className="mt-1 text-gray-500">
-                      Try adjusting your search criteria or filters
-                    </p>
-                  </div>
-
-                  {/* Reset Button */}
-                  <button
-                    className="px-4 py-2 bg-[#6f9d7e] text-white rounded-md hover:bg-[#5a8a6a] transition-colors whitespace-nowrap"
-                    onClick={() => {
-                      setSearchTerm("");
-                      setStatusFilter("all");
-                      setDateFilter("all");
-                    }}
-                  >
-                    Reset All Filters
-                  </button>
-                </div>
-              </div>
-            )}
           </div>
         )}
 
