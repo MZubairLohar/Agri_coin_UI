@@ -1,42 +1,34 @@
 "use client";
 import Link from "next/link";
-import React from "react";
+import React, { useContext, useRef } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { ethers } from "ethers";
 import Web3Modal from "web3modal";
-import { useState } from "react";
+import { BrowserProvider } from "ethers";
 import { CoinbaseWalletSDK } from "@coinbase/wallet-sdk";
+// import WalletConnectProvider from "@walletconnect/web3-provider";
+import { WalletContext } from "@/context/WalletContext";
+import { useState } from "react";
+// import { CoinbaseWalletSDK } from "@coinbase/wallet-sdk";
 import WalletConnectProvider from "@walletconnect/web3-provider";
 
-function getProvider() {
-  const provider = window.safepalProvider; // Check if SafePal provider is injected
-  if (!provider) {
-    // If SafePal provider is not found, open the download link
-    window.open("https://www.safepal.com/download");
-    throw new Error(
-      "Please go to our official website to download SafePal wallet."
-    );
-  }
-  return provider;
-}
 const providerOptions = {
   coinbasewallet: {
     package: CoinbaseWalletSDK,
     options: {
-      appName: "Web3Modal Demo",
-      infuraId: "https://rpc.testnet.fantom.network", // Replace with the correct RPC URL if needed
+      appName: "AGUA Coin",
+      infuraId: "https://rpc.testnet.fantom.network",
     },
   },
-
   walletconnect: {
     package: WalletConnectProvider,
     options: {
       rpc: {
-        4002: "https://rpc.testnet.fantom.network", // Replace with the correct RPC URL
+        4002: "https://rpc.testnet.fantom.network",
       },
-      bridge: "https://bridge.walletconnect.org", // Default WalletConnect bridge
-      qrcode: true, // Show QR code for connection
+      bridge: "https://bridge.walletconnect.org",
+      qrcode: true,
     },
   },
 };
@@ -46,11 +38,16 @@ const Header = (props) => {
 
   function Route() {
     localStorage.clear();
-    router.push("../");
+    router.push("/");
   }
+  const { walletAddress, setWalletAddress, signer, setSigner } =
+    useContext(WalletContext);
 
   const [account, setAccount] = useState(null);
-  const [signer, setSigner] = useState(null);
+
+  const menuRef = useRef();
+  const web3ModalRef = useRef(null);
+  const [showWalletModal, setShowWalletModal] = useState(false);
 
   // const connectWallet = async () => {
   //   console.log("connectting");
@@ -111,7 +108,25 @@ const Header = (props) => {
   //     console.log("Error disconnecting wallet:", error);
   //   }
   // };
+  const connectWallet = async () => {
+    try {
+      if (!web3ModalRef.current) {
+        web3ModalRef.current = new Web3Modal({
+          cacheProvider: false,
+          providerOptions,
+        });
+      }
 
+      const instance = await web3ModalRef.current.connect();
+      const provider = new BrowserProvider(instance);
+      const signer = await provider.getSigner();
+      const address = await signer.getAddress();
+      setWalletAddress(address);
+      setSigner(signer);
+    } catch (err) {
+      console.error("Wallet connection failed:", err);
+    }
+  };
   return (
     <header className="sticky top-0 z-20 w-full bg-[#FFE990] drop-shadow-md">
       <div className="flex flex-wrap items-center justify-between px-4 py-3 md:px-6 lg:px-11">
@@ -150,7 +165,7 @@ const Header = (props) => {
             </button>
           ) : (
             <button
-              // onClick={connectWallet}
+              onClick={connectWallet}
               className="btn bg-[#6F9D7E] border border-[#FFE990] text-[#FFE990]"
             >
               Connect Wallet

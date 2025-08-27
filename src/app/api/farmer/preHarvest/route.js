@@ -149,11 +149,11 @@ export async function GET(request) {
     // Optional: Get userId from query string if needed
     const { searchParams } = new URL(request.url);
     const userId = searchParams.get("userId");
-
+    console.log("userId", userId);
     let preHarvestData;
 
     if (userId) {
-      preHarvestData = await PreHarvestModel.find({ userId });
+      preHarvestData = await PreHarvestModel.findOne({ userId });
     } else {
       // Return all records (admin use-case)
       preHarvestData = await PreHarvestModel.find({});

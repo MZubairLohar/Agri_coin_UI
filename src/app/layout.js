@@ -31,6 +31,8 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import LoaderWrapper from "@/components/LoadWrapper";
+import { WalletProvider } from "@/context/WalletContext";
+
 // import Loader from "@/components/loader/loader"; // ✅ import the client component
 
 const geistSans = Geist({
@@ -51,11 +53,14 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
         {/* <LoaderWrapper> */}
+
         <LoaderWrapper>
-          {children}
-          </LoaderWrapper>
+          <WalletProvider>{children}</WalletProvider>
+        </LoaderWrapper>
         {/* </LoaderWrapper> */}
       </body>
     </html>
