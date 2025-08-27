@@ -47,16 +47,16 @@ const menuGroups = [
       },      
       {
         icon: <CircleDollarSign />,
-        label: "All Categories",
+        label: "Buy Requests",
         route: "/admindashboard",
         children: [
           {
             label: "Pre Harvest Categories",
-            route: "/admindashboard/allcategories/preharvest",
+            route: "/admindashboard/buyrequests/preharvest",
           },
           {
             label: "Post Harvest Categories",
-            route: "/admindashboard/allcategories/postharvest",
+            route: "/admindashboard/buyrequests/postharvest",
           },
         ],
       },
