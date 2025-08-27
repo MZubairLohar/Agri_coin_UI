@@ -249,7 +249,6 @@ function Prereq() {
       console.log("✅ Status Update Response:", data);
 
       return data;
-      fetchData();
     } catch (error) {
       console.error("❌ Error updating status:", error);
       throw error;
