@@ -53,8 +53,6 @@ const farmerSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-// export default mongoose.models.FarmerForm ||
-//   mongoose.model("FarmerForm", farmerSchema);
 const PostHarvestModel =
   mongoose.models.postHarvest || mongoose.model("postHarvest", farmerSchema);
 export default PostHarvestModel;

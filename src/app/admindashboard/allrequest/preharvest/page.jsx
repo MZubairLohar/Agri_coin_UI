@@ -3,6 +3,11 @@ import { useContext, useEffect, useState } from "react";
 import AdminLayout from "@/components/maincomp/AdminLayout";
 import { WalletContext } from "@/context/WalletContext";
 import { ethers } from "ethers";
+import {
+  adminAddress,
+  preHarvestAbi,
+  preHarvestNFT,
+} from "@/content/tokenData";
 
 function Prereq() {
   const [data, setData] = useState([]);
@@ -105,16 +110,16 @@ function Prereq() {
 
   const mintNFT = async () => {
     try {
-      if (!signer || !walletAddress) alert("connect Metamask");
+      if (!signer || !walletAddress) alert("connect Wallet");
 
       const contract = new ethers.Contract(
-        NFT_CONTRACT_ADDRESS,
-        NFT_ABI,
+        preHarvestNFT,
+        preHarvestAbi,
         signer
       );
 
       // Admin ke address par NFT mint hoga
-      const tx = await contract.mint(ADMIN_ADDRESS);
+      const tx = await contract.mint(adminAddress);
       const receipt = await tx.wait();
 
       // Transfer event se tokenId nikal lo
@@ -153,8 +158,9 @@ function Prereq() {
   // };
   const updateStatus = async (recordId, newStatus) => {
     try {
+      console.log("working");
       let tokenId = "";
-
+      console.log(recordId, newStatus);
       if (newStatus === "accepted") {
         tokenId = await mintNFT(); // minting admin ke address pe hogi
         if (tokenId) {
