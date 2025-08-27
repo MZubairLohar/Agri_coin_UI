@@ -52,18 +52,12 @@
 
 // export default Signup;
 "use client";
-
-import { useState } from "react";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Leaf, Loader2 } from "lucide-react";
-import Link from "next/link";
+import { Eye, EyeOff } from "lucide-react"; // Add this import
 import { useRouter } from "next/navigation";
+import { useState } from "react";
+import Link from "next/link";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle, } from "@/components/ui/card";
+import { Leaf, Loader2 } from "lucide-react";
 
 const Signin = () => {
   const router = useRouter();
@@ -71,8 +65,9 @@ const Signin = () => {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [showPassword, setShowPassword] = useState(false); // ✅ New state
 
-  // Login function
+  // Login function (unchanged)
   async function handleLogin() {
     setLoading(true);
     setError("");
@@ -92,10 +87,8 @@ const Signin = () => {
         return;
       }
 
-      // ✅ Save token in localStorage
       localStorage.setItem("authToken", data.token);
 
-      // ✅ Redirect user based on role
       if (data.user.role === "Admin") {
         router.push("/admindashboard");
       } else if (data.user.role === "Farmer") {
@@ -103,7 +96,7 @@ const Signin = () => {
       } else if (data.user.role === "Investor") {
         router.push("/investordash");
       } else {
-        router.push("/"); // default
+        router.push("/");
       }
     } catch (err) {
       console.error(err);
@@ -130,6 +123,7 @@ const Signin = () => {
         </CardHeader>
         <CardContent>
           <div className="space-y-4 text-black">
+            {/* Email Input */}
             <div className="space-y-2">
               <label className="text-sm font-medium">Email</label>
               <input
@@ -140,15 +134,30 @@ const Signin = () => {
                 className="input input-success bg-white w-full border rounded-lg p-2"
               />
             </div>
+
+            {/* Password Input with Show/Hide */}
             <div className="space-y-2">
               <label className="text-sm font-medium">Password</label>
-              <input
-                type="password"
-                placeholder="Enter your password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="input input-success bg-white w-full border rounded-lg p-2"
-              />
+              <div className="relative">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Enter your password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="input input-success bg-white w-full border rounded-lg p-2 pr-10"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
+                >
+                  {showPassword ? (
+                    <EyeOff className="w-5 h-5" />
+                  ) : (
+                    <Eye className="w-5 h-5" />
+                  )}
+                </button>
+              </div>
             </div>
 
             {error && <p className="text-red-500 text-sm">{error}</p>}
