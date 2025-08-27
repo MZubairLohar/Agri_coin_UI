@@ -4,9 +4,9 @@ import Investdash from "@/components/investorcomp";
 export default function Home() {
   return (
     <>
-      <DefaultLayout>
+      {/* <DefaultLayout> */}
        <Investdash />
-      </DefaultLayout>
+      {/* </DefaultLayout> */}
     </>
   );
 }

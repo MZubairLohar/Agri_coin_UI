@@ -22,11 +22,11 @@ const menuGroups = [
         children: [
           {
             label: "Pre-harvest",
-            route: "/market/pre-harvest",
+            route: "/investordash/market/pre-harvest",
           },
           {
             label: "Post-harvest",
-            route: "/market/post-harvest",
+            route: "/investordash/market/post-harvest",
           },
         ],
       },      
@@ -37,11 +37,11 @@ const menuGroups = [
         children: [
           {
             label: "Pre-harvest",
-            route: "/purchase/pre-harvest",
+            route: "/investordash/purchase/pre-harvest",
           },
           {
             label: "Post-harvest",
-            route: "/purchase/post-harvest",
+            route: "/investordash/purchase/post-harvest",
           },
         ],
       },  
@@ -52,11 +52,11 @@ const menuGroups = [
         children: [
           {
             label: "Pre-harvest",
-            route: "/history/pre-harvest",
+            route: "/investordash/history/pre-harvest",
           },
           {
             label: "Post-harvest",
-            route: "/history/post-harvest",
+            route: "/investordash/history/post-harvest",
           },
         ],
       },  
