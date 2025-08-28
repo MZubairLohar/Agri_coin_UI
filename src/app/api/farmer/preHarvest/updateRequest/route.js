@@ -58,27 +58,27 @@ export async function PUT(request) {
     await connectDB();
     const body = await request.json();
     const { recordId, status, tokenId } = body;
-
-    if (!recordId || !status) {
-      return NextResponse.json(
-        { error: "recordId and status are required" },
-        { status: 400 }
-      );
-    }
-
+    console.log(recordId, status, tokenId);
     let updatedRecord;
 
-    if (tokenId) {
+    if (tokenId && recordId && status) {
       // ✅ If tokenId provided → update both status + tokenId
       updatedRecord = await PreHarvestModel.findByIdAndUpdate(
         recordId,
         { status, tokenId },
         { new: true }
       );
-    } else {
+    } else if (!tokenId) {
       // ✅ If no tokenId → update only status
       updatedRecord = await PreHarvestModel.findByIdAndUpdate(
         recordId,
+        { status },
+        { new: true }
+      );
+    } else if (tokenId && status) {
+      // ✅ If no recordId → update only tokenId
+      updatedRecord = await PreHarvestModel.findOneAndUpdate(
+        { tokenId: tokenId },
         { status },
         { new: true }
       );

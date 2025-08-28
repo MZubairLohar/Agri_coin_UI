@@ -46,7 +46,14 @@ const LoanApplicationSchema = new mongoose.Schema(
     agree: Boolean,
     status: {
       type: String,
-      enum: ["pending", "approved", "rejected", "bought"],
+      enum: [
+        "pending",
+        "approved",
+        "rejected",
+        "investmentPending",
+        "investmentPending",
+        " investmentRejected",
+      ],
       default: "pending",
     },
   },

@@ -7,6 +7,10 @@ const transactionSchema = new mongoose.Schema(
       ref: "Auth",
       required: true,
     },
+    tokenId: {
+      type: String,
+      default: "",
+    },
     status: {
       type: String,
       enum: ["pending", "approved", "rejected"], // you can adjust as per logic

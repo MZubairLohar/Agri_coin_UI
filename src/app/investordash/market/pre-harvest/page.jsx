@@ -49,7 +49,9 @@ function PreHarvest() {
       }
 
       // ✅ Only show approved status cards
-      const approvedData = apiData.filter((item) => item.status === "approved");
+      const approvedData = apiData.filter(
+        (item) => item.status !== "pending" && item.status !== "rejected"
+      );
       setData(approvedData);
     } catch (error) {
       console.error("❌ Error fetching preHarvest data:", error);
@@ -76,7 +78,15 @@ function PreHarvest() {
       color: "bg-green-100 text-green-800",
       icon: <FaCheckCircle className="text-green-500" />,
     },
-    partial: {
+    investmentPending: {
+      color: "bg-blue-100 text-blue-800",
+      icon: <FaCheckCircle className="text-blue-500" />,
+    },
+    investmentApproved: {
+      color: "bg-blue-100 text-blue-800",
+      icon: <FaCheckCircle className="text-blue-500" />,
+    },
+    investmentRejected: {
       color: "bg-blue-100 text-blue-800",
       icon: <FaCheckCircle className="text-blue-500" />,
     },
@@ -115,6 +125,7 @@ function PreHarvest() {
     setShowCryptoOptions(false);
     axios
       .post("/api/stripe/stripe-checkout", {
+        recordId: selectedPaymentItem?._id,
         userId: userId,
         tokenId: selectedPaymentItem?.tokenId,
         status: "pending",
@@ -171,9 +182,27 @@ function PreHarvest() {
           hash: tx.hash,
         }),
       });
-
+      let tokenId = selectedPaymentItem?.tokenId;
+      let recordId = selectedPaymentItem?._id;
       const data = await response.json();
+      if (data) {
+        const res = await fetch("/api/farmer/preHarvest/updateRequest", {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            recordId,
+            status: "investmentPending",
+            tokenId,
+          }),
+        });
 
+        if (!res.ok) {
+          throw new Error(`Failed to update: ${res.statusText}`);
+        }
+
+        const data = await res.json();
+        console.log("✅ Status Update Response:", data);
+      }
       if (!response.ok) {
         throw new Error(data.error || "Failed to save transaction to backend.");
       }
@@ -215,101 +244,234 @@ function PreHarvest() {
           <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#6f9d7e]"></div>
         </div>
       ) : (
+        // <div className="mt-6">
+        //   {/* Investment Cards */}
+        //   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        //     {data.length > 0 ? (
+        //       data.map((item) => (
+        //         <div
+        //           key={item._id}
+        //           className="bg-white p-6 rounded-lg shadow-md border border-gray-200 hover:shadow-lg transition-shadow"
+        //         >
+        //           <div className="flex justify-between items-start mb-4">
+        //             <h2 className="text-xl font-semibold text-[#6F9D7E]">
+        //               {item.crops ? item.crops.join(", ") : "N/A"}
+        //             </h2>
+        //             <span
+        //               className={`text-xs px-2 py-1 rounded-full ${
+        //                 statusConfig[item.status]?.color ||
+        //                 statusConfig.pending.color
+        //               } flex items-center`}
+        //             >
+        //               {statusConfig[item.status]?.icon ||
+        //                 statusConfig.pending.icon}
+        //               <span className="ml-1 capitalize">
+        //                 {item.status || "pending"}
+        //               </span>
+        //             </span>
+        //           </div>
+
+        //           <div className="space-y-3">
+        //             <div className="flex justify-between">
+        //               <span className="text-gray-600 font-medium">
+        //                 Land Size:
+        //               </span>
+        //               <span className="font-medium text-[#6F9D7E]">
+        //                 {item.landSize || "N/A"}
+        //               </span>
+        //             </div>
+
+        //             <div className="flex justify-between">
+        //               <span className="text-gray-600 font-medium">
+        //                 Loan Amount:
+        //               </span>
+        //               <span className="font-medium text-[#6F9D7E]">
+        //                 $
+        //                 {item.loanAmount
+        //                   ? parseFloat(item.loanAmount).toLocaleString()
+        //                   : "N/A"}
+        //               </span>
+        //             </div>
+
+        //             <div className="flex justify-between">
+        //               <span className="text-gray-600 font-medium">
+        //                 Farm Location:
+        //               </span>
+        //               <span className="text-right text-[#6F9D7E] text-sm">
+        //                 {item.farmLocation || "N/A"}
+        //               </span>
+        //             </div>
+
+        //             <div className="flex justify-between">
+        //               <span className="text-gray-600 font-medium">
+        //                 Loan Purpose:
+        //               </span>
+        //               <span className="text-sm text-[#6F9D7E]">
+        //                 {item.loanPurpose || "N/A"}
+        //               </span>
+        //             </div>
+
+        //             <div className="flex justify-between text-sm mt-3 pt-3 border-t border-gray-200">
+        //               <span className="text-gray-600 font-medium">
+        //                 Request Date:
+        //               </span>
+        //               <span className="text-[#6F9D7E]">
+        //                 {item.createdAt
+        //                   ? new Date(item.createdAt).toLocaleDateString()
+        //                   : "N/A"}
+        //               </span>
+        //             </div>
+        //           </div>
+
+        //           <div className="mt-4 flex gap-2">
+        //             <button
+        //               onClick={() => handleViewDetails(item)}
+        //               className="flex-1 py-2 bg-gray-200 text-gray-700 rounded text-sm hover:bg-gray-300 transition"
+        //             >
+        //               View Details
+        //             </button>
+        //             <button
+        //               onClick={() => handleBuyNow(item)}
+        //               className="flex-1 py-2 bg-[#6F9D7E] text-white rounded text-sm hover:bg-[#5a8a6a] transition"
+        //             >
+        //               Buy Now
+        //             </button>
+        //           </div>
+        //         </div>
+        //       ))
+        //     ) : (
+        //       <div className="col-span-full text-center py-12">
+        //         <div className="bg-gray-50 p-8 rounded-lg">
+        //           <FaWarehouse className="text-gray-400 text-4xl mx-auto mb-4" />
+        //           <h3 className="text-lg font-medium text-gray-900">
+        //             No approved pre-harvest investments available
+        //           </h3>
+        //           <p className="mt-2 text-gray-500">
+        //             There are currently no approved pre-harvest investments in
+        //             the market.
+        //           </p>
+        //         </div>
+        //       </div>
+        //     )}
+        //   </div>
+        // </div>
         <div className="mt-6">
           {/* Investment Cards */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {data.length > 0 ? (
-              data.map((item) => (
-                <div
-                  key={item._id}
-                  className="bg-white p-6 rounded-lg shadow-md border border-gray-200 hover:shadow-lg transition-shadow"
-                >
-                  <div className="flex justify-between items-start mb-4">
-                    <h2 className="text-xl font-semibold text-[#6F9D7E]">
-                      {item.crops ? item.crops.join(", ") : "N/A"}
-                    </h2>
-                    <span
-                      className={`text-xs px-2 py-1 rounded-full ${
-                        statusConfig[item.status]?.color ||
-                        statusConfig.pending.color
-                      } flex items-center`}
-                    >
-                      {statusConfig[item.status]?.icon ||
-                        statusConfig.pending.icon}
-                      <span className="ml-1 capitalize">
-                        {item.status || "pending"}
+              data.map((item) => {
+                const isPending = item.status === "investmentPending";
+                const isApproved = item.status === "investmentApproved";
+
+                return (
+                  <div
+                    key={item._id}
+                    className={`bg-white p-6 rounded-lg shadow-md border border-gray-200 hover:shadow-lg transition-shadow ${
+                      isPending ? "opacity-50 pointer-events-none" : ""
+                    }`}
+                  >
+                    <div className="flex justify-between items-start mb-4">
+                      <h2 className="text-xl font-semibold text-[#6F9D7E]">
+                        {item.crops ? item.crops.join(", ") : "N/A"}
+                      </h2>
+                      <span
+                        className={`text-xs px-2 py-1 rounded-full ${
+                          statusConfig[item.status]?.color ||
+                          statusConfig.pending.color
+                        } flex items-center`}
+                      >
+                        {statusConfig[item.status]?.icon ||
+                          statusConfig.pending.icon}
+                        <span className="ml-1 capitalize">
+                          {item.status || "pending"}
+                        </span>
                       </span>
-                    </span>
+                    </div>
+
+                    <div className="space-y-3">
+                      <div className="flex justify-between">
+                        <span className="text-gray-600 font-medium">
+                          Land Size:
+                        </span>
+                        <span className="font-medium text-[#6F9D7E]">
+                          {item.landSize || "N/A"}
+                        </span>
+                      </div>
+
+                      <div className="flex justify-between">
+                        <span className="text-gray-600 font-medium">
+                          Loan Amount:
+                        </span>
+                        <span className="font-medium text-[#6F9D7E]">
+                          $
+                          {item.loanAmount
+                            ? parseFloat(item.loanAmount).toLocaleString()
+                            : "N/A"}
+                        </span>
+                      </div>
+
+                      <div className="flex justify-between">
+                        <span className="text-gray-600 font-medium">
+                          Farm Location:
+                        </span>
+                        <span className="text-right text-[#6F9D7E] text-sm">
+                          {item.farmLocation || "N/A"}
+                        </span>
+                      </div>
+
+                      <div className="flex justify-between">
+                        <span className="text-gray-600 font-medium">
+                          Loan Purpose:
+                        </span>
+                        <span className="text-sm text-[#6F9D7E]">
+                          {item.loanPurpose || "N/A"}
+                        </span>
+                      </div>
+
+                      <div className="flex justify-between text-sm mt-3 pt-3 border-t border-gray-200">
+                        <span className="text-gray-600 font-medium">
+                          Request Date:
+                        </span>
+                        <span className="text-[#6F9D7E]">
+                          {item.createdAt
+                            ? new Date(item.createdAt).toLocaleDateString()
+                            : "N/A"}
+                        </span>
+                      </div>
+                    </div>
+
+                    <div className="mt-4 flex gap-2">
+                      <button
+                        onClick={() => handleViewDetails(item)}
+                        className="flex-1 py-2 bg-gray-200 text-gray-700 rounded text-sm hover:bg-gray-300 transition"
+                      >
+                        View Details
+                      </button>
+
+                      {isApproved ? (
+                        <button
+                          disabled
+                          className="flex-1 py-2 bg-gray-400 text-white rounded text-sm cursor-not-allowed"
+                        >
+                          Bought
+                        </button>
+                      ) : (
+                        <button
+                          onClick={() => handleBuyNow(item)}
+                          disabled={isPending}
+                          className={`flex-1 py-2 rounded text-sm transition ${
+                            isPending
+                              ? "bg-gray-400 text-white cursor-not-allowed"
+                              : "bg-[#6F9D7E] text-white hover:bg-[#5a8a6a]"
+                          }`}
+                        >
+                          Buy Now
+                        </button>
+                      )}
+                    </div>
                   </div>
-
-                  <div className="space-y-3">
-                    <div className="flex justify-between">
-                      <span className="text-gray-600 font-medium">
-                        Land Size:
-                      </span>
-                      <span className="font-medium text-[#6F9D7E]">
-                        {item.landSize || "N/A"}
-                      </span>
-                    </div>
-
-                    <div className="flex justify-between">
-                      <span className="text-gray-600 font-medium">
-                        Loan Amount:
-                      </span>
-                      <span className="font-medium text-[#6F9D7E]">
-                        $
-                        {item.loanAmount
-                          ? parseFloat(item.loanAmount).toLocaleString()
-                          : "N/A"}
-                      </span>
-                    </div>
-
-                    <div className="flex justify-between">
-                      <span className="text-gray-600 font-medium">
-                        Farm Location:
-                      </span>
-                      <span className="text-right text-[#6F9D7E] text-sm">
-                        {item.farmLocation || "N/A"}
-                      </span>
-                    </div>
-
-                    <div className="flex justify-between">
-                      <span className="text-gray-600 font-medium">
-                        Loan Purpose:
-                      </span>
-                      <span className="text-sm text-[#6F9D7E]">
-                        {item.loanPurpose || "N/A"}
-                      </span>
-                    </div>
-
-                    <div className="flex justify-between text-sm mt-3 pt-3 border-t border-gray-200">
-                      <span className="text-gray-600 font-medium">
-                        Request Date:
-                      </span>
-                      <span className="text-[#6F9D7E]">
-                        {item.createdAt
-                          ? new Date(item.createdAt).toLocaleDateString()
-                          : "N/A"}
-                      </span>
-                    </div>
-                  </div>
-
-                  <div className="mt-4 flex gap-2">
-                    <button
-                      onClick={() => handleViewDetails(item)}
-                      className="flex-1 py-2 bg-gray-200 text-gray-700 rounded text-sm hover:bg-gray-300 transition"
-                    >
-                      View Details
-                    </button>
-                    <button
-                      onClick={() => handleBuyNow(item)}
-                      className="flex-1 py-2 bg-[#6F9D7E] text-white rounded text-sm hover:bg-[#5a8a6a] transition"
-                    >
-                      Buy Now
-                    </button>
-                  </div>
-                </div>
-              ))
+                );
+              })
             ) : (
               <div className="col-span-full text-center py-12">
                 <div className="bg-gray-50 p-8 rounded-lg">

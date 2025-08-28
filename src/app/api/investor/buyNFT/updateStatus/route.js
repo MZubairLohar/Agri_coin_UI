@@ -49,7 +49,7 @@
 // }
 // app/api/farmer/preHarvest/route.js
 import connectDB from "@/lib/db";
-import PreHarvestModel from "@/models/preHarvest.model";
+import NFTBuyModel from "@/models/buyNFT.model";
 import { NextResponse } from "next/server";
 
 // ✅ Update Status API
@@ -70,10 +70,10 @@ export async function PUT(request) {
 
     if (tokenId) {
       // ✅ If tokenId provided → update both status + tokenId
-      updatedRecord = await PreHarvestModel.findByIdAndUpdate(
-        tokenId,
-        { status },
-        { new: true }
+      updatedRecord = await NFTBuyModel.findOneAndUpdate(
+        { tokenId: tokenId }, // condition
+        { status }, // update
+        { new: true } // return updated doc
       );
     }
 

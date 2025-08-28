@@ -47,6 +47,7 @@ export default function PostHarvest() {
   const [userId, setUserId] = useState("");
 
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   // Options for dropdowns/multi-selects
   useEffect(() => {
@@ -83,6 +84,7 @@ export default function PostHarvest() {
   // };
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     const payload = { ...formData, userId };
     console.log("Form Data:", payload);
     try {
@@ -101,7 +103,46 @@ export default function PostHarvest() {
       const data = await res.json();
       console.log("Server Response:", data);
 
-      setIsSubmitted(true);
+      // setIsSubmitted(true);
+      setLoading(true);
+      setFormData({
+        fullName: "",
+        usdaFarmNumber: "",
+        farmLocation: "",
+        totalAcres: "",
+        primaryCommodity: "",
+
+        // Section 2: Harvest Details
+        harvestDate: "",
+        totalYield: "",
+        yieldUnit: "bushels", // default
+        currentStorageMethod: "",
+
+        // Section 3: Post-Harvest Needs
+        investmentType: [], // multi-select
+        coldStorageRequired: false,
+        coldStorageCapacity: "",
+        processingType: "",
+        packagingNeeds: "",
+        transportationDistance: "",
+        marketingChannels: [],
+
+        // Section 4: Financial Requirements
+        totalInvestmentRequired: "",
+        fundingSources: [],
+        existingFacilities: "",
+        expectedROI: "",
+
+        // Section 5: Business Plan
+        targetMarkets: "",
+        valueAddedProducts: "",
+        sustainabilityPractices: "",
+
+        // Section 6: Supporting Documents
+        hasBusinessPlan: false,
+        hasFeasibilityStudy: false,
+        agreeTerms: false,
+      });
     } catch (error) {
       console.error("Error submitting form:", error);
       alert("Something went wrong, please try again.");
@@ -493,7 +534,7 @@ export default function PostHarvest() {
                   type="submit"
                   className="w-full mt-4 bg-[#6f9d7e]  text-[#FFE990] px-6 py-3 rounded hover:bg-[#FFE990] hover:text-[#6f9d7e] transition duration-200 ease-in-out"
                 >
-                  Submit Investment Request
+                  {loading ? "loading.." : "Submit Investment Request"}
                 </button>
               </div>
             </form>

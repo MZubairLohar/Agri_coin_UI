@@ -247,7 +247,7 @@ function Prereq() {
 
       const data = await res.json();
       console.log("✅ Status Update Response:", data);
-
+      fetchData(); // Refresh data after update
       return data;
     } catch (error) {
       console.error("❌ Error updating status:", error);

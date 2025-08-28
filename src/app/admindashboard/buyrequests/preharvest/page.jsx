@@ -22,12 +22,38 @@ export default function PreHarvest() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  // useEffect(() => {
+  //   const fetchPayments = async () => {
+  //     try {
+  //       setLoading(true);
+
+  //       // Build API URL with optional userId query
+  //       let url = "/api/investor/buyNFT";
+
+  //       const res = await fetch(url);
+  //       const json = await res.json();
+
+  //       if (!res.ok) {
+  //         throw new Error(json.error || "Failed to fetch data");
+  //       }
+  //       console.log("json.data", json.data);
+  //       // ✅ Ensure always an array
+  //       setData(Array.isArray(json.data) ? json.data : [json.data]);
+  //     } catch (err) {
+  //       setError(err.message);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
+
+  //   fetchPayments();
+  // }, []);
   useEffect(() => {
     const fetchPayments = async () => {
       try {
         setLoading(true);
 
-        // Build API URL with optional userId query
+        // Build API URL
         let url = "/api/investor/buyNFT";
 
         const res = await fetch(url);
@@ -36,9 +62,15 @@ export default function PreHarvest() {
         if (!res.ok) {
           throw new Error(json.error || "Failed to fetch data");
         }
+
         console.log("json.data", json.data);
-        // ✅ Ensure always an array
-        setData(Array.isArray(json.data) ? json.data : [json.data]);
+
+        // ✅ Ensure always an array + filter for type === "preHarvest"
+        const filteredData = (
+          Array.isArray(json.data) ? json.data : [json.data]
+        ).filter((item) => item.type === "preHarvest");
+
+        setData(filteredData);
       } catch (err) {
         setError(err.message);
       } finally {
@@ -48,26 +80,42 @@ export default function PreHarvest() {
 
     fetchPayments();
   }, []);
-  
-  const updateStatus = async (tokenId, newStatus) => {
-    try {
-      console.log("Updating:", tokenId, newStatus);
 
-      if (newStatus === "approved") {
-        const res = await fetch("/api/farmer/preHarvest/updateRequest", {
+  const updateStatus = async (tokenId, newStatus) => {
+    let statusToUpdate;
+    if (newStatus === "investmentRejected") {
+      statusToUpdate = "rejected";
+    } else if (newStatus === "investmentApproved") {
+      statusToUpdate = "approved";
+    }
+
+    try {
+      console.log("Updating:", tokenId, newStatus, statusToUpdate);
+
+      if (newStatus === "investmentApproved") {
+        const response = await fetch("/api/investor/buyNFT/updateStatus", {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ tokenId, status: newStatus }),
+          body: JSON.stringify({
+            tokenId,
+            status: statusToUpdate || "approved",
+          }),
         });
+        if (response.ok) {
+          const res = await fetch("/api/farmer/preHarvest/updateRequest", {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ tokenId, status: newStatus }),
+          });
+          if (!res.ok) {
+            throw new Error(`Failed to update: ${res.statusText}`);
+          }
 
-        if (!res.ok) {
-          throw new Error(`Failed to update: ${res.statusText}`);
+          const data = await res.json();
+          console.log("✅ Status Update Response:", data);
+
+          return data;
         }
-
-        const data = await res.json();
-        console.log("✅ Status Update Response:", data);
-
-        return data;
       }
     } catch (error) {
       console.error("❌ Error updating status:", error);
@@ -313,12 +361,16 @@ export default function PreHarvest() {
                           {item.type}
                         </td>
                         <td className="px-3 py-4 text-sm text-gray-900 whitespace-nowrap">
-                          <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                            item.status === 'approved' ? 'bg-green-100 text-green-800' :
-                            item.status === 'pending' ? 'bg-yellow-100 text-yellow-800' :
-                            'bg-red-100 text-red-800'
-                          }`}>
-                            {item.status || 'pending'}
+                          <span
+                            className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
+                              item.status === "approved"
+                                ? "bg-green-100 text-green-800"
+                                : item.status === "pending"
+                                ? "bg-yellow-100 text-yellow-800"
+                                : "bg-red-100 text-red-800"
+                            }`}
+                          >
+                            {item.status || "pending"}
                           </span>
                         </td>
                         <td className="px-3 py-4 text-sm text-gray-900 whitespace-nowrap">
@@ -343,13 +395,17 @@ export default function PreHarvest() {
                         <td className="px-3 py-4 text-sm text-gray-900 whitespace-nowrap">
                           <div className="flex flex-col sm:flex-row gap-2">
                             <button
-                              onClick={() => updateStatus(item.tokenId, "approved")}
+                              onClick={() =>
+                                updateStatus(item.tokenId, "investmentApproved")
+                              }
                               className="px-3 py-1 bg-green-600 text-white rounded-md text-xs hover:bg-green-700 transition-colors whitespace-nowrap"
                             >
                               Accept
                             </button>
                             <button
-                              onClick={() => updateStatus(item.tokenId, "rejected")}
+                              onClick={() =>
+                                updateStatus(item.tokenId, "investmentRejected")
+                              }
                               className="px-3 py-1 bg-red-600 text-white rounded-md text-xs hover:bg-red-700 transition-colors whitespace-nowrap"
                             >
                               Reject

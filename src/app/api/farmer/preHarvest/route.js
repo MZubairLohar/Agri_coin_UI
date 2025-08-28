@@ -158,7 +158,7 @@ export async function GET(request) {
       // Return all records (admin use-case)
       preHarvestData = await PreHarvestModel.find({});
     }
-
+    console.log("preHarvestData", preHarvestData);
     return NextResponse.json({ data: preHarvestData }, { status: 200 });
   } catch (error) {
     console.error("❌ Error fetching payment details:", error);

@@ -314,21 +314,6 @@
 //   );
 // }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 "use client";
 import { useEffect, useState } from "react";
 import { preHarvestInvestments } from "@/app/content/data";
@@ -368,7 +353,7 @@ export default function PostHarvest() {
 
       const result = await res.json();
       console.log("API Response:", result);
-      
+
       // ✅ Check if result.data is an array, if not, convert it to an array
       if (result.data && !Array.isArray(result.data)) {
         // If data is a single object, wrap it in an array
@@ -386,7 +371,7 @@ export default function PostHarvest() {
       setLoading(false);
     }
   };
-  
+
   useEffect(() => {
     const userData = getDecodedAuthToken();
     if (userData) {
@@ -400,28 +385,38 @@ export default function PostHarvest() {
 
   // Calculate summary data from API data - with safe array checks
   const totalRequests = Array.isArray(data) ? data.length : 0;
-  
-  const totalRequested = Array.isArray(data) 
+
+  const totalRequested = Array.isArray(data)
     ? data.reduce((sum, item) => sum + (parseFloat(item.loanAmount) || 0), 0)
     : 0;
-    
-  const totalApproved = Array.isArray(data) 
+
+  const totalApproved = Array.isArray(data)
     ? data.reduce(
-        (sum, item) => sum + (item.status === "approved" ? parseFloat(item.loanAmount) || 0 : 0),
+        (sum, item) =>
+          sum +
+          (item.status === "approved" ? parseFloat(item.loanAmount) || 0 : 0),
         0
       )
     : 0;
-    
+
   const approvalRate =
     totalRequested > 0 ? Math.round((totalApproved / totalRequested) * 100) : 0;
 
   // Filter investments based on search and filters
-  const filteredInvestments = Array.isArray(data) 
+  const filteredInvestments = Array.isArray(data)
     ? data.filter((item) => {
         const matchesSearch =
-          (item.crops && item.crops.join(", ").toLowerCase().includes(searchTerm.toLowerCase())) ||
-          (item.loanPurpose && item.loanPurpose.toLowerCase().includes(searchTerm.toLowerCase())) ||
-          (item.fullName && item.fullName.toLowerCase().includes(searchTerm.toLowerCase()));
+          (item.crops &&
+            item.crops
+              .join(", ")
+              .toLowerCase()
+              .includes(searchTerm.toLowerCase())) ||
+          (item.loanPurpose &&
+            item.loanPurpose
+              .toLowerCase()
+              .includes(searchTerm.toLowerCase())) ||
+          (item.fullName &&
+            item.fullName.toLowerCase().includes(searchTerm.toLowerCase()));
 
         const matchesStatus =
           statusFilter === "all" || (item.status || "pending") === statusFilter;
@@ -430,9 +425,10 @@ export default function PostHarvest() {
           dateFilter === "all" ||
           (dateFilter === "recent" &&
             item.createdAt &&
-            new Date(item.createdAt) > new Date(Date.now() - 30 * 24 * 60 * 60 * 1000)) ||
-          (dateFilter === "upcoming" && 
-            item.disbursementDate && 
+            new Date(item.createdAt) >
+              new Date(Date.now() - 30 * 24 * 60 * 60 * 1000)) ||
+          (dateFilter === "upcoming" &&
+            item.disbursementDate &&
             new Date(item.disbursementDate) > new Date());
 
         return matchesSearch && matchesStatus && matchesDate;
@@ -573,11 +569,15 @@ export default function PostHarvest() {
                       </h2>
                       <span
                         className={`text-xs px-2 py-1 rounded-full ${
-                          statusConfig[item.status]?.color || statusConfig.pending.color
+                          statusConfig[item.status]?.color ||
+                          statusConfig.pending.color
                         } flex items-center`}
                       >
-                        {statusConfig[item.status]?.icon || statusConfig.pending.icon}
-                        <span className="ml-1 capitalize">{item.status || "pending"}</span>
+                        {statusConfig[item.status]?.icon ||
+                          statusConfig.pending.icon}
+                        <span className="ml-1 capitalize">
+                          {item.status || "pending"}
+                        </span>
                       </span>
                     </div>
 
@@ -596,7 +596,10 @@ export default function PostHarvest() {
                           Requested Amount:
                         </span>
                         <span className="font-medium text-[#FFE990]">
-                          ${item.loanAmount ? parseFloat(item.loanAmount).toLocaleString() : "N/A"}
+                          $
+                          {item.loanAmount
+                            ? parseFloat(item.loanAmount).toLocaleString()
+                            : "N/A"}
                         </span>
                       </div>
 
@@ -623,12 +626,14 @@ export default function PostHarvest() {
                           Request Date:
                         </span>
                         <span className="text-[#FFE990]">
-                          {item.createdAt ? new Date(item.createdAt).toLocaleDateString() : "N/A"}
+                          {item.createdAt
+                            ? new Date(item.createdAt).toLocaleDateString()
+                            : "N/A"}
                         </span>
                       </div>
                     </div>
 
-                    <button 
+                    <button
                       onClick={() => handleViewDetails(item)}
                       className="mt-3 w-full py-1 bg-[#6f9d7e] text-[#FFE990] border border-[#FFE990] rounded text-sm hover:bg-[#5a8a6a] transition"
                     >
@@ -682,14 +687,14 @@ export default function PostHarvest() {
                 <h2 className="text-xl font-bold text-[#6f9d7e]">
                   Application Details
                 </h2>
-                <button 
+                <button
                   onClick={closeModal}
                   className="text-gray-500 hover:text-gray-700"
                 >
                   <FaTimes size={20} />
                 </button>
               </div>
-              
+
               <div className="p-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {/* Personal Information */}
@@ -697,91 +702,202 @@ export default function PostHarvest() {
                     <h3 className="font-semibold text-[#6f9d7e] border-b pb-1">
                       Personal Information
                     </h3>
-                    <DetailRow label="Full Name" value={selectedItem.fullName} />
+                    <DetailRow
+                      label="Full Name"
+                      value={selectedItem.fullName}
+                    />
                     <DetailRow label="Email" value={selectedItem.email} />
                     <DetailRow label="Phone" value={selectedItem.phone} />
                     <DetailRow label="Date of Birth" value={selectedItem.dob} />
-                    <DetailRow label="Citizenship Status" value={selectedItem.citizenshipStatus} />
+                    <DetailRow
+                      label="Citizenship Status"
+                      value={selectedItem.citizenshipStatus}
+                    />
                     <DetailRow label="SSN" value={selectedItem.ssn} />
                   </div>
-                  
+
                   {/* Business Information */}
                   <div className="space-y-3">
                     <h3 className="font-semibold text-[#6f9d7e] border-b pb-1">
                       Business Information
                     </h3>
-                    <DetailRow label="Business Name" value={selectedItem.businessName} />
-                    <DetailRow label="Entity Type" value={selectedItem.entityType} />
+                    <DetailRow
+                      label="Business Name"
+                      value={selectedItem.businessName}
+                    />
+                    <DetailRow
+                      label="Entity Type"
+                      value={selectedItem.entityType}
+                    />
                     <DetailRow label="EIN" value={selectedItem.ein} />
-                    <DetailRow label="Years in Operation" value={selectedItem.yearsInOperation} />
-                    <DetailRow label="Annual Income" value={selectedItem.annualIncome} />
-                    <DetailRow label="USDA Farm Number" value={selectedItem.usdaFarmNumber} />
+                    <DetailRow
+                      label="Years in Operation"
+                      value={selectedItem.yearsInOperation}
+                    />
+                    <DetailRow
+                      label="Annual Income"
+                      value={selectedItem.annualIncome}
+                    />
+                    <DetailRow
+                      label="USDA Farm Number"
+                      value={selectedItem.usdaFarmNumber}
+                    />
                   </div>
-                  
+
                   {/* Farm Details */}
                   <div className="space-y-3">
                     <h3 className="font-semibold text-[#6f9d7e] border-b pb-1">
                       Farm Details
                     </h3>
-                    <DetailRow label="Farm Location" value={selectedItem.farmLocation} />
-                    <DetailRow label="Land Size" value={selectedItem.landSize} />
-                    <DetailRow label="Land Status" value={selectedItem.landStatus} />
-                    <DetailRow label="Crops" value={selectedItem.crops ? selectedItem.crops.join(", ") : "N/A"} />
-                    <DetailRow label="Area per Crop" value={selectedItem.areaPerCrop} />
-                    <DetailRow label="Expected Yield" value={selectedItem.expectedYield} />
-                    <DetailRow label="Soil Type" value={selectedItem.soilType} />
-                    <DetailRow label="Irrigation Type" value={selectedItem.irrigationType} />
-                    <DetailRow label="Crop Insurance" value={selectedItem.cropInsurance} />
-                    <DetailRow label="Practices" value={selectedItem.practices} />
+                    <DetailRow
+                      label="Farm Location"
+                      value={selectedItem.farmLocation}
+                    />
+                    <DetailRow
+                      label="Land Size"
+                      value={selectedItem.landSize}
+                    />
+                    <DetailRow
+                      label="Land Status"
+                      value={selectedItem.landStatus}
+                    />
+                    <DetailRow
+                      label="Crops"
+                      value={
+                        selectedItem.crops
+                          ? selectedItem.crops.join(", ")
+                          : "N/A"
+                      }
+                    />
+                    <DetailRow
+                      label="Area per Crop"
+                      value={selectedItem.areaPerCrop}
+                    />
+                    <DetailRow
+                      label="Expected Yield"
+                      value={selectedItem.expectedYield}
+                    />
+                    <DetailRow
+                      label="Soil Type"
+                      value={selectedItem.soilType}
+                    />
+                    <DetailRow
+                      label="Irrigation Type"
+                      value={selectedItem.irrigationType}
+                    />
+                    <DetailRow
+                      label="Crop Insurance"
+                      value={selectedItem.cropInsurance}
+                    />
+                    <DetailRow
+                      label="Practices"
+                      value={selectedItem.practices}
+                    />
                   </div>
-                  
+
                   {/* Loan Information */}
                   <div className="space-y-3">
                     <h3 className="font-semibold text-[#6f9d7e] border-b pb-1">
                       Loan Information
                     </h3>
-                    <DetailRow label="Loan Type" value={selectedItem.loanType} />
-                    <DetailRow label="Loan Amount" value={selectedItem.loanAmount} />
-                    <DetailRow label="Loan Purpose" value={selectedItem.loanPurpose} />
-                    <DetailRow label="Loan Term" value={selectedItem.loanTerm} />
-                    <DetailRow label="Disbursement Date" value={selectedItem.disbursementDate} />
-                    <DetailRow label="Repayment Source" value={selectedItem.repaymentSource} />
-                    <DetailRow label="Previous Loans" value={selectedItem.previousLoans} />
-                    <DetailRow label="Credit Score" value={selectedItem.creditScore} />
-                    <DetailRow label="Equipment Owned" value={selectedItem.equipmentOwned} />
+                    <DetailRow
+                      label="Loan Type"
+                      value={selectedItem.loanType}
+                    />
+                    <DetailRow
+                      label="Loan Amount"
+                      value={selectedItem.loanAmount}
+                    />
+                    <DetailRow
+                      label="Loan Purpose"
+                      value={selectedItem.loanPurpose}
+                    />
+                    <DetailRow
+                      label="Loan Term"
+                      value={selectedItem.loanTerm}
+                    />
+                    <DetailRow
+                      label="Disbursement Date"
+                      value={selectedItem.disbursementDate}
+                    />
+                    <DetailRow
+                      label="Repayment Source"
+                      value={selectedItem.repaymentSource}
+                    />
+                    <DetailRow
+                      label="Previous Loans"
+                      value={selectedItem.previousLoans}
+                    />
+                    <DetailRow
+                      label="Credit Score"
+                      value={selectedItem.creditScore}
+                    />
+                    <DetailRow
+                      label="Equipment Owned"
+                      value={selectedItem.equipmentOwned}
+                    />
                   </div>
-                  
+
                   {/* Bank Information */}
                   <div className="space-y-3">
                     <h3 className="font-semibold text-[#6f9d7e] border-b pb-1">
                       Bank Information
                     </h3>
-                    <DetailRow label="Bank Name" value={selectedItem.bankName} />
-                    <DetailRow label="Account Number" value={selectedItem.accountNumber} />
-                    <DetailRow label="Routing Number" value={selectedItem.routingNumber} />
+                    <DetailRow
+                      label="Bank Name"
+                      value={selectedItem.bankName}
+                    />
+                    <DetailRow
+                      label="Account Number"
+                      value={selectedItem.accountNumber}
+                    />
+                    <DetailRow
+                      label="Routing Number"
+                      value={selectedItem.routingNumber}
+                    />
                   </div>
-                  
+
                   {/* Address Information */}
                   <div className="space-y-3 md:col-span-2">
                     <h3 className="font-semibold text-[#6f9d7e] border-b pb-1">
                       Address Information
                     </h3>
-                    <DetailRow label="Mailing Address" value={selectedItem.mailingAddress} />
-                    <DetailRow label="Residential Address" value={selectedItem.residentialAddress} />
+                    <DetailRow
+                      label="Mailing Address"
+                      value={selectedItem.mailingAddress}
+                    />
+                    <DetailRow
+                      label="Residential Address"
+                      value={selectedItem.residentialAddress}
+                    />
                   </div>
-                  
+
                   {/* Application Status */}
                   <div className="space-y-3 md:col-span-2">
                     <h3 className="font-semibold text-[#6f9d7e] border-b pb-1">
                       Application Status
                     </h3>
                     <DetailRow label="Status" value={selectedItem.status} />
-                    <DetailRow label="Created At" value={selectedItem.createdAt ? new Date(selectedItem.createdAt).toLocaleString() : "N/A"} />
-                    <DetailRow label="Updated At" value={selectedItem.updatedAt ? new Date(selectedItem.updatedAt).toLocaleString() : "N/A"} />
+                    <DetailRow
+                      label="Created At"
+                      value={
+                        selectedItem.createdAt
+                          ? new Date(selectedItem.createdAt).toLocaleString()
+                          : "N/A"
+                      }
+                    />
+                    <DetailRow
+                      label="Updated At"
+                      value={
+                        selectedItem.updatedAt
+                          ? new Date(selectedItem.updatedAt).toLocaleString()
+                          : "N/A"
+                      }
+                    />
                   </div>
                 </div>
               </div>
-              
+
               <div className="p-4 border-t border-gray-200 flex justify-end">
                 <button
                   onClick={closeModal}

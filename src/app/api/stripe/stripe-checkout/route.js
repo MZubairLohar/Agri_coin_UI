@@ -5,10 +5,11 @@ const stripe = require("stripe")(
 );
 
 export async function POST(req) {
-  const { userId, tokenId, status, from, amount, type, paymentType } =
+  const { recordId, userId, tokenId, status, from, amount, type, paymentType } =
     await req.json();
 
   console.log("stripeCheckoutData", {
+    recordId,
     userId,
     tokenId,
     status,
@@ -37,6 +38,7 @@ export async function POST(req) {
     ],
     mode: "payment",
     metadata: {
+      recordId: recordId,
       userId: userId,
       tokenId: tokenId,
       status: status,

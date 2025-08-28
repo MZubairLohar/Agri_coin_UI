@@ -44,7 +44,7 @@ export default function Preharvest() {
   });
   const [userId, setUserId] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
-
+  const [loading, setLoading] = useState(false);
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setFormData((prev) => ({
@@ -70,6 +70,7 @@ export default function Preharvest() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     const payload = { ...formData, userId };
     console.log("Form Data:", payload);
     try {
@@ -88,7 +89,47 @@ export default function Preharvest() {
       const data = await res.json();
       console.log("Server Response:", data);
 
-      setIsSubmitted(true);
+      // setIsSubmitted(true);
+      setLoading(false);
+      setFormData({
+        fullName: "",
+        ssn: "",
+        dob: "",
+        phone: "",
+        email: "",
+        residentialAddress: "",
+        mailingAddress: "",
+        citizenshipStatus: "",
+        businessName: "",
+        entityType: "",
+        ein: "",
+        usdaFarmNumber: "",
+        farmLocation: "",
+        yearsInOperation: "",
+        annualIncome: "",
+        previousLoans: "",
+        landStatus: "",
+        landSize: "",
+        crops: [],
+        areaPerCrop: "",
+        irrigationType: "",
+        equipmentOwned: "",
+        soilType: "",
+        practices: "",
+        loanAmount: "",
+        loanPurpose: "",
+        loanTerm: "",
+        loanType: "",
+        disbursementDate: "",
+        expectedYield: "",
+        repaymentSource: "",
+        cropInsurance: "",
+        bankName: "",
+        accountNumber: "",
+        routingNumber: "",
+        creditScore: "",
+        agree: false,
+      });
     } catch (error) {
       console.error("Error submitting form:", error);
       alert("Something went wrong, please try again.");
@@ -542,7 +583,7 @@ export default function Preharvest() {
                   type="submit"
                   className="w-full mt-4 bg-[#6f9d7e]  text-[#FFE990] px-6 py-3 rounded hover:bg-[#FFE990] hover:text-[#6f9d7e] transition duration-200 ease-in-out"
                 >
-                  Submit Application
+                  {loading ? "loading.." : "Submit Application"}
                 </button>
               </div>
             </form>

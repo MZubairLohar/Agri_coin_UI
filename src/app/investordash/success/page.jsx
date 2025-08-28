@@ -90,7 +90,8 @@ const Success = () => {
           console.log("Session metadata", session.metadata);
 
           // Post data to DB
-          await axios.post("/api/investor/buyNFT", {
+          const response = await axios.post("/api/investor/buyNFT", {
+            recordId: session.metadata.recordId,
             userId: session.metadata.userId,
             tokenId: session.metadata.tokenId,
             status: session.metadata.status,
@@ -100,8 +101,39 @@ const Success = () => {
             type: session.metadata.type,
             paymentType: session.metadata.paymentType,
           });
+          let tokenId = session.metadata.tokenId;
+          let recordId = session.metadata.recordId;
+          const data = await response.json();
+          if (data && type === "preHarvest") {
+            const res = await fetch("/api/farmer/preHarvest/updateRequest", {
+              method: "PUT",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                recordId,
+                status: "investmentPending",
+                tokenId,
+              }),
+            });
 
-          console.log("Data sent successfully");
+            if (!res.ok) {
+              throw new Error(`Failed to update: ${res.statusText}`);
+            }
+
+            const data = await res.json();
+            console.log("✅ Status Update Response:", data);
+          } else if (data && type === "postHarvest") {
+            const res = await fetch("/api/farmer/postHarvest/updateRequest", {
+              method: "PUT",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                recordId,
+                status: "investmentPending",
+                tokenId,
+              }),
+            });
+            const data = await res.json();
+            console.log("✅ Status Update Response:", data);
+          }
         }
       } catch (err) {
         console.error("Error sending payment data:", err);

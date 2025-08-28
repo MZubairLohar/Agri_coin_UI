@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import React, { useContext, useRef } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { ethers } from "ethers";
@@ -12,6 +12,7 @@ import { WalletContext } from "@/context/WalletContext";
 import { useState } from "react";
 // import { CoinbaseWalletSDK } from "@coinbase/wallet-sdk";
 import WalletConnectProvider from "@walletconnect/web3-provider";
+import { getDecodedAuthToken } from "@/content/data";
 
 const providerOptions = {
   coinbasewallet: {
@@ -44,11 +45,21 @@ const Header = (props) => {
     useContext(WalletContext);
 
   const [account, setAccount] = useState(null);
+  const [data, setData] = useState([]);
 
   const menuRef = useRef();
   const web3ModalRef = useRef(null);
   const [showWalletModal, setShowWalletModal] = useState(false);
-
+  useEffect(() => {
+    const userData = getDecodedAuthToken();
+    // console.log("userData", userData);
+    if (userData) {
+      console.log("User Info:", userData);
+      setData(userData);
+    } else {
+      console.log("No valid token found");
+    }
+  }, []);
   // const connectWallet = async () => {
   //   console.log("connectting");
   //   try {
@@ -208,10 +219,13 @@ const Header = (props) => {
               className="dropdown-content z-[1] menu p-2 shadow text-black border border-gray-400 bg-white rounded-box w-52 space-y-2"
             >
               <li>
-                <span className="font-bold">John Doe</span>
+                <span className="font-bold">{data?.fullName}</span>
               </li>
               <li>
-                <span>johndoe@gmail.com</span>
+                <span>{data?.email}</span>
+              </li>
+              <li>
+                <span>{data?.role}</span>
               </li>
               <li>
                 <button

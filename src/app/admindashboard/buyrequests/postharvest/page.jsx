@@ -286,15 +286,6 @@
 //   );
 // }
 
-
-
-
-
-
-
-
-
-
 "use client";
 import { useEffect, useState } from "react";
 import { postHarvestInvestments } from "@/app/content/data";
@@ -320,12 +311,47 @@ export default function PostHarvestBuyRequests() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  // useEffect(() => {
+  //   const fetchPayments = async () => {
+  //     try {
+  //       setLoading(true);
+
+  //       // Build API URL with optional userId query
+  //       let url = "/api/investor/buyNFT";
+
+  //       const res = await fetch(url);
+  //       const json = await res.json();
+
+  //       if (!res.ok) {
+  //         throw new Error(json.error || "Failed to fetch data");
+  //       }
+  //       console.log("json.data", json.data);
+
+  //       // ✅ Ensure always an array
+  //       const apiData = Array.isArray(json.data) ? json.data : [json.data];
+
+  //       // ✅ Filter for post-harvest type only
+  //       const postHarvestData = apiData.filter(item =>
+  //         item.type && item.type.toLowerCase() === "post-harvest"
+  //       );
+
+  //       setData(postHarvestData);
+  //       setFilteredData(postHarvestData);
+  //     } catch (err) {
+  //       setError(err.message);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
+
+  //   fetchPayments();
+  // }, []);
   useEffect(() => {
     const fetchPayments = async () => {
       try {
         setLoading(true);
 
-        // Build API URL with optional userId query
+        // Build API URL
         let url = "/api/investor/buyNFT";
 
         const res = await fetch(url);
@@ -334,18 +360,15 @@ export default function PostHarvestBuyRequests() {
         if (!res.ok) {
           throw new Error(json.error || "Failed to fetch data");
         }
+
         console.log("json.data", json.data);
-        
-        // ✅ Ensure always an array
-        const apiData = Array.isArray(json.data) ? json.data : [json.data];
-        
-        // ✅ Filter for post-harvest type only
-        const postHarvestData = apiData.filter(item => 
-          item.type && item.type.toLowerCase() === "post-harvest"
-        );
-        
-        setData(postHarvestData);
-        setFilteredData(postHarvestData);
+
+        // ✅ Ensure always an array + filter for type === "preHarvest"
+        const filteredData = (
+          Array.isArray(json.data) ? json.data : [json.data]
+        ).filter((item) => item.type === "postHarvest");
+
+        setData(filteredData);
       } catch (err) {
         setError(err.message);
       } finally {
@@ -355,40 +378,43 @@ export default function PostHarvestBuyRequests() {
 
     fetchPayments();
   }, []);
-  
+
   // Filter data based on search term and filters
   useEffect(() => {
     let result = data;
-    
+
     // Apply search filter
     if (searchTerm) {
-      result = result.filter(item => 
-        item.from?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        item.amount?.toString().includes(searchTerm) ||
-        item.paymentType?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        item.hash?.toLowerCase().includes(searchTerm.toLowerCase())
+      result = result.filter(
+        (item) =>
+          item.from?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          item.amount?.toString().includes(searchTerm) ||
+          item.paymentType?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          item.hash?.toLowerCase().includes(searchTerm.toLowerCase())
       );
     }
-    
+
     // Apply status filter
     if (statusFilter !== "all") {
-      result = result.filter(item => item.status === statusFilter);
+      result = result.filter((item) => item.status === statusFilter);
     }
-    
+
     // Apply date filter
     if (dateFilter !== "all") {
       const now = new Date();
       if (dateFilter === "recent") {
         const thirtyDaysAgo = new Date(now.setDate(now.getDate() - 30));
-        result = result.filter(item => new Date(item.createdAt) > thirtyDaysAgo);
+        result = result.filter(
+          (item) => new Date(item.createdAt) > thirtyDaysAgo
+        );
       } else if (dateFilter === "upcoming") {
-        result = result.filter(item => new Date(item.createdAt) > now);
+        result = result.filter((item) => new Date(item.createdAt) > now);
       }
     }
-    
+
     setFilteredData(result);
   }, [data, searchTerm, statusFilter, dateFilter]);
-  
+
   const updateStatus = async (tokenId, newStatus) => {
     try {
       console.log("Updating:", tokenId, newStatus);
@@ -408,12 +434,12 @@ export default function PostHarvestBuyRequests() {
         console.log("✅ Status Update Response:", result);
 
         // Update local state
-        setData(prevData => 
-          prevData.map(item => 
+        setData((prevData) =>
+          prevData.map((item) =>
             item.tokenId === tokenId ? { ...item, status: newStatus } : item
           )
         );
-        
+
         return result;
       }
     } catch (error) {
@@ -444,7 +470,8 @@ export default function PostHarvestBuyRequests() {
     0
   );
   const totalApproved = filteredData.reduce(
-    (sum, item) => sum + (item.status === "approved" ? parseFloat(item.amount) || 0 : 0),
+    (sum, item) =>
+      sum + (item.status === "approved" ? parseFloat(item.amount) || 0 : 0),
     0
   );
   const approvalRate =
@@ -640,12 +667,16 @@ export default function PostHarvestBuyRequests() {
                           </span>
                         </td>
                         <td className="px-3 py-4 text-sm text-gray-900 whitespace-nowrap">
-                          <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                            item.status === 'approved' ? 'bg-green-100 text-green-800' :
-                            item.status === 'pending' ? 'bg-yellow-100 text-yellow-800' :
-                            'bg-red-100 text-red-800'
-                          }`}>
-                            {item.status || 'pending'}
+                          <span
+                            className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
+                              item.status === "approved"
+                                ? "bg-green-100 text-green-800"
+                                : item.status === "pending"
+                                ? "bg-yellow-100 text-yellow-800"
+                                : "bg-red-100 text-red-800"
+                            }`}
+                          >
+                            {item.status || "pending"}
                           </span>
                         </td>
                         <td className="px-3 py-4 text-sm text-gray-900 whitespace-nowrap">
@@ -670,13 +701,17 @@ export default function PostHarvestBuyRequests() {
                         <td className="px-3 py-4 text-sm text-gray-900 whitespace-nowrap">
                           <div className="flex flex-col sm:flex-row gap-2">
                             <button
-                              onClick={() => updateStatus(item.tokenId, "approved")}
+                              onClick={() =>
+                                updateStatus(item.tokenId, "approved")
+                              }
                               className="px-3 py-1 bg-green-600 text-white rounded-md text-xs hover:bg-green-700 transition-colors whitespace-nowrap"
                             >
                               Accept
                             </button>
                             <button
-                              onClick={() => updateStatus(item.tokenId, "rejected")}
+                              onClick={() =>
+                                updateStatus(item.tokenId, "rejected")
+                              }
                               className="px-3 py-1 bg-red-600 text-white rounded-md text-xs hover:bg-red-700 transition-colors whitespace-nowrap"
                             >
                               Reject
