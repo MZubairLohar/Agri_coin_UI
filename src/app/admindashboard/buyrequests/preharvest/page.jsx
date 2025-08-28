@@ -11,7 +11,6 @@ import {
   FaCalendarAlt,
   FaCopy,
 } from "react-icons/fa";
-import AdminLayout from "@/components/maincomp/AdminLayout";
 
 export default function PreHarvest() {
   // State for filters
@@ -194,7 +193,6 @@ export default function PreHarvest() {
   };
 
   return (
-    <AdminLayout>
       <div className="p-4 text-black">
         <h1 className="text-2xl font-bold mb-6 flex items-center text-[#6f9d7e]">
           <FaWarehouse className="mr-2" /> Pre-Harvest Buy Requests
@@ -430,6 +428,5 @@ export default function PreHarvest() {
           </div>
         </div>
       </div>
-    </AdminLayout>
   );
 }

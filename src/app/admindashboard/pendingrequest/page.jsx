@@ -1,49 +1,115 @@
-'use client';
+"use client";
 import { useState } from "react";
-import AdminLayout from "@/components/maincomp/AdminLayout";
 
 function Pendingreq() {
-    const tokens = [
-        { id: 'ry671p7vl', farmer: 'John Doe', crop: 'Wheat', quantity: '100 kg', amount: '5000 Bushels', type: 'Pre-Harvest', status: 'Requested', action: 'Accept' },
-        { id: 'ss5rb8gce', farmer: 'Alice Smith', crop: 'Corn', quantity: '150 kg', amount: '4000 Bushels', type: 'Pre-Harvest', status: 'Created', action: 'Reject' },
-        { id: '1hesf8j42', farmer: 'Bob Johnson', crop: 'Rice', quantity: '130 kg', amount: '2000 Bushels', type: 'Post-Harvest', status: 'Approved', action: 'Reject' },
-        { id: '9jtqugxf8', farmer: 'Emily Brown', crop: 'Soybeans', quantity: '110 kg', amount: '6000 Bushels', type: 'Post-Harvest', status: 'Rejected', action: 'Accept' },
-        { id: 'pcrz0ypqu', farmer: 'David Wilson', crop: 'Barley', quantity: '160 kg', amount: '4000 Bushels', type: 'Pre-Harvest', status: 'Created', action: 'Reject' },
-        { id: 'hckh147cb', farmer: 'Joe Denly', crop: 'Potato', quantity: '190 kg', amount: '3000 Bushels', type: 'Post-Harvest', status: 'Completed', action: 'Reject' },
-      ];
-      
+  const tokens = [
+    {
+      id: "ry671p7vl",
+      farmer: "John Doe",
+      crop: "Wheat",
+      quantity: "100 kg",
+      amount: "5000 Bushels",
+      type: "Pre-Harvest",
+      status: "Requested",
+      action: "Accept",
+    },
+    {
+      id: "ss5rb8gce",
+      farmer: "Alice Smith",
+      crop: "Corn",
+      quantity: "150 kg",
+      amount: "4000 Bushels",
+      type: "Pre-Harvest",
+      status: "Created",
+      action: "Reject",
+    },
+    {
+      id: "1hesf8j42",
+      farmer: "Bob Johnson",
+      crop: "Rice",
+      quantity: "130 kg",
+      amount: "2000 Bushels",
+      type: "Post-Harvest",
+      status: "Approved",
+      action: "Reject",
+    },
+    {
+      id: "9jtqugxf8",
+      farmer: "Emily Brown",
+      crop: "Soybeans",
+      quantity: "110 kg",
+      amount: "6000 Bushels",
+      type: "Post-Harvest",
+      status: "Rejected",
+      action: "Accept",
+    },
+    {
+      id: "pcrz0ypqu",
+      farmer: "David Wilson",
+      crop: "Barley",
+      quantity: "160 kg",
+      amount: "4000 Bushels",
+      type: "Pre-Harvest",
+      status: "Created",
+      action: "Reject",
+    },
+    {
+      id: "hckh147cb",
+      farmer: "Joe Denly",
+      crop: "Potato",
+      quantity: "190 kg",
+      amount: "3000 Bushels",
+      type: "Post-Harvest",
+      status: "Completed",
+      action: "Reject",
+    },
+  ];
 
   const statusColors = {
-    Requested: 'bg-yellow-100 text-yellow-800',
-    Created: 'bg-blue-100 text-blue-800',
-    Approved: 'bg-green-100 text-green-800',
-    Rejected: 'bg-red-100 text-red-800',
-    Completed: 'bg-purple-100 text-purple-800',
+    Requested: "bg-yellow-100 text-yellow-800",
+    Created: "bg-blue-100 text-blue-800",
+    Approved: "bg-green-100 text-green-800",
+    Rejected: "bg-red-100 text-red-800",
+    Completed: "bg-purple-100 text-purple-800",
   };
 
-  const statuses = ['All', 'Requested', 'Created', 'Approved', 'Rejected', 'Completed'];
-  const [selectedStatus, setSelectedStatus] = useState('All');
+  const statuses = [
+    "All",
+    "Requested",
+    "Created",
+    "Approved",
+    "Rejected",
+    "Completed",
+  ];
+  const [selectedStatus, setSelectedStatus] = useState("All");
 
-  const filteredTokens = selectedStatus === 'All'
-    ? tokens
-    : tokens.filter((token) => token.status === selectedStatus);
+  const filteredTokens =
+    selectedStatus === "All"
+      ? tokens
+      : tokens.filter((token) => token.status === selectedStatus);
 
   return (
-    <AdminLayout>
+    <>
       <div className=" text-[#FFE990] ">
-        <h1 className="text-3xl font-bold text-[#6f9d7e] mb-4">Pending Requests</h1>
+        <h1 className="text-3xl font-bold text-[#6f9d7e] mb-4">
+          Pending Requests
+        </h1>
       </div>
 
       <div className="p-6 bg-[#6F9D7E] w-full  mx-auto text-black border border-[#FFE990] rounded-lg shadow">
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-xl font-semibold text-white">Showing {filteredTokens.length} tokens</h2>
+          <h2 className="text-xl font-semibold text-white">
+            Showing {filteredTokens.length} tokens
+          </h2>
           <select
             className="border rounded px-3 py-2 text-sm text-black bg-white focus:outline-none"
             value={selectedStatus}
             onChange={(e) => setSelectedStatus(e.target.value)}
           >
             {statuses.map((status) => (
-              <option key={status} value={status}>{status}</option>
+              <option key={status} value={status}>
+                {status}
+              </option>
             ))}
           </select>
         </div>
@@ -72,17 +138,20 @@ function Pendingreq() {
                   <td className="py-3 px-4">{token.amount}</td>
                   <td className="py-3 px-4">{token.type}</td>
                   <td className="py-3 px-4">
-                    <span className={`px-3 py-1 text-xs font-medium rounded-full ${statusColors[token.status]}`}>
+                    <span
+                      className={`px-3 py-1 text-xs font-medium rounded-full ${
+                        statusColors[token.status]
+                      }`}
+                    >
                       {token.status}
                     </span>
                   </td>
                   <td className="py-3 px-4">
-  <div className="flex gap-2">
-    <button className="btn btn-success btn-sm">Accept</button>
-    <button className="btn btn-error btn-sm">Reject</button>
-  </div>
-</td>
-
+                    <div className="flex gap-2">
+                      <button className="btn btn-success btn-sm">Accept</button>
+                      <button className="btn btn-error btn-sm">Reject</button>
+                    </div>
+                  </td>
                 </tr>
               ))}
               {filteredTokens.length === 0 && (
@@ -96,7 +165,7 @@ function Pendingreq() {
           </table>
         </div>
       </div>
-    </AdminLayout>
+    </>
   );
 }
 

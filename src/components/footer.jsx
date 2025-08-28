@@ -1,32 +1,32 @@
 import { MdOutlineArrowForwardIos } from "react-icons/md";
 
 const Footer = () => {
-    const ButtonWrapper = () => {
-        return (
-          <div className="flex items-center justify-center">
-            <NeumorphismButton />
-          </div>
-        );
-      };
-      
-      const NeumorphismButton = () => {
-        return (
-          <button
-            className="
+  const ButtonWrapper = () => {
+    return (
+      <div className="flex items-center justify-center">
+        <NeumorphismButton />
+      </div>
+    );
+  };
+
+  const NeumorphismButton = () => {
+    return (
+      <button
+        className="
               px-6 py-2 rounded-full 
               flex items-center gap-2 
               text-[#6F9D7E] bg-[#FFE990]
               transition-all
               hover:shadow-[-1px_-1px_5px_rgba(255,_255,_255,_0.6),_1px_1px_5px_rgba(0,_0,_0,_0.3),inset_-2px_-2px_5px_rgba(255,_255,_255,_1),inset_2px_2px_4px_rgba(0,_0,_0,_0.3)]
             "
-          >
-            <span>Donate</span>
-            <div className="w-6 h-6 flex items-center justify-center rounded-full bg-white">
-              <MdOutlineArrowForwardIos className="text-[#6F9D7E] text-md" />
-            </div>
-          </button>
-        );
-      };
+      >
+        <span>Donate</span>
+        <div className="w-6 h-6 flex items-center justify-center rounded-full bg-white">
+          <MdOutlineArrowForwardIos className="text-[#6F9D7E] text-md" />
+        </div>
+      </button>
+    );
+  };
 
   return (
     <footer className="relative py-12 mt-10 overflow-hidden bg-[#6F9D7E]">
@@ -60,7 +60,7 @@ const Footer = () => {
 
           {/* Social Icons */}
           <div className="flex space-x-4">
-           <ButtonWrapper />
+            <ButtonWrapper />
           </div>
         </div>
 

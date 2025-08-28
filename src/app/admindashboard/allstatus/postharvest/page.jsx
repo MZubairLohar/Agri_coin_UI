@@ -1,6 +1,5 @@
 "use client";
 import { useEffect, useState } from "react";
-import AdminLayout from "@/components/maincomp/AdminLayout";
 
 function Posthistory() {
   const [data, setData] = useState([]);
@@ -106,14 +105,13 @@ function Posthistory() {
       : tokens.filter((token) => token.status === selectedStatus);
 
   return (
-    <AdminLayout>
+    <>
       <div className="text-[#FFE990] px-4">
         <h1 className="text-2xl sm:text-3xl font-bold text-[#6f9d7e] mb-6">
           Post-Harvest Status
         </h1>
       </div>
 
-      {/* Filter + Table */}
       <div className="p-4 sm:p-6 bg-[#6F9D7E] w-full mx-auto text-black border border-[#FFE990] rounded-lg shadow">
         {/* Header and Filter */}
         <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-4">
@@ -222,7 +220,7 @@ function Posthistory() {
           </p>
         )}
       </div>
-    </AdminLayout>
+    </>
   );
 }
 

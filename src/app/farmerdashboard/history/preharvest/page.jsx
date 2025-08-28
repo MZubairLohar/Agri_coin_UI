@@ -1,6 +1,5 @@
 'use client';
 import { useState } from "react";
-import FarmerLayout from "@/components/maincomp/FarmerLayout";
 
 function Posthistory() {
   const tokens = [
@@ -28,7 +27,7 @@ function Posthistory() {
     : tokens.filter((token) => token.status === selectedStatus);
 
   return (
-    <FarmerLayout>
+    <>
       <div className="text-[#FFE990] px-4">
         <h1 className="text-2xl sm:text-3xl font-bold text-[#6f9d7e] mb-6">
           Pre-Harvest Overview of History
@@ -59,7 +58,6 @@ function Posthistory() {
         </div>
       </div>
 
-      {/* Filter + Table */}
       <div className="p-4 sm:p-6 bg-[#6F9D7E] w-full mx-auto text-black border border-[#FFE990] rounded-lg shadow">
         {/* Header and Filter */}
         <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-4">
@@ -137,7 +135,7 @@ function Posthistory() {
           <p className="py-6 text-center text-white">No tokens found for selected status.</p>
         )}
       </div>
-    </FarmerLayout>
+      </>
   );
 }
 

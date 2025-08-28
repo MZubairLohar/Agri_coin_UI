@@ -2,11 +2,9 @@
 import React from "react";
 import ChartOne from "./Chartone";
 import ChartTwo from "./ChartTwo";
-import { useContext } from "react";
-import { Leaf } from "lucide-react";
-import Card from "../Card"
+import Card from "./Card";
 
-const ECommerce = () => {
+const AdminDash = () => {
   return (
     <>
       <div className="" >
@@ -38,4 +36,4 @@ const ECommerce = () => {
   );
 };
 
-export default ECommerce;
+export default AdminDash;

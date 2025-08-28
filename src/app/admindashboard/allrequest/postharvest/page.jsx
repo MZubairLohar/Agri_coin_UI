@@ -1,6 +1,5 @@
 "use client";
 import { useContext, useEffect, useState } from "react";
-import AdminLayout from "@/components/maincomp/AdminLayout";
 import { postHarvestAbi, postHarvestNFT } from "@/content/tokenData";
 import { ethers } from "ethers";
 import { WalletContext } from "@/context/WalletContext";
@@ -171,14 +170,13 @@ function Postreq() {
   };
 
   return (
-    <AdminLayout>
+    <>
       <div className="text-[#FFE990] px-4">
         <h1 className="text-2xl sm:text-3xl font-bold text-[#6f9d7e] mb-6">
           Post-Harvest Requests
         </h1>
       </div>
 
-      {/* Filter + Table */}
       <div className="p-4 sm:p-6 bg-[#6F9D7E] w-full mx-auto text-black border border-[#FFE990] rounded-lg shadow">
         <div className="overflow-x-auto hidden sm:block">
           <table className="min-w-full divide-y divide-gray-200 text-sm">
@@ -274,7 +272,7 @@ function Postreq() {
           </p>
         )}
       </div>
-    </AdminLayout>
+    </>
   );
 }
 

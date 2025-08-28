@@ -1,6 +1,5 @@
 "use client";
 import { commodityOptions, investmentOptions } from "@/app/content/data";
-import FarmerLayout from "@/components/maincomp/FarmerLayout";
 import { getDecodedAuthToken } from "@/content/data";
 import { useEffect, useState } from "react";
 
@@ -150,7 +149,6 @@ export default function PostHarvest() {
   };
 
   return (
-    <FarmerLayout>
       <div className="text-black min-h-screen flex justify-center items-center px-4 py-8">
         <div className="bg-white border border-gray-200 rounded-xl shadow-2xl w-full max-w-4xl">
           <div className="p-8">
@@ -560,6 +558,5 @@ export default function PostHarvest() {
           </div>
         )}
       </div>
-    </FarmerLayout>
   );
 }

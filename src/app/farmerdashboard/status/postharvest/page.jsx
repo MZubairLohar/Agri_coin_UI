@@ -321,7 +321,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import FarmerLayout from "@/components/maincomp/FarmerLayout";
 import {
   FaCheckCircle,
   FaClock,
@@ -406,7 +405,6 @@ export default function PostHarvest() {
   };
 
   return (
-    <FarmerLayout>
       <div className="p-2 text-black">
         <h1 className="text-2xl font-bold mb-4 flex items-center text-[#6f9d7e]">
           <FaWarehouse className="mr-2" /> Post-Harvest Status
@@ -563,6 +561,5 @@ export default function PostHarvest() {
           </div>
         )}
       </div>
-    </FarmerLayout>
   );
 }
