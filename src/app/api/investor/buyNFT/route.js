@@ -54,7 +54,8 @@ export async function GET(request) {
     let buyNFTData;
 
     if (userId) {
-      buyNFTData = await NFTBuyModel.findOne({ userId });
+      buyNFTData = await NFTBuyModel.find({ userId });
+      console.log("buyNFTData", buyNFTData);
     } else {
       // Return all records (admin use-case)
       buyNFTData = await NFTBuyModel.find({});

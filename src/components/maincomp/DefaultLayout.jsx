@@ -13,7 +13,7 @@ export default function DefaultLayout({ children }) {
         {/* <!-- ===== Sidebar End ===== --> */}
 
         {/* <!-- ===== Content Area Start ===== --> */}
-        <div className="relative  flex flex-1 flex-col bg-white lg:ml-72.5">
+        <div className="relative  flex flex-1 flex-col bg-white lg:ml-60">
           {/* <!-- ===== Header Start ===== --> */}
           <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
           
