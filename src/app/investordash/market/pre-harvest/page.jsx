@@ -25,7 +25,7 @@ function PreHarvest() {
   const [selectedPaymentItem, setSelectedPaymentItem] = useState(null);
   const [showCryptoOptions, setShowCryptoOptions] = useState(false);
   const [userId, setUserId] = useState(null);
-
+  const [isLoading, setIsLoading] = useState(false);
   const fetchData = async () => {
     try {
       setLoading(true);
@@ -148,7 +148,10 @@ function PreHarvest() {
   };
   const handleUsdtEthPayment = async () => {
     console.log("Processing USDT (Ethereum) payment...");
-
+    if (walletAddress === adminAddress) {
+      alert("connect MetaMask");
+    }
+    setIsLoading(true);
     try {
       const contract = new Contract(usdtToken, usdtAbi, signer);
 
@@ -208,8 +211,11 @@ function PreHarvest() {
       }
 
       console.log("✅ Transaction saved to DB successfully.");
+      fetchData();
+      setIsLoading(false);
     } catch (err) {
       console.error("❌ Payment failed:", err?.message || err);
+      setIsLoading(false);
     }
   };
   // Handle specific crypto payment
@@ -453,19 +459,19 @@ function PreHarvest() {
                           disabled
                           className="flex-1 py-2 bg-gray-400 text-white rounded text-sm cursor-not-allowed"
                         >
-                          Bought
+                          Invested
                         </button>
                       ) : (
                         <button
                           onClick={() => handleBuyNow(item)}
                           disabled={isPending}
                           className={`flex-1 py-2 rounded text-sm transition ${
-                            isPending
+                            isPending || isLoading
                               ? "bg-gray-400 text-white cursor-not-allowed"
                               : "bg-[#6F9D7E] text-white hover:bg-[#5a8a6a]"
                           }`}
                         >
-                          Buy Now
+                          {isLoading ? "Loading..." : "Buy Now"}
                         </button>
                       )}
                     </div>

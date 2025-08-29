@@ -95,32 +95,79 @@ import PostHarvestModel from "@/models/postHarvest.model";
 import { NextResponse } from "next/server";
 
 // ✅ Update Status API
+// export async function PUT(request) {
+//   try {
+//     await connectDB();
+//     const body = await request.json();
+//     const { recordId, status, tokenId } = body;
+
+//     if (!recordId || !status) {
+//       return NextResponse.json(
+//         { error: "recordId and status are required" },
+//         { status: 400 }
+//       );
+//     }
+
+//     let updatedRecord;
+
+//     if (tokenId) {
+//       // ✅ If tokenId provided → update both status + tokenId
+//       updatedRecord = await PostHarvestModel.findByIdAndUpdate(
+//         recordId,
+//         { status, tokenId },
+//         { new: true }
+//       );
+//     } else {
+//       // ✅ If no tokenId → update only status
+//       updatedRecord = await PostHarvestModel.findByIdAndUpdate(
+//         recordId,
+//         { status },
+//         { new: true }
+//       );
+//     }
+
+//     if (!updatedRecord) {
+//       return NextResponse.json({ error: "Record not found" }, { status: 404 });
+//     }
+
+//     return NextResponse.json(
+//       { message: "Status updated successfully", data: updatedRecord },
+//       { status: 200 }
+//     );
+//   } catch (error) {
+//     console.error("❌ Error updating status:", error);
+//     return NextResponse.json(
+//       { error: "Failed to update status" },
+//       { status: 500 }
+//     );
+//   }
+// }
 export async function PUT(request) {
   try {
     await connectDB();
     const body = await request.json();
     const { recordId, status, tokenId } = body;
-
-    if (!recordId || !status) {
-      return NextResponse.json(
-        { error: "recordId and status are required" },
-        { status: 400 }
-      );
-    }
-
+    console.log(recordId, status, tokenId);
     let updatedRecord;
 
-    if (tokenId) {
+    if (tokenId && recordId && status) {
       // ✅ If tokenId provided → update both status + tokenId
       updatedRecord = await PostHarvestModel.findByIdAndUpdate(
         recordId,
         { status, tokenId },
         { new: true }
       );
-    } else {
+    } else if (!tokenId) {
       // ✅ If no tokenId → update only status
       updatedRecord = await PostHarvestModel.findByIdAndUpdate(
         recordId,
+        { status },
+        { new: true }
+      );
+    } else if (tokenId && status) {
+      // ✅ If no recordId → update only tokenId
+      updatedRecord = await PostHarvestModel.findOneAndUpdate(
+        { tokenId: tokenId },
         { status },
         { new: true }
       );

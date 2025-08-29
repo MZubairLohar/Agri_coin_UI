@@ -25,6 +25,8 @@ function Postharvest() {
   const [selectedPaymentItem, setSelectedPaymentItem] = useState(null);
   const [showCryptoOptions, setShowCryptoOptions] = useState(false);
   const [userId, setUserId] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+
   const fetchData = async () => {
     try {
       setLoading(true);
@@ -103,7 +105,10 @@ function Postharvest() {
   };
   const handleUsdtEthPayment = async () => {
     console.log("Processing USDT (Ethereum) payment...");
-
+    if (!signer || !walletAddress) {
+      return alert("Kindly connect your wallet first");
+    }
+    setIsLoading(true);
     try {
       const contract = new Contract(usdtToken, usdtAbi, signer);
 
@@ -158,6 +163,7 @@ function Postharvest() {
         }
 
         const data = await res.json();
+
         console.log("✅ Status Update Response:", data);
       }
       if (!response.ok) {
@@ -165,9 +171,12 @@ function Postharvest() {
       }
 
       console.log("✅ Transaction saved to DB successfully.");
+
       fetchData(); // Refresh data after payment
+      setIsLoading(false);
     } catch (err) {
       console.error("❌ Payment failed:", err?.message || err);
+      setIsLoading(false);
     }
   };
   const statusConfig = {
@@ -464,14 +473,14 @@ function Postharvest() {
                       ) : (
                         <button
                           onClick={() => handleBuyNow(item)}
-                          disabled={isPending}
+                          disabled={isPending || isLoading}
                           className={`flex-1 py-2 rounded text-sm transition ${
-                            isPending
+                            isPending || isLoading
                               ? "bg-gray-400 text-white cursor-not-allowed"
                               : "bg-[#6F9D7E] text-white hover:bg-[#5a8a6a]"
                           }`}
                         >
-                          Buy Now
+                          {isLoading ? "Loading..." : "Buy Now"}
                         </button>
                       )}
                     </div>

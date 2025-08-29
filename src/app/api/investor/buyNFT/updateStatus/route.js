@@ -57,9 +57,9 @@ export async function PUT(request) {
   try {
     await connectDB();
     const body = await request.json();
-    const { status, tokenId } = body;
+    const { status, id } = body;
 
-    if (!tokenId || !status) {
+    if (!id || !status) {
       return NextResponse.json(
         { error: "recordId and status are required" },
         { status: 400 }
@@ -67,11 +67,11 @@ export async function PUT(request) {
     }
 
     let updatedRecord;
-
-    if (tokenId) {
+    let _id = id;
+    if (id) {
       // ✅ If tokenId provided → update both status + tokenId
-      updatedRecord = await NFTBuyModel.findOneAndUpdate(
-        { tokenId: tokenId }, // condition
+      updatedRecord = await NFTBuyModel.findByIdAndUpdate(
+        _id, // condition
         { status }, // update
         { new: true } // return updated doc
       );
