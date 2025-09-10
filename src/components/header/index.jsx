@@ -3,14 +3,11 @@ import Link from "next/link";
 import React, { useContext, useEffect, useRef } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { ethers } from "ethers";
 import Web3Modal from "web3modal";
 import { BrowserProvider } from "ethers";
 import { CoinbaseWalletSDK } from "@coinbase/wallet-sdk";
-// import WalletConnectProvider from "@walletconnect/web3-provider";
 import { WalletContext } from "@/context/WalletContext";
 import { useState } from "react";
-// import { CoinbaseWalletSDK } from "@coinbase/wallet-sdk";
 import WalletConnectProvider from "@walletconnect/web3-provider";
 import { getDecodedAuthToken } from "@/content/data";
 
@@ -46,13 +43,14 @@ const Header = (props) => {
 
   const [account, setAccount] = useState(null);
   const [data, setData] = useState([]);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const menuRef = useRef();
   const web3ModalRef = useRef(null);
   const [showWalletModal, setShowWalletModal] = useState(false);
+  
   useEffect(() => {
     const userData = getDecodedAuthToken();
-    // console.log("userData", userData);
     if (userData) {
       console.log("User Info:", userData);
       setData(userData);
@@ -60,65 +58,21 @@ const Header = (props) => {
       console.log("No valid token found");
     }
   }, []);
-  // const connectWallet = async () => {
-  //   console.log("connectting");
-  //   try {
-  //     const web3Modal = new Web3Modal({
-  //       cacheProvider: false,
-  //       providerOptions,
-  //       themeVariables: {
-  //         "--w3m-color-mix": "#00BB7F",
-  //         "--w3m-color-mix-strength": 40,
-  //       },
-  //     });
+  
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setIsDropdownOpen(false);
+      }
+    };
+    
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
-  //     const web3modalInstance = await web3Modal.connect();
-  //     const web3modalProvider = new ethers.providers.Web3Provider(
-  //       web3modalInstance
-  //     );
-  //     let provider;
-  //     if (window.safepalProvider) {
-  //       provider = new ethers.providers.Web3Provider(getProvider()); // SafePal provider
-  //     } else {
-  //       // Fallback to Web3Modal provider
-  //       provider = new ethers.providers.Web3Provider(web3modalInstance);
-  //     }
-  //     const signer = web3modalProvider.getSigner();
-  //     console.log(signer);
-  //     // Update state with wallet details
-  //     const address = await signer.getAddress();
-
-  //     setSigner(signer);
-  //     setAccount(address);
-  //     return true;
-  //   } catch (error) {
-  //     console.log("Error connecting wallet:", error);
-  //   }
-  // };
-  // const disconnectWallet = async () => {
-  //   try {
-  //     const web3Modal = new Web3Modal({
-  //       cacheProvider: false,
-  //       providerOptions,
-  //     });
-
-  //     // Clear cache
-  //     web3Modal.clearCachedProvider();
-
-  //     // If the provider has a disconnect method, call it
-  //     if (window.ethereum?.disconnect) {
-  //       await window.ethereum.disconnect();
-  //     }
-
-  //     // Reset state
-  //     setAccount(null);
-  //     setSigner(null);
-
-  //     console.log("Wallet disconnected");
-  //   } catch (error) {
-  //     console.log("Error disconnecting wallet:", error);
-  //   }
-  // };
   const connectWallet = async () => {
     try {
       if (!web3ModalRef.current) {
@@ -141,6 +95,7 @@ const Header = (props) => {
       console.error("Wallet connection failed:", err);
     }
   };
+  
   const disconnectWallet = async () => {
     try {
       if (web3ModalRef.current) {
@@ -179,7 +134,7 @@ const Header = (props) => {
               alt="Logo"
               width={72}
               height={72}
-              className="object-contain max-h-12 scale-125" // scale logo but restrict max height
+              className="object-contain max-h-12 scale-125"
             />
           </Link>
         </div>
@@ -189,53 +144,82 @@ const Header = (props) => {
           {account ? (
             <button
               onClick={disconnectWallet}
-              className="btn bg-red-500 text-white"
+              className="px-4 py-2 text-sm font-medium text-white bg-red-500 rounded-lg hover:bg-red-600 transition-colors duration-200"
             >
               Disconnect: {account.slice(0, 3)}...{account.slice(-2)}
             </button>
           ) : (
             <button
               onClick={connectWallet}
-              className="btn bg-[#6F9D7E] border border-[#FFE990] text-[#FFE990]"
+              className="px-4 py-2 text-sm font-medium bg-[#6F9D7E] border border-[#FFE990] text-[#FFE990] rounded-lg hover:bg-[#5d8a6d] transition-colors duration-200"
             >
               Connect Wallet
             </button>
           )}
         </div>
 
-        {/* User Dropdown */}
-        <div className="flex items-center gap-3 mt-3 lg:mt-0">
-          <div className="dropdown dropdown-end">
-            <div tabIndex={0} role="button" className="avatar">
-              <div className="w-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                <img
-                  src="https://www.shutterstock.com/image-vector/profile-picture-vector-260nw-404138239.jpg"
-                  alt="user"
-                />
-              </div>
-            </div>
-            <ul
-              tabIndex={0}
-              className="dropdown-content z-[1] menu p-2 shadow text-black border border-gray-400 bg-white rounded-box w-52 space-y-2"
+        {/* Enhanced User Dropdown */}
+        <div className="flex items-center gap-3 mt-3 lg:mt-0" ref={menuRef}>
+          <div className="relative">
+            <button 
+              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+              className="flex items-center justify-center w-10 h-10 rounded-full bg-gradient-to-r from-[#6F9D7E] to-[#5d8a6d] text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#6F9D7E] transition-all duration-200 hover:shadow-md"
             >
-              <li>
-                <span className="font-bold">{data?.fullName}</span>
-              </li>
-              <li>
-                <span>{data?.email}</span>
-              </li>
-              <li>
-                <span>{data?.role}</span>
-              </li>
-              <li>
-                <button
-                  onClick={Route}
-                  className="btn btn-sm bg-[#FFE990] text-black mt-2"
-                >
-                  Logout
-                </button>
-              </li>
-            </ul>
+              <span className="font-semibold text-sm">
+                {data?.fullName?.charAt(0)?.toUpperCase() || 'N'}
+              </span>
+            </button>
+
+            {isDropdownOpen && (
+              <div className="absolute right-0 mt-2 w-64 bg-white rounded-xl shadow-xl border border-gray-200 overflow-hidden z-30">
+                {/* Dropdown Header */}
+                <div className="p-4 bg-gradient-to-r from-[#6F9D7E] to-[#5d8a6d] text-white">
+                  <div className="flex items-center space-x-3">
+                    <div className="flex items-center justify-center w-12 h-12 rounded-full bg-white bg-opacity-20">
+                      <span className="font-semibold text-lg text-[#5d8a6d]">
+                        {data?.fullName?.charAt(0)?.toUpperCase() || 'N'}
+                      </span>
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-sm truncate">{data?.name || 'Name'}</h3>
+                      <p className="text-xs opacity-90 truncate">{data?.email || 'No email'}</p>
+                    </div>
+                  </div>
+                </div>
+                
+                {/* User Info */}
+                <div className="p-4 border-b border-gray-100">
+                  <div className="flex items-center justify-between py-1">
+                    <span className="text-xs font-medium text-gray-500">Role</span>
+                    <span className="text-sm font-medium text-[#6F9D7E] bg-[#f0f7f3] px-2 py-1 rounded-full">
+                      {data?.role || 'User'}
+                    </span>
+                  </div>
+                  
+                  {account && (
+                    <div className="flex items-center justify-between py-1 mt-2">
+                      <span className="text-xs font-medium text-gray-500">Wallet</span>
+                      <span className="text-xs font-mono text-gray-600 bg-gray-100 px-2 py-1 rounded">
+                        {account.slice(0, 6)}...{account.slice(-4)}
+                      </span>
+                    </div>
+                  )}
+                </div>
+                
+                {/* Dropdown Footer */}
+                <div className="p-3 bg-gray-50">
+                  <button
+                    onClick={Route}
+                    className="w-full flex items-center justify-center px-4 py-2 bg-gradient-to-r from-[#FFE990] to-[#f5de84] text-gray-800 rounded-lg font-medium hover:from-[#f5de84] hover:to-[#ecd275] transition-all duration-200 shadow-sm hover:shadow-md"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                    </svg>
+                    Sign Out
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>

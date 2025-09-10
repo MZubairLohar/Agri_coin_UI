@@ -32,8 +32,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import LoaderWrapper from "@/components/LoadWrapper";
 import { WalletProvider } from "@/context/WalletContext";
-
-// import Loader from "@/components/loader/loader"; // ✅ import the client component
+import Head from "next/head";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -53,15 +52,15 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <head>
+        <link rel="icon" href="/agri-logo.png" sizes="any" />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {/* <LoaderWrapper> */}
-
         <LoaderWrapper>
           <WalletProvider>{children}</WalletProvider>
         </LoaderWrapper>
-        {/* </LoaderWrapper> */}
       </body>
     </html>
   );

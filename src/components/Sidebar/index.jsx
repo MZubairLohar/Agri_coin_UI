@@ -13,8 +13,15 @@ import { Leaf, BarChart2, CloudRain, Users, Settings, HelpCircle, Home,History }
 
 const menuGroups = [
   {
-    name: "MENU INVENTORY",
+    name: "INVESTOR MENU",
     menuItems: [
+      {
+        icon: (
+          <IoHomeOutline />
+        ),
+        label: "Dashboard",
+        route: "/investordash",
+      },
       {
         icon: <Leaf />,
         label: "Market",

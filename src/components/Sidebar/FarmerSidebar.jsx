@@ -14,7 +14,7 @@ import { CircleDollarSign } from 'lucide-react';
 
 const menuGroups = [
   {
-    name: "MENU",
+    name: "FARMER MENU",
     menuItems: [
       {
            icon: (

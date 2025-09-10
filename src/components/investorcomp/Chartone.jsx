@@ -85,8 +85,8 @@ const options = {
     type: "category",
     labels: {
       style: {
-        colors: "#6B7280", 
-        fontSize: "12px", 
+        colors: "#6B7280",
+        fontSize: "12px",
       },
     },
     categories: [
@@ -113,8 +113,8 @@ const options = {
   yaxis: {
     labels: {
       style: {
-        colors: "#6B7280", 
-        fontSize: "12px", 
+        colors: "#6B7280",
+        fontSize: "12px",
       },
     },
     title: {
@@ -136,98 +136,57 @@ const ChartOne = () => {
   ];
 
   return (
-    <div className="col-span-12 h-68 font-lora rounded-xl border border-[#FFE990] bg-[#6F9D7E] px-5 pb-5 pt-7.5 shadow-default sm:px-7.5 xl:col-span-8">
-      <div className="flex flex-wrap items-start justify-between gap-3 sm:flex-nowrap">
-        <div className="flex w-full flex-wrap gap-3 sm:gap-5">
-          <div className="flex min-w-47.5">
-            <div className="w-full font-lora">
-              <p className="font-semibold text-gray-200 text-2xl">Investor</p>
-            </div>
-          </div>
-        </div>
-        <div className="flex w-full justify-end">
-          <div className="inline-flex items-center rounded-md bg-[#FFE990] p-1.5 border border-[#6F9D7E]">
-            <button className="px-3 py-1 text-md font-medium shadow-card hover:shadow-card text-[#6F9D7E]">
-              Total Amount
-            </button>
-            <button className="px-3 py-1 text-md font-medium hover:shadow-card text-[#6F9D7E]">
-              153$
-            </button>
-          </div>
-        </div>
+    <div className="col-span-12 font-lora rounded-xl pb-5 mt-6 shadow-default xl:col-span-8 bg-white">
+
+  {/* Card Section */}
+  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    {/* Card 1 */}
+    <div className="card bg-[#FFE990] border border-[#FFE990] text-black shadow-md rounded-xl overflow-hidden">
+      <div className="card-body p-5">
+        <h2 className="text-xl font-bold">Corn</h2>
+        <p className="text-gray-600 mt-2">
+          A card component has a figure, a body part, and inside body there are
+          title and actions parts.
+        </p>
       </div>
-      
-    <div className="flex gap-6 mt-6">  
-      <div className="card w-44 bg-[#FFE990] border border-[#FFE990] text-black card-xs shadow-sm">
-  <div className="card-body">
-    <h2 className="card-title text-xl">Corn</h2>
-    <p className="text-gray-500">A card component has a figure, a body part, and inside body there are title and actions parts</p>
-  </div>
-  <div className="flex ml-2">
-    <div>
-    <h2 className=" text-lg">Price :</h2>
+      <div className="flex justify-between items-center border-t border-[#659375] px-5 py-3">
+        <h2 className="text-lg font-semibold">Price:</h2>
+        <h2 className="text-lg text-gray-700">$35</h2>
+      </div>
     </div>
-    <div>
-    <h2 className="text-lg text-gray-500 ml-2">35$</h2>
+
+    {/* Card 2 */}
+    <div className="card bg-[#FFE990] border border-gray-300 text-black shadow-md rounded-xl overflow-hidden">
+      <div className="card-body p-5">
+        <h2 className="text-xl font-bold">Wheat</h2>
+        <p className="text-gray-600 mt-2">
+          A card component has a figure, a body part, and inside body there are
+          title and actions parts.
+        </p>
+      </div>
+      <div className="flex justify-between items-center border-t border-[#659375] px-5 py-3">
+        <h2 className="text-lg font-semibold">Price:</h2>
+        <h2 className="text-lg text-gray-700">$35</h2>
+      </div>
+    </div>
+
+    {/* Card 3 */}
+    <div className="card bg-[#FFE990] border border-gray-300 text-black shadow-md rounded-xl overflow-hidden">
+      <div className="card-body p-5">
+        <h2 className="text-xl font-bold">Rice</h2>
+        <p className="text-gray-600 mt-2">
+          A card component has a figure, a body part, and inside body there are
+          title and actions parts.
+        </p>
+      </div>
+      <div className="flex justify-between items-center border-t border-[#659375] px-5 py-3">
+        <h2 className="text-lg font-semibold">Price:</h2>
+        <h2 className="text-lg text-gray-700">$35</h2>
+      </div>
     </div>
   </div>
 </div>
 
-<div className="card w-44 bg-[#FFE990] border border-gray-300 text-black card-xs shadow-sm">
-  <div className="card-body">
-    <h2 className="card-title text-xl">Wheat</h2>
-    <p className="text-gray-500">A card component has a figure, a body part, and inside body there are title and actions parts</p>
-  </div>
-  <div className="flex ml-2">
-    <div>
-    <h2 className=" text-lg">Price :</h2>
-    </div>
-    <div>
-    <h2 className="text-lg text-gray-500 ml-2">35$</h2>
-    </div>
-  </div>
-</div>
-
-<div className="card w-44 bg-[#FFE990] border border-gray-300 text-black card-xs shadow-sm">
-  <div className="card-body">
-    <h2 className="card-title text-xl">Rice</h2>
-    <p className="text-gray-500">A card component has a figure, a body part, and inside body there are title and actions parts</p>
-  </div>
-  <div className="flex ml-2">
-    <div>
-    <h2 className=" text-lg">Price :</h2>
-    </div>
-    <div>
-    <h2 className="text-lg text-gray-500 ml-2">35$</h2>
-    </div>
-  </div>
-</div>
-</div>
-
-{/* <div className="flex gap-6 mt-6">  
-      <div className="card w-44 bg-white border border-gray-300 text-black card-xs shadow-sm">
-  <div className="card-body">
-    <h2 className="card-title text-xl">Price :</h2>
-    <h2 className="text-xl text-gray-500">35$</h2>
-  </div>
-</div>
-
-<div className="card w-44 bg-white border border-gray-300 text-black card-xs shadow-sm">
-  <div className="card-body">
-    <h2 className="card-title text-xl">Price :</h2>
-    <h2 className="text-xl text-gray-500">57$</h2>
-  </div>
-</div>
-
-<div className="card w-44 bg-white border border-gray-300 text-black card-xs shadow-sm">
-  <div className="card-body">
-    <h2 className="card-title text-xl">Price :</h2>
-    <h2 className="text-xl text-gray-500">31$</h2>
-  </div>
-</div>
-</div> */}
-
-    </div>
   );
 };
 

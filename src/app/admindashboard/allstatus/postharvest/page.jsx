@@ -114,7 +114,7 @@ function Posthistory() {
 
       <div className="p-4 sm:p-6 bg-[#6F9D7E] w-full mx-auto text-black border border-[#FFE990] rounded-lg shadow">
         {/* Header and Filter */}
-        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-4">
+        {/* <div className="flex flex-col sm:flex-row sm:justify-end sm:items-center gap-4 mb-4">
           <h2 className="text-lg sm:text-xl font-semibold text-white">
             Showing {filteredTokens.length} tokens
           </h2>
@@ -129,7 +129,7 @@ function Posthistory() {
               </option>
             ))}
           </select>
-        </div>
+        </div> */}
 
         {/* Responsive Table */}
         <div className="overflow-x-auto hidden sm:block">

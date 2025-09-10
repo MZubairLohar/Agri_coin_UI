@@ -483,7 +483,7 @@ export default function PostHarvest() {
               </div>
 
               <div className="space-y-2 text-sm">
-                <div className="flex justify-between">
+                <div>
                   <span className="text-gray-200 font-semibold">
                     Commodity:
                   </span>
